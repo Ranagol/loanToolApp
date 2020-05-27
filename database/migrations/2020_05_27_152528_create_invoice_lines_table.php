@@ -16,7 +16,6 @@ class CreateInvoiceLinesTable extends Migration
         Schema::create('invoice_lines', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('invoice_id');
-            $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('tool_id');
             $table->integer('4h_or_24h_price');
             $table->date('taken')->nullable();
@@ -26,7 +25,6 @@ class CreateInvoiceLinesTable extends Migration
             $table->boolean('invoice_line_closed')->default(false);
             $table->text('comments')->nullable();
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('tool_id')->references('id')->on('tools')->onDelete('cascade');
             $table->timestamps();
         });
