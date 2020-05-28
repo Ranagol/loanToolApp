@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use Illuminate\Http\Request;
-
+use Illuminate\Http\JsonResponse;
 class CustomerController extends Controller
 {
     /**
@@ -14,7 +14,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        return Customer::all();
     }
 
     /**
@@ -35,7 +35,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $customer = Customer::create($request->all());
+        return $customer;
     }
 
     /**
@@ -46,7 +47,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return $customer;
     }
 
     /**
@@ -69,7 +70,8 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $customer->update($request->all());
+        return $customer;
     }
 
     /**
@@ -80,6 +82,8 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        return new JsonResponse(true); 
+
     }
 }

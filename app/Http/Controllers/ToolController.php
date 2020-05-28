@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tool;
 use Illuminate\Http\Request;
-
+use Illuminate\Http\JsonResponse;
 class ToolController extends Controller
 {
     /**
@@ -14,7 +14,7 @@ class ToolController extends Controller
      */
     public function index()
     {
-        //
+        return Tool::all();
     }
 
     /**
@@ -35,7 +35,8 @@ class ToolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tool = Tool::create($request->all());
+        return $tool;
     }
 
     /**
@@ -46,7 +47,7 @@ class ToolController extends Controller
      */
     public function show(Tool $tool)
     {
-        //
+        return $tool;
     }
 
     /**
@@ -69,7 +70,8 @@ class ToolController extends Controller
      */
     public function update(Request $request, Tool $tool)
     {
-        //
+        $tool->update($request->all());
+        return $tool;
     }
 
     /**
@@ -80,6 +82,7 @@ class ToolController extends Controller
      */
     public function destroy(Tool $tool)
     {
-        //
+        $tool->delete();
+        return new JsonResponse(true);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Invoice;
 use Illuminate\Http\Request;
-
+use Illuminate\Http\JsonResponse;
 class InvoiceController extends Controller
 {
     /**
@@ -14,7 +14,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        return Invoice::all();
     }
 
     /**
@@ -35,7 +35,8 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $invoice = Invoice::create($request->all());
+        return $invoice;
     }
 
     /**
@@ -46,7 +47,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        //
+        return $invoice;
     }
 
     /**
@@ -69,7 +70,8 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
-        //
+        $invoice->update($request->all());
+        return $invoice;
     }
 
     /**
@@ -80,6 +82,7 @@ class InvoiceController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
-        //
+        $invoice->delete();
+        return new JsonResponse(true);
     }
 }
