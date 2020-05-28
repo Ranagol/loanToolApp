@@ -8,7 +8,7 @@ class Invoice extends Model
 {
     protected $guarded = ['id'];
     
-    public function invoice_lines(){
+    public function invoiceitems(){
         return $this->hasMany(Invoice_line::class);
     }
 
