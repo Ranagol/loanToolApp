@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Invoice_line extends Model
+class Invoiceline extends Model
 {
     protected $guarded = ['id'];
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Invoice_line;
+use App\Invoiceline;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -15,7 +15,7 @@ class InvoiceLineController extends Controller
      */
     public function index()
     {
-        return Invoice_line::all();
+        return Invoiceline::all();
     }
 
     /**
@@ -36,28 +36,28 @@ class InvoiceLineController extends Controller
      */
     public function store(Request $request)
     {
-        $invoice_line = Invoice_line::create($request->all());
-        return $invoice_line;
+        $invoiceline = Invoiceline::create($request->all());
+        return $invoiceline;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Invoice_line  $invoice_line
+     * @param  \App\Invoiceline  $invoiceline
      * @return \Illuminate\Http\Response
      */
-    public function show(Invoice_line $invoice_line)
+    public function show(Invoiceline $invoiceline)
     {
-        return $invoice_line;
+        return $invoiceline;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Invoice_line  $invoice_line
+     * @param  \App\Invoiceline  $invoiceline
      * @return \Illuminate\Http\Response
      */
-    public function edit(Invoice_line $invoice_line)
+    public function edit(Invoiceline $invoiceline)
     {
         //
     }
@@ -66,24 +66,24 @@ class InvoiceLineController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Invoice_line  $invoice_line
+     * @param  \App\Invoiceline  $invoiceline
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Invoice_line $invoice_line)
+    public function update(Request $request, Invoiceline $invoiceline)
     {
-        $invoice_line->update($request->all());
-        return $invoice_line;
+        $invoiceline->update($request->all());
+        return $invoiceline;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Invoice_line  $invoice_line
+     * @param  \App\Invoiceline  $invoiceline
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invoice_line $invoice_line)
+    public function destroy(Invoiceline $invoiceline)
     {
-        $invoice_line->delete();
+        $invoiceline->delete();
         return new JsonResponse(true);
     }
 }
