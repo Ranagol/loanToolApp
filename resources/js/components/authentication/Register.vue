@@ -13,13 +13,8 @@
     </h3>
 
     <div class="form-group">
-      <label for="first_name">First name</label>
-      <input v-model="first_name" type="text" name="first_name" class="form-control" id="first_name" required>
-    </div>
-
-    <div class="form-group">
-      <label for="last_name">Last name</label>
-      <input v-model="last_name"  type="text" name="last_name"  class="form-control" id="last_name" required>
+      <label for="last_name">Name</label>
+      <input v-model="name"  type="text" name="Name"  class="form-control" id="Name" required>
     </div>
 
     <div class="form-group">
@@ -37,12 +32,6 @@
       <input v-model="password_confirmation"  type="password_confirmation"  name="password_confirmation"  class="form-control" id="password_confirmation" required>
     </div>
 
-
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="terms" required>
-      <label class="form-check-label"  name="terms"  for="terms">Accepted terms and conditions</label>
-    </div>
-
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Register</button>
     </div>
@@ -51,14 +40,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import { authService } from '../../service/authService';
+import { authService } from '../service/authService';
 export default {
   name: 'Register',
   data(){
     return{
-      first_name:'',
-      last_name: '',
+      name: '',
       email: '',
       password: '',
       password_confirmation: '',
@@ -67,14 +54,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setLoggedIn']),
     register(){
       this.loading = true;
-      authService.register(this.first_name, this.last_name, this.email, this.password, this.password_confirmation)
+      authService.register(this.name, this.email, this.password, this.password_confirmation)
       .then(() => {
-        this.setLoggedIn();
+        //this.setLoggedIn();
         this.loading = false;
-        this.$router.push('/');
+        console.log('Registering successfull.');
+        this.$router.push('/customers');
         
       })
       .catch((error) => {

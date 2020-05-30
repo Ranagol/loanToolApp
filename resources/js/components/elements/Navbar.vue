@@ -17,11 +17,11 @@
         </li>
 
         <li class="nav-item">
-          <router-link class="nav-link" to="/" >Shops</router-link>
+          <router-link class="nav-link" to="/customers" >Customers</router-link>
         </li>
 
         <li class="nav-item">
-          <router-link class="nav-link" to="/" >Managers</router-link>
+          <router-link class="nav-link" to="/tools" >Tools</router-link>
         </li>
 
       </ul>

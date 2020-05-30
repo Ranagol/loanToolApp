@@ -27,9 +27,7 @@
 </template>
 
 <script>
-
-import { mapActions } from 'vuex';
-import { authService } from '../../service/authService';
+import { authService } from '../service/authService';
 export default {
   name: 'Login',
   data(){
@@ -41,7 +39,6 @@ export default {
     }
   },
   methods:{
-    ...mapActions(['setLoggedIn']),
     login(){
       this.loading = true;
       authService.login(this.email, this.password)

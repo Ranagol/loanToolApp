@@ -1920,14 +1920,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'vuex'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../service/authService'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+/* harmony import */ var _service_authService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service/authService */ "./resources/js/components/service/authService.js");
 //
 //
 //
@@ -1956,7 +1949,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Login',
@@ -1968,12 +1960,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       loading: false
     };
   },
-  methods: _objectSpread(_objectSpread({}, !(function webpackMissingModule() { var e = new Error("Cannot find module 'vuex'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(['setLoggedIn'])), {}, {
+  methods: {
     login: function login() {
       var _this = this;
 
       this.loading = true;
-      !(function webpackMissingModule() { var e = new Error("Cannot find module '../../service/authService'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).login(this.email, this.password).then(function () {
+      _service_authService__WEBPACK_IMPORTED_MODULE_0__["authService"].login(this.email, this.password).then(function () {
         _this.setLoggedIn();
 
         _this.loading = false;
@@ -1991,7 +1983,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.loading = false;
       });
     }
-  })
+  }
 });
 
 /***/ }),
@@ -2005,14 +1997,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'vuex'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-!(function webpackMissingModule() { var e = new Error("Cannot find module '../../service/authService'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+/* harmony import */ var _service_authService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service/authService */ "./resources/js/components/service/authService.js");
 //
 //
 //
@@ -2054,25 +2039,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Register',
   data: function data() {
     return {
-      first_name: '',
-      last_name: '',
+      name: '',
       email: '',
       password: '',
       password_confirmation: '',
@@ -2080,17 +2052,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       loading: false
     };
   },
-  methods: _objectSpread(_objectSpread({}, !(function webpackMissingModule() { var e = new Error("Cannot find module 'vuex'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(['setLoggedIn'])), {}, {
+  methods: {
     register: function register() {
       var _this = this;
 
       this.loading = true;
-      !(function webpackMissingModule() { var e = new Error("Cannot find module '../../service/authService'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).register(this.first_name, this.last_name, this.email, this.password, this.password_confirmation).then(function () {
-        _this.setLoggedIn();
-
+      _service_authService__WEBPACK_IMPORTED_MODULE_0__["authService"].register(this.name, this.email, this.password, this.password_confirmation).then(function () {
+        //this.setLoggedIn();
         _this.loading = false;
+        console.log('Registering successfull.');
 
-        _this.$router.push('/');
+        _this.$router.push('/customers');
       })["catch"](function (error) {
         console.dir(error);
 
@@ -2103,7 +2075,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.loading = false;
       });
     }
-  })
+  }
 });
 
 /***/ }),
@@ -20770,62 +20742,26 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "first_name" } }, [_vm._v("First name")]),
+        _c("label", { attrs: { for: "last_name" } }, [_vm._v("Name")]),
         _vm._v(" "),
         _c("input", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.first_name,
-              expression: "first_name"
+              value: _vm.name,
+              expression: "name"
             }
           ],
           staticClass: "form-control",
-          attrs: {
-            type: "text",
-            name: "first_name",
-            id: "first_name",
-            required: ""
-          },
-          domProps: { value: _vm.first_name },
+          attrs: { type: "text", name: "Name", id: "Name", required: "" },
+          domProps: { value: _vm.name },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.first_name = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "last_name" } }, [_vm._v("Last name")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.last_name,
-              expression: "last_name"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            name: "last_name",
-            id: "last_name",
-            required: ""
-          },
-          domProps: { value: _vm.last_name },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.last_name = $event.target.value
+              _vm.name = $event.target.value
             }
           }
         })
@@ -20921,34 +20857,12 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1)
+      _vm._m(0)
     ],
     2
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group form-check" }, [
-      _c("input", {
-        staticClass: "form-check-input",
-        attrs: { type: "checkbox", id: "terms", required: "" }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "form-check-label",
-          attrs: { name: "terms", for: "terms" }
-        },
-        [_vm._v("Accepted terms and conditions")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -21085,8 +20999,8 @@ var render = function() {
               [
                 _c(
                   "router-link",
-                  { staticClass: "nav-link", attrs: { to: "/" } },
-                  [_vm._v("Shops")]
+                  { staticClass: "nav-link", attrs: { to: "/customers" } },
+                  [_vm._v("Customers")]
                 )
               ],
               1
@@ -21098,8 +21012,8 @@ var render = function() {
               [
                 _c(
                   "router-link",
-                  { staticClass: "nav-link", attrs: { to: "/" } },
-                  [_vm._v("Managers")]
+                  { staticClass: "nav-link", attrs: { to: "/tools" } },
+                  [_vm._v("Tools")]
                 )
               ],
               1
@@ -36772,6 +36686,117 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Navbar_vue_vue_type_template_id_1ddb54cd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/service/authService.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/service/authService.js ***!
+  \********************************************************/
+/*! exports provided: default, authService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AuthService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authService", function() { return authService; });
+/* harmony import */ var _baseService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./baseService */ "./resources/js/components/service/baseService.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var AuthService = /*#__PURE__*/function (_BaseService) {
+  _inherits(AuthService, _BaseService);
+
+  var _super = _createSuper(AuthService);
+
+  function AuthService() {
+    _classCallCheck(this, AuthService);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(AuthService, [{
+    key: "register",
+    value: function register(name, email, password, password_confirmation) {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+        _this.axios.post('register', {
+          name: name,
+          email: email,
+          password: password,
+          password_confirmation: password_confirmation
+        }).then(function (response) {
+          _this.localStorageSetUp(response);
+
+          resolve(response.data.token);
+        })["catch"](function (error) {
+          console.log('Error from register authService', error.response.data);
+          reject(error);
+        });
+      });
+    }
+  }, {
+    key: "login",
+    value: function login(email, password) {
+      var _this2 = this;
+
+      return new Promise(function (resolve, reject) {
+        _this2.axios.post('login', {
+          email: email,
+          password: password
+        }).then(function (response) {
+          _this2.localStorageSetUp(response);
+
+          resolve(response.data.token);
+        })["catch"](function (error) {
+          console.log('Error from login authService', error.response.data.error);
+          reject(error);
+        });
+      });
+    }
+  }, {
+    key: "localStorageSetUp",
+    value: function localStorageSetUp(response) {
+      window.localStorage.setItem('loginToken', response.data.token);
+      window.localStorage.setItem('user_id', response.data.userId);
+      this.setAxiosHeader();
+    }
+  }, {
+    key: "logout",
+    value: function logout() {
+      window.localStorage.removeItem('loginToken');
+      window.localStorage.removeItem('user_id');
+      delete this.axios.defaults.headers.common['Authorization'];
+    }
+  }]);
+
+  return AuthService;
+}(_baseService__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+var authService = new AuthService();
 
 /***/ }),
 

@@ -1,6 +1,5 @@
 import { HTTP } from './baseService';
 
-
 class CustomerService {
 
     getCustomers(){
