@@ -1966,11 +1966,10 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       _service_authService__WEBPACK_IMPORTED_MODULE_0__["authService"].login(this.email, this.password).then(function () {
-        _this.setLoggedIn();
-
+        //this.setLoggedIn();
         _this.loading = false;
 
-        _this.$router.push('/');
+        _this.$router.push('/tools');
       })["catch"](function (error) {
         console.dir(error);
 
@@ -36792,9 +36791,11 @@ var AuthService = /*#__PURE__*/function (_BaseService) {
         }).then(function (response) {
           _this2.localStorageSetUp(response);
 
+          console.dir(response);
           resolve(response.data.token);
         })["catch"](function (error) {
-          console.log('Error from login authService', error.response.data.error);
+          console.dir(error);
+          console.log('Error from login authService');
           reject(error);
         });
       });
@@ -36803,7 +36804,7 @@ var AuthService = /*#__PURE__*/function (_BaseService) {
     key: "localStorageSetUp",
     value: function localStorageSetUp(response) {
       window.localStorage.setItem('loginToken', response.data.token);
-      window.localStorage.setItem('user_id', response.data.user.id);
+      window.localStorage.setItem('user_id', response.data.id);
       this.setAxiosHeader();
     }
   }, {

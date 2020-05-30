@@ -21,10 +21,12 @@ export default class AuthService extends BaseService {
       this.axios.post('login', { email, password })
         .then((response) => {
           this.localStorageSetUp(response);
+          console.dir(response);
           resolve(response.data.token);
         }).
         catch ((error) => {
-          console.log('Error from login authService', error.response.data.error);
+          console.dir(error);
+          console.log('Error from login authService');
           reject(error);
         })
     });
@@ -32,7 +34,7 @@ export default class AuthService extends BaseService {
 
   localStorageSetUp(response) {
     window.localStorage.setItem('loginToken', response.data.token);
-    window.localStorage.setItem('user_id', response.data.user.id);
+    window.localStorage.setItem('user_id', response.data.id);
     this.setAxiosHeader();
   }
 
