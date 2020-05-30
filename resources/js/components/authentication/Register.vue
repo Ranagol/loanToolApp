@@ -60,8 +60,7 @@ export default {
       .then(() => {
         //this.setLoggedIn();
         this.loading = false;
-        console.log('Registering successfull.');
-        this.$router.push('/customers');
+        this.$router.push('/tools');
         
       })
       .catch((error) => {

@@ -32,7 +32,7 @@ export default class AuthService extends BaseService {
 
   localStorageSetUp(response) {
     window.localStorage.setItem('loginToken', response.data.token);
-    window.localStorage.setItem('user_id', response.data.userId);
+    window.localStorage.setItem('user_id', response.data.user.id);
     this.setAxiosHeader();
   }
 

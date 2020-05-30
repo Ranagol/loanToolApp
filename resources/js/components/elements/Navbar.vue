@@ -24,6 +24,10 @@
           <router-link class="nav-link" to="/tools" >Tools</router-link>
         </li>
 
+        <li class="nav-item">
+          <a @click="logout" class="nav-link" href="#">Logout</a>
+        </li>
+
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control" type="search" placeholder="Search" aria-label="Search">
@@ -35,7 +39,14 @@
 
 
 <script>
+import { authService } from '../service/authService';
 export default {
   name: 'Navbar',
+  methods: {
+    logout(){
+      authService.logout();
+      this.$router.push('/login');
+    }
+  }
 }
 </script>

@@ -2060,9 +2060,8 @@ __webpack_require__.r(__webpack_exports__);
       _service_authService__WEBPACK_IMPORTED_MODULE_0__["authService"].register(this.name, this.email, this.password, this.password_confirmation).then(function () {
         //this.setLoggedIn();
         _this.loading = false;
-        console.log('Registering successfull.');
 
-        _this.$router.push('/customers');
+        _this.$router.push('/tools');
       })["catch"](function (error) {
         console.dir(error);
 
@@ -2189,6 +2188,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _service_authService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service/authService */ "./resources/js/components/service/authService.js");
 //
 //
 //
@@ -2225,8 +2225,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Navbar'
+  name: 'Navbar',
+  methods: {
+    logout: function logout() {
+      _service_authService__WEBPACK_IMPORTED_MODULE_0__["authService"].logout();
+      this.$router.push('/login');
+    }
+  }
 });
 
 /***/ }),
@@ -21017,7 +21028,19 @@ var render = function() {
                 )
               ],
               1
-            )
+            ),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link",
+                  attrs: { href: "#" },
+                  on: { click: _vm.logout }
+                },
+                [_vm._v("Logout")]
+              )
+            ])
           ]),
           _vm._v(" "),
           _vm._m(1)
@@ -36780,7 +36803,7 @@ var AuthService = /*#__PURE__*/function (_BaseService) {
     key: "localStorageSetUp",
     value: function localStorageSetUp(response) {
       window.localStorage.setItem('loginToken', response.data.token);
-      window.localStorage.setItem('user_id', response.data.userId);
+      window.localStorage.setItem('user_id', response.data.user.id);
       this.setAxiosHeader();
     }
   }, {
