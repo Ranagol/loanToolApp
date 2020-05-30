@@ -8,11 +8,7 @@
 
     <body>
         <div id="app">
-            <router-link to="/customers">Customer</router-link>
-            <router-link to="/tools">Tools</router-link>
-
-            <router-view></router-view>
-            
+            <app></app>
         </div>
         <script src="/js/app.js"></script>
     </body>
