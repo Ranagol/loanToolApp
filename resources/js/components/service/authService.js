@@ -16,20 +16,30 @@ export default class AuthService extends BaseService {
   }
   
   
-  login(email, password) {
-    return new Promise((resolve, reject) => {
-      this.axios.post('login', { email, password })
-        .then((response) => {
-          this.localStorageSetUp(response);
-          console.dir(response);
-          resolve(response.data.token);
-        }).
-        catch ((error) => {
-          console.dir(error);
-          console.log('Error from login authService');
-          reject(error);
-        })
-    });
+  // login(email, password) {
+  //   return new Promise((resolve, reject) => {
+  //     this.axios.post('login', { email, password })
+  //       .then((response) => {
+  //         this.localStorageSetUp(response);
+  //         console.dir(response);
+  //         resolve(response.data.token);
+  //       }).
+  //       catch ((error) => {
+  //         console.dir(error);
+  //         console.log('Error from login authService');
+  //         reject(error);
+  //       })
+  //   });
+  // }
+
+  login(email, password){
+    {
+      return axios.post('login', { email, password });
+      console.dir(response);
+      this.localStorageSetUp(response);
+    } catch (error) {
+      
+    }
   }
 
   localStorageSetUp(response) {

@@ -23,11 +23,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@authenticate');
-Route::resource('customers','CustomerController');
+
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'UserController@getAuthenticatedUser');
-    
+    Route::resource('customers','CustomerController');
     Route::resource('invoiceitems','InvoiceitemController');
     Route::resource('invoices','InvoiceController');
     Route::resource('tools','ToolController');

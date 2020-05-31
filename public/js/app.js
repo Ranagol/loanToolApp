@@ -1920,7 +1920,15 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _service_authService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service/authService */ "./resources/js/components/service/authService.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _service_authService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../service/authService */ "./resources/js/components/service/authService.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -1961,26 +1969,36 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    // login(){
+    //   this.loading = true;
+    //   authService.login(this.email, this.password)
+    //   .then(() => {
+    //     //this.setLoggedIn();
+    //     this.loading = false;
+    //     this.$router.push('/tools');
+    //   })
+    //   .catch((error) => {
+    //     console.dir(error);
+    //     if (error.response && error.response.status === 400) {
+    //       this.errors = error.response.data.error;
+    //     } else {
+    //       console.dir(error);
+    //     }
+    //     this.loading = false;
+    //   });
+    // }
     login: function login() {
-      var _this = this;
-
-      this.loading = true;
-      _service_authService__WEBPACK_IMPORTED_MODULE_0__["authService"].login(this.email, this.password).then(function () {
-        //this.setLoggedIn();
-        _this.loading = false;
-
-        _this.$router.push('/tools');
-      })["catch"](function (error) {
-        console.dir(error);
-
-        if (error.response && error.response.status === 400) {
-          _this.errors = error.response.data.error;
-        } else {
-          console.dir(error);
-        }
-
-        _this.loading = false;
-      });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
   }
 });
@@ -36716,111 +36734,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./resources/js/components/service/authService.js ***!
   \********************************************************/
 /*! exports provided: default, authService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AuthService; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authService", function() { return authService; });
-/* harmony import */ var _baseService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./baseService */ "./resources/js/components/service/baseService.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var AuthService = /*#__PURE__*/function (_BaseService) {
-  _inherits(AuthService, _BaseService);
-
-  var _super = _createSuper(AuthService);
-
-  function AuthService() {
-    _classCallCheck(this, AuthService);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(AuthService, [{
-    key: "register",
-    value: function register(name, email, password, password_confirmation) {
-      var _this = this;
-
-      return new Promise(function (resolve, reject) {
-        _this.axios.post('register', {
-          name: name,
-          email: email,
-          password: password,
-          password_confirmation: password_confirmation
-        }).then(function (response) {
-          _this.localStorageSetUp(response);
-
-          resolve(response.data.token);
-        })["catch"](function (error) {
-          console.log('Error from register authService', error.response.data);
-          reject(error);
-        });
-      });
-    }
-  }, {
-    key: "login",
-    value: function login(email, password) {
-      var _this2 = this;
-
-      return new Promise(function (resolve, reject) {
-        _this2.axios.post('login', {
-          email: email,
-          password: password
-        }).then(function (response) {
-          _this2.localStorageSetUp(response);
-
-          console.dir(response);
-          resolve(response.data.token);
-        })["catch"](function (error) {
-          console.dir(error);
-          console.log('Error from login authService');
-          reject(error);
-        });
-      });
-    }
-  }, {
-    key: "localStorageSetUp",
-    value: function localStorageSetUp(response) {
-      window.localStorage.setItem('loginToken', response.data.token);
-      window.localStorage.setItem('user_id', response.data.id);
-      this.setAxiosHeader();
-    }
-  }, {
-    key: "logout",
-    value: function logout() {
-      window.localStorage.removeItem('loginToken');
-      window.localStorage.removeItem('user_id');
-      delete this.axios.defaults.headers.common['Authorization'];
-    }
-  }]);
-
-  return AuthService;
-}(_baseService__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-
-var authService = new AuthService();
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\API\\loanToolApp\\resources\\js\\components\\service\\authService.js: Unexpected token (40:6)\n\n  38 |       console.dir(response);\n  39 |       this.localStorageSetUp(response);\n> 40 |     } catch (error) {\n     |       ^\n  41 |       \n  42 |     }\n  43 |   }\n    at Parser._raise (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:742:17)\n    at Parser.raiseWithData (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.raise (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:729:17)\n    at Parser.unexpected (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:8779:16)\n    at Parser.parseExprAtom (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:10074:20)\n    at Parser.parseExprSubscripts (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:9624:23)\n    at Parser.parseMaybeUnary (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:9604:21)\n    at Parser.parseExprOps (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:9474:23)\n    at Parser.parseMaybeConditional (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:9447:23)\n    at Parser.parseMaybeAssign (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:9402:21)\n    at Parser.parseExpression (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:9354:23)\n    at Parser.parseStatementContent (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11233:23)\n    at Parser.parseStatement (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11679:25)\n    at Parser.parseBlockBody (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11665:10)\n    at Parser.parseBlock (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11649:10)\n    at Parser.parseFunctionBody (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:10656:24)\n    at Parser.parseFunctionBodyAndFinish (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:10639:10)\n    at Parser.parseMethod (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:10601:10)\n    at Parser.pushClassMethod (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:12104:30)\n    at Parser.parseClassMemberWithIsStatic (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:12021:12)\n    at Parser.parseClassMember (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11963:10)\n    at D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11908:14\n    at Parser.withTopicForbiddingContext (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:10979:14)\n    at Parser.parseClassBody (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11885:10)\n    at Parser.parseClass (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11859:22)\n    at Parser.parseExportDefaultExpression (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:12295:19)\n    at Parser.parseExport (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:12208:31)\n    at Parser.parseStatementContent (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11208:27)\n    at Parser.parseStatement (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11679:25)\n    at Parser.parseBlockBody (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11665:10)\n    at Parser.parseTopLevel (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:11035:10)\n    at Parser.parse (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:12671:10)\n    at parse (D:\\API\\loanToolApp\\node_modules\\@babel\\parser\\lib\\index.js:12722:38)\n    at parser (D:\\API\\loanToolApp\\node_modules\\@babel\\core\\lib\\parser\\index.js:54:34)");
 
 /***/ }),
 
