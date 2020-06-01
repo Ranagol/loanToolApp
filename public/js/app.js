@@ -1981,9 +1981,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.loading = false;
       });
-    } // async login(){
-    // }
-
+    }
   }
 });
 
@@ -36326,12 +36324,35 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); //Global registration for the App.vue
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+  routes: _routes__WEBPACK_IMPORTED_MODULE_2__["routes"],
+  mode: 'history'
+});
+/*
+Postaviti da neulogovan korisnik može da pristupi samo login i register stranicama.
+Postaviti da ulogovan korisnik može da pristupi svim stranicama osim login i register
+*/
+
+router.beforeEach(function (to, from, next) {
+  var isThereToken = localStorage.getItem('loginToken'); //check if the user has a login token
+
+  console.log("Guard activated. From: ".concat(from.path, " to: ").concat(to.path)); //awesome consol.log trick to see if this is working
+
+  if (to.name !== 'login' && to.name !== 'register' && !isThereToken) {
+    //if the user is not logged in, he can only visit the login and the register pag	e. ATTENTION: these here are route NAMES, NOT ROUTE PATHS!
+    next('/login');
+    return;
+  } else if ((to.name == 'login' || to.name == 'register') && isThereToken) {
+    //if the user is logged in, he can't visit login and register pages, if he does 	that, navigate him to the /movies
+    return next('/tools');
+  } else next();
+}); //Global registration for the App.vue
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('App', __webpack_require__(/*! ./components/elements/App.vue */ "./resources/js/components/elements/App.vue")["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
-  router: new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"](_routes__WEBPACK_IMPORTED_MODULE_2__["default"])
+  router: router
 });
 
 /***/ }),
@@ -36990,11 +37011,12 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************!*\
   !*** ./resources/js/routes.js ***!
   \********************************/
-/*! exports provided: default */
+/*! exports provided: routes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return routes; });
 /* harmony import */ var _components_authentication_Login__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/authentication/Login */ "./resources/js/components/authentication/Login.vue");
 /* harmony import */ var _components_authentication_Register__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/authentication/Register */ "./resources/js/components/authentication/Register.vue");
 /* harmony import */ var _components_customers_Customers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/customers/Customers */ "./resources/js/components/customers/Customers.vue");
@@ -37003,26 +37025,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mode: 'history',
-  routes: [{
-    path: '/login',
-    name: 'login',
-    component: _components_authentication_Login__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }, {
-    path: '/register',
-    name: 'register',
-    component: _components_authentication_Register__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }, {
-    path: '/customers',
-    name: 'customers',
-    component: _components_customers_Customers__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }, {
-    path: '/tools',
-    name: 'tools',
-    component: _components_tools_Tools__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }]
-});
+var routes = [{
+  path: '/login',
+  name: 'login',
+  component: _components_authentication_Login__WEBPACK_IMPORTED_MODULE_0__["default"]
+}, {
+  path: '/register',
+  name: 'register',
+  component: _components_authentication_Register__WEBPACK_IMPORTED_MODULE_1__["default"]
+}, {
+  path: '/customers',
+  name: 'customers',
+  component: _components_customers_Customers__WEBPACK_IMPORTED_MODULE_2__["default"]
+}, {
+  path: '/tools',
+  name: 'tools',
+  component: _components_tools_Tools__WEBPACK_IMPORTED_MODULE_3__["default"]
+}];
 
 /***/ }),
 

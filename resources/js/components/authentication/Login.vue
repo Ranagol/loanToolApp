@@ -58,9 +58,7 @@ export default {
       });
     }
 
-    // async login(){
-      
-    // }
+    
   }
 
 }
