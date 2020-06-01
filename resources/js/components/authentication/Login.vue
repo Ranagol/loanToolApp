@@ -39,27 +39,28 @@ export default {
     }
   },
   methods:{
-    // login(){
-    //   this.loading = true;
-    //   authService.login(this.email, this.password)
-    //   .then(() => {
-    //     //this.setLoggedIn();
-    //     this.loading = false;
-    //     this.$router.push('/tools');
-    //   })
-    //   .catch((error) => {
-    //     console.dir(error);
-    //     if (error.response && error.response.status === 400) {
-    //       this.errors = error.response.data.error;
-    //     } else {
-    //       console.dir(error);
-    //     }
-    //     this.loading = false;
-    //   });
-    // }
-    async login(){
-      
+    login(){
+      this.loading = true;
+      authService.login(this.email, this.password)
+      .then(() => {
+        //this.setLoggedIn();
+        this.loading = false;
+        this.$router.push('/tools');
+      })
+      .catch((error) => {
+        console.dir(error);
+        if (error.response && error.response.status === 400) {
+          this.errors = error.response.data.error;
+        } else {
+          console.dir(error);
+        }
+        this.loading = false;
+      });
     }
+
+    // async login(){
+      
+    // }
   }
 
 }

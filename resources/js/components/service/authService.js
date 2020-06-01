@@ -15,32 +15,24 @@ export default class AuthService extends BaseService {
     });
   }
   
-  
-  // login(email, password) {
-  //   return new Promise((resolve, reject) => {
-  //     this.axios.post('login', { email, password })
-  //       .then((response) => {
-  //         this.localStorageSetUp(response);
-  //         console.dir(response);
-  //         resolve(response.data.token);
-  //       }).
-  //       catch ((error) => {
-  //         console.dir(error);
-  //         console.log('Error from login authService');
-  //         reject(error);
-  //       })
-  //   });
-  // }
-
-  login(email, password){
-    {
-      return axios.post('login', { email, password });
-      console.dir(response);
-      this.localStorageSetUp(response);
-    } catch (error) {
-      
-    }
+  //TODO Losi - ez itt Promise alapu funkcio. I would like to transform this into a async/await style function. Is that possible? How? The response here would have to be used for 2 things. 1-return the response to the calling function 2-use as an argument with the localStorageSetup().Would it work if we save the response to a variable, and use this variable would be used wit the localStorageSetup()? I am kinda gueaasing that it wont, because we would storing a Promise? But would it work, if we combine it here with an await for the localStorageSetup()?
+  login(email, password) {
+    return new Promise((resolve, reject) => {
+      this.axios.post('login', { email, password })
+        .then((response) => {
+          this.localStorageSetUp(response);
+          console.dir(response);
+          resolve(response.data.token);
+        }).
+        catch ((error) => {
+          console.dir(error);
+          console.log('Error from login authService');
+          reject(error);
+        })
+    });
   }
+
+ 
 
   localStorageSetUp(response) {
     window.localStorage.setItem('loginToken', response.data.token);
