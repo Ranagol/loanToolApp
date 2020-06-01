@@ -1,4 +1,5 @@
 import BaseService from './baseService';
+import { EventBus } from '../../eventbus';
 export default class AuthService extends BaseService {
 
   register(name, email, password, password_confirmation){
@@ -6,6 +7,7 @@ export default class AuthService extends BaseService {
       this.axios.post('register', { name, email, password, password_confirmation})
       .then((response) => {
         this.localStorageSetUp(response);
+        EventBus.$emit('loginSuccesfullyDone');
         resolve(response.data.token);
       }).
       catch((error) => {
@@ -21,7 +23,7 @@ export default class AuthService extends BaseService {
       this.axios.post('login', { email, password })
         .then((response) => {
           this.localStorageSetUp(response);
-          console.dir(response);
+          EventBus.$emit('loginSuccesfullyDone');
           resolve(response.data.token);
         }).
         catch ((error) => {
