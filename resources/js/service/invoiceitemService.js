@@ -1,11 +1,27 @@
 import { HTTP } from './baseService';
 
-class CustomerService {
+class InvoiceitemService {
 
-    getCustomers(){
-        return HTTP.get('/customers');
+    getInvoices(){
+        return HTTP.get('/invoices');
     }
+    getInvoiceById(id){
+        return HTTP.get(`/invoices/${id}`);
+    }
+
+    createInvoice(invoice){
+        return HTTP.post('/invoices', invoice);
+    }
+
+    getOpenInvoices(){
+        return HTTP.get("/open-invoices");
+    }
+
+    deleteInvoice(id){
+        return HTTP.delete(`/invoices/${id}`);
+    }
+    
 }
 
-const customerService = new CustomerService();
-export default customerService;
+const invoiceService = new InvoiceService();
+export default invoiceService;

@@ -1,12 +1,14 @@
 <template>
     <div>
-        <button @click="createInvoice" class="btn btn-warning">Create invoice</button>
+        <h2>Create invoice</h2>
 
+        <button @click="createInvoiceWithItems" class="btn btn-warning">Create invoice</button>
     </div>
 </template>
 
 <script>
 export default {
+    name: 'CreateInvoice',
     data(){
         return {
             invoice: {
@@ -21,18 +23,19 @@ export default {
                     tool_id: 2,
                     price: 2600,
                 },
-                
             ],
+            invoiceWithItems: {},
              
-                
-                
-
         }
     },
     methods: {
-        createInvoice(){
+        async createInvoiceWithItems(){
+            this.invoiceWithItems.invoice = this.invoice;
+            this.invoiceWithItems.invoice_items = this.invoice_items;
+            console.dir(this.invoiceWithItems);
+        },
 
-        }
+        
     }
 }
 </script>

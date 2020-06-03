@@ -25,6 +25,10 @@
         </li>
 
         <li v-if="userHasToken" class="nav-item">
+          <router-link class="nav-link" to="/create-invoice" >Create invoice</router-link>
+        </li>
+
+        <li v-if="userHasToken" class="nav-item">
           <a @click="logout" class="nav-link" href="#">Logout</a>
         </li>
 
