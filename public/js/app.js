@@ -1920,7 +1920,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _service_authService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service/authService */ "./resources/js/components/service/authService.js");
+/* harmony import */ var _service_authService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../service/authService */ "./resources/js/service/authService.js");
 //
 //
 //
@@ -1996,7 +1996,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _service_authService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service/authService */ "./resources/js/components/service/authService.js");
+/* harmony import */ var _service_authService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../service/authService */ "./resources/js/service/authService.js");
 //
 //
 //
@@ -2047,7 +2047,7 @@ __webpack_require__.r(__webpack_exports__);
       email: '',
       password: '',
       password_confirmation: '',
-      validationErrors: {},
+      validationErrors: null,
       loading: false
     };
   },
@@ -2065,7 +2065,9 @@ __webpack_require__.r(__webpack_exports__);
         console.dir(error);
 
         if (error.response && error.response.status === 422) {
-          _this.validationErrors = Object.assign({}, {}, error.response.data.errors);
+          _this.validationErrors = error.response.data.errors;
+          console.log('Below is the new validation error:');
+          console.dir(_this.validationErrors);
         } else {
           console.dir(error);
         }
@@ -2089,7 +2091,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../service/customerService */ "./resources/js/components/service/customerService.js");
+/* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/customerService */ "./resources/js/service/customerService.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2187,7 +2189,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _service_authService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service/authService */ "./resources/js/components/service/authService.js");
+/* harmony import */ var _service_authService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../service/authService */ "./resources/js/service/authService.js");
 /* harmony import */ var _eventbus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../eventbus */ "./resources/js/eventbus.js");
 //
 //
@@ -2256,10 +2258,12 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    //TODO I tried to use this event listener without a hook, and it did not worked. Why?
     _eventbus__WEBPACK_IMPORTED_MODULE_1__["EventBus"].$on('loginSuccesfullyDone', function () {
       _this.userHasToken = true;
     });
+  },
+  beforeDestroy: function beforeDestroy() {
+    _eventbus__WEBPACK_IMPORTED_MODULE_1__["EventBus"].$off('loginSuccesfullyDone');
   }
 });
 
@@ -20645,7 +20649,7 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm.loading
-        ? _c("h3", { staticClass: "alert alert-warning" }, [
+        ? _c("h3", { staticClass: "alert alert-info" }, [
             _vm._v("\n    Loading...\n  ")
           ])
         : _vm._e(),
@@ -20754,23 +20758,19 @@ var render = function() {
     [
       _c("h3", [_vm._v("Register")]),
       _vm._v(" "),
-      _vm._l(_vm.validationErrors, function(validationError, fieldName) {
-        return _c(
-          "div",
-          {
-            key: "validation-errors-" + fieldName,
-            staticClass: "alert alert-danger"
-          },
-          [
-            _vm._v(
-              "\n    " + _vm._s(fieldName + ": " + validationError[0]) + "\n  "
-            )
-          ]
-        )
-      }),
+      _vm.validationErrors
+        ? _c(
+            "div",
+            { staticClass: "alert alert-danger" },
+            _vm._l(_vm.validationErrors, function(error, i) {
+              return _c("p", { key: i }, [_vm._v(" " + _vm._s(error[0]))])
+            }),
+            0
+          )
+        : _vm._e(),
       _vm._v(" "),
       _vm.loading
-        ? _c("h3", { staticClass: "alert alert-warning" }, [
+        ? _c("h3", { staticClass: "alert alert-info" }, [
             _vm._v("\n    Loading...\n  ")
           ])
         : _vm._e(),
@@ -20892,8 +20892,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm._m(0)
-    ],
-    2
+    ]
   )
 }
 var staticRenderFns = [
@@ -36357,7 +36356,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  //VueRouter code
 
 
- //TODO Losi just to check, the { routes } above means that we are extracting only the 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
@@ -36769,213 +36767,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/service/authService.js":
-/*!********************************************************!*\
-  !*** ./resources/js/components/service/authService.js ***!
-  \********************************************************/
-/*! exports provided: default, authService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AuthService; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authService", function() { return authService; });
-/* harmony import */ var _baseService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./baseService */ "./resources/js/components/service/baseService.js");
-/* harmony import */ var _eventbus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../eventbus */ "./resources/js/eventbus.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var AuthService = /*#__PURE__*/function (_BaseService) {
-  _inherits(AuthService, _BaseService);
-
-  var _super = _createSuper(AuthService);
-
-  function AuthService() {
-    _classCallCheck(this, AuthService);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(AuthService, [{
-    key: "register",
-    value: function register(name, email, password, password_confirmation) {
-      var _this = this;
-
-      return new Promise(function (resolve, reject) {
-        _this.axios.post('register', {
-          name: name,
-          email: email,
-          password: password,
-          password_confirmation: password_confirmation
-        }).then(function (response) {
-          _this.localStorageSetUp(response);
-
-          _eventbus__WEBPACK_IMPORTED_MODULE_1__["EventBus"].$emit('loginSuccesfullyDone');
-          resolve(response.data.token);
-        })["catch"](function (error) {
-          console.log('Error from register authService', error.response.data);
-          reject(error);
-        });
-      });
-    } //TODO Losi - ez itt Promise alapu funkcio. I would like to transform this into a async/await style function. Is that possible? How? The response here would have to be used for 2 things. 1-return the response to the calling function 2-use as an argument with the localStorageSetup().Would it work if we save the response to a variable, and use this variable would be used wit the localStorageSetup()? I am kinda gueaasing that it wont, because we would storing a Promise? But would it work, if we combine it here with an await for the localStorageSetup()?
-
-  }, {
-    key: "login",
-    value: function login(email, password) {
-      var _this2 = this;
-
-      return new Promise(function (resolve, reject) {
-        _this2.axios.post('login', {
-          email: email,
-          password: password
-        }).then(function (response) {
-          _this2.localStorageSetUp(response);
-
-          _eventbus__WEBPACK_IMPORTED_MODULE_1__["EventBus"].$emit('loginSuccesfullyDone');
-          resolve(response.data.token);
-        })["catch"](function (error) {
-          console.dir(error);
-          console.log('Error from login authService');
-          reject(error);
-        });
-      });
-    }
-  }, {
-    key: "localStorageSetUp",
-    value: function localStorageSetUp(response) {
-      window.localStorage.setItem('loginToken', response.data.token);
-      window.localStorage.setItem('user_id', response.data.id);
-      this.setAxiosHeader();
-    }
-  }, {
-    key: "logout",
-    value: function logout() {
-      window.localStorage.removeItem('loginToken');
-      window.localStorage.removeItem('user_id');
-      delete this.axios.defaults.headers.common['Authorization'];
-    }
-  }]);
-
-  return AuthService;
-}(_baseService__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-
-var authService = new AuthService();
-
-/***/ }),
-
-/***/ "./resources/js/components/service/baseService.js":
-/*!********************************************************!*\
-  !*** ./resources/js/components/service/baseService.js ***!
-  \********************************************************/
-/*! exports provided: default, HTTP */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BaseService; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HTTP", function() { return HTTP; });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-var BaseService = /*#__PURE__*/function () {
-  function BaseService() {
-    _classCallCheck(this, BaseService);
-
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = 'http://localhost:8000/api/';
-    this.axios = axios__WEBPACK_IMPORTED_MODULE_0___default.a; //this axios is = to the installed axios
-
-    this.setAxiosHeader();
-  }
-
-  _createClass(BaseService, [{
-    key: "setAxiosHeader",
-    value: function setAxiosHeader() {
-      var TOKEN = window.localStorage.getItem('loginToken'); //find the token in localStorage
-
-      if (!TOKEN) {
-        return; //if there is no token, just return (there will be no token in the header, api will reject requests...)
-      }
-
-      this.axios.defaults.headers.common['Authorization'] = "Bearer ".concat(TOKEN); //if there is a token, set it up.
-    }
-  }]);
-
-  return BaseService;
-}();
-
-
-var HTTP = new BaseService().axios;
-
-/***/ }),
-
-/***/ "./resources/js/components/service/customerService.js":
-/*!************************************************************!*\
-  !*** ./resources/js/components/service/customerService.js ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _baseService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./baseService */ "./resources/js/components/service/baseService.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-var CustomerService = /*#__PURE__*/function () {
-  function CustomerService() {
-    _classCallCheck(this, CustomerService);
-  }
-
-  _createClass(CustomerService, [{
-    key: "getCustomers",
-    value: function getCustomers() {
-      return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].get('/customers');
-    }
-  }]);
-
-  return CustomerService;
-}();
-
-var customerService = new CustomerService();
-/* harmony default export */ __webpack_exports__["default"] = (customerService);
-
-/***/ }),
-
 /***/ "./resources/js/components/tools/Tools.vue":
 /*!*************************************************!*\
   !*** ./resources/js/components/tools/Tools.vue ***!
@@ -37097,6 +36888,212 @@ var routes = [{
   name: 'tools',
   component: _components_tools_Tools__WEBPACK_IMPORTED_MODULE_3__["default"]
 }];
+
+/***/ }),
+
+/***/ "./resources/js/service/authService.js":
+/*!*********************************************!*\
+  !*** ./resources/js/service/authService.js ***!
+  \*********************************************/
+/*! exports provided: default, authService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AuthService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authService", function() { return authService; });
+/* harmony import */ var _baseService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./baseService */ "./resources/js/service/baseService.js");
+/* harmony import */ var _eventbus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../eventbus */ "./resources/js/eventbus.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var AuthService = /*#__PURE__*/function (_BaseService) {
+  _inherits(AuthService, _BaseService);
+
+  var _super = _createSuper(AuthService);
+
+  function AuthService() {
+    _classCallCheck(this, AuthService);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(AuthService, [{
+    key: "register",
+    value: function register(name, email, password, password_confirmation) {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+        _this.axios.post('register', {
+          name: name,
+          email: email,
+          password: password,
+          password_confirmation: password_confirmation
+        }).then(function (response) {
+          _this.localStorageSetUp(response);
+
+          _eventbus__WEBPACK_IMPORTED_MODULE_1__["EventBus"].$emit('loginSuccesfullyDone');
+          resolve(response.data.token);
+        })["catch"](function (error) {
+          console.log('Error from register authService', error.response.data);
+          reject(error);
+        });
+      });
+    }
+  }, {
+    key: "login",
+    value: function login(email, password) {
+      var _this2 = this;
+
+      return new Promise(function (resolve, reject) {
+        _this2.axios.post('login', {
+          email: email,
+          password: password
+        }).then(function (response) {
+          _this2.localStorageSetUp(response);
+
+          _eventbus__WEBPACK_IMPORTED_MODULE_1__["EventBus"].$emit('loginSuccesfullyDone');
+          resolve(response.data.token);
+        })["catch"](function (error) {
+          console.dir(error);
+          console.log('Error from login authService');
+          reject(error);
+        });
+      });
+    }
+  }, {
+    key: "localStorageSetUp",
+    value: function localStorageSetUp(response) {
+      window.localStorage.setItem('loginToken', response.data.token);
+      window.localStorage.setItem('user_id', response.data.id);
+      this.setAxiosHeader();
+    }
+  }, {
+    key: "logout",
+    value: function logout() {
+      window.localStorage.removeItem('loginToken');
+      window.localStorage.removeItem('user_id');
+      delete this.axios.defaults.headers.common['Authorization'];
+    }
+  }]);
+
+  return AuthService;
+}(_baseService__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+var authService = new AuthService();
+
+/***/ }),
+
+/***/ "./resources/js/service/baseService.js":
+/*!*********************************************!*\
+  !*** ./resources/js/service/baseService.js ***!
+  \*********************************************/
+/*! exports provided: default, HTTP */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BaseService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HTTP", function() { return HTTP; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var BaseService = /*#__PURE__*/function () {
+  function BaseService() {
+    _classCallCheck(this, BaseService);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = 'http://localhost:8000/api/';
+    this.axios = axios__WEBPACK_IMPORTED_MODULE_0___default.a; //this axios is = to the installed axios
+
+    this.setAxiosHeader();
+  }
+
+  _createClass(BaseService, [{
+    key: "setAxiosHeader",
+    value: function setAxiosHeader() {
+      var TOKEN = window.localStorage.getItem('loginToken'); //find the token in localStorage
+
+      if (!TOKEN) {
+        return; //if there is no token, just return (there will be no token in the header, api will reject requests...)
+      }
+
+      this.axios.defaults.headers.common['Authorization'] = "Bearer ".concat(TOKEN); //if there is a token, set it up.
+    }
+  }]);
+
+  return BaseService;
+}();
+
+
+var HTTP = new BaseService().axios;
+
+/***/ }),
+
+/***/ "./resources/js/service/customerService.js":
+/*!*************************************************!*\
+  !*** ./resources/js/service/customerService.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _baseService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./baseService */ "./resources/js/service/baseService.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var CustomerService = /*#__PURE__*/function () {
+  function CustomerService() {
+    _classCallCheck(this, CustomerService);
+  }
+
+  _createClass(CustomerService, [{
+    key: "getCustomers",
+    value: function getCustomers() {
+      return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].get('/customers');
+    }
+  }]);
+
+  return CustomerService;
+}();
+
+var customerService = new CustomerService();
+/* harmony default export */ __webpack_exports__["default"] = (customerService);
 
 /***/ }),
 

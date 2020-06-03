@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import customerService from '../service/customerService';
+import customerService from '../../service/customerService';
 export default {
     name: 'Customers',
     data(){

@@ -40,7 +40,7 @@
 
 
 <script>
-import { authService } from '../service/authService';
+import { authService } from '../../service/authService';
 import { EventBus } from '../../eventbus';
 export default {
   name: 'Navbar',
@@ -64,10 +64,12 @@ export default {
     }
   },
   mounted(){
-    //TODO I tried to use this event listener without a hook, and it did not worked. Why?
     EventBus.$on('loginSuccesfullyDone', () => {
       this.userHasToken = true;
     });
+  },
+  beforeDestroy() {
+    EventBus.$off('loginSuccesfullyDone');
   }
   
   

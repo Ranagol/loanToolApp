@@ -5,7 +5,6 @@ import Vue from 'vue';
 //VueRouter code
 import VueRouter from 'vue-router';
 import { routes } from './routes';
-//TODO Losi just to check, the { routes } above means that we are extracting only the 
 Vue.use(VueRouter);
 const router = new VueRouter({
     routes,

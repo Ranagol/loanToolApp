@@ -8,7 +8,7 @@
     </div>
 
     <!-- Loading displaying -->
-    <h3 v-if="loading" class="alert alert-warning">
+    <h3 v-if="loading" class="alert alert-info">
       Loading...
     </h3>
 
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { authService } from '../service/authService';
+import { authService } from '../../service/authService';
 export default {
   name: 'Login',
   data(){
