@@ -10,6 +10,7 @@ class InvoiceService {
     }
 
     createInvoice(invoice){
+        console.log('InvoiceService/createInvoice activated.');
         return HTTP.post('/invoices', invoice);
     }
 

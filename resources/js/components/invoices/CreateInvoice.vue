@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import invoiceService from '../../service/invoiceService';
 export default {
     name: 'CreateInvoice',
     data(){
@@ -33,6 +34,14 @@ export default {
             this.invoiceWithItems.invoice = this.invoice;
             this.invoiceWithItems.invoice_items = this.invoice_items;
             console.dir(this.invoiceWithItems);
+            try {
+                await invoiceService.createInvoice(this.invoiceWithItems);
+                console.log('Invoice sent to api');
+            } catch (error) {
+                console.dir(error);
+                console.log('Something is wrong');
+            }
+            console.log('This is bad');
         },
 
         
