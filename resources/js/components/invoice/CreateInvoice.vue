@@ -1,5 +1,6 @@
 <template>
     <div>
+        <button @click="createInvoice" class="btn btn-warning">Create invoice</button>
 
     </div>
 </template>
@@ -8,29 +9,28 @@
 export default {
     data(){
         return {
-            customer: {
-                id: 1,
-                name: "Baupartner",
-                address: "Bla",
-                phone: "phone",
-                scan_doc: null,
-                blacklist: 0,
-                comments: null,
+            invoice: {
+                customer_id: 1,
             },
-            tools: [
-                {
-                    id: 1,
-                    brand: "Makita",
-                    model: "HM1203",
-                    description: "Stemarica",
-                    serial_number: null,
-                    price_for_4h: 1500,
-                    price_for_24h: 2200,
-                    onStock: 1,
-                    tool_picture_url: null,
-                    comments: null,
-                }
+            invoice_items: [
+                { 
+                    tool_id: 1,
+                    price: 2200,
+                },
+                { 
+                    tool_id: 2,
+                    price: 2600,
+                },
+                
             ],
+             
+                
+                
+
+        }
+    },
+    methods: {
+        createInvoice(){
 
         }
     }

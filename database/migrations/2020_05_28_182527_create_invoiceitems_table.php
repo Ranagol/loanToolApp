@@ -17,7 +17,7 @@ class CreateInvoiceitemsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('invoice_id');
             $table->unsignedBigInteger('tool_id');
-            $table->integer('4h_or_24h_price');
+            $table->integer('price');
             $table->date('taken')->nullable();
             $table->date('returned')->nullable();
             $table->integer('time_on_field')->nullable();
