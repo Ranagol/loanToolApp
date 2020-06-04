@@ -18,7 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+// Route::post('/invoices', function () {
+//     $data = [
+//         "status" => "route activated",
+//         "message" => "good work!"
+//     ];
+//     return response()->json($data); 
+// });
 
 
 Route::post('register', 'UserController@register');

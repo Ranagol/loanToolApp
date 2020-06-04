@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Invoice;
+use App\Invoiceitem;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 class InvoiceController extends Controller
@@ -35,8 +36,11 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $invoice = Invoice::create($request->all());
-        return $invoice;
+        $invoice = new Invoice();
+        $invoice->customer_id = $request->input('invoice.customer_id');
+        $invoice->save();
+        
+        return response()->json($request->input('invoice.customer_id')); 
     }
 
     /**
