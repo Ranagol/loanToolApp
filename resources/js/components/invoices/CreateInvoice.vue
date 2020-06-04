@@ -2,22 +2,21 @@
     <div>
         <h2>Create invoice</h2>
 
-<el-select
-    v-model="value"
-    multiple
-    filterable
-    remote
-    reserve-keyword
-    placeholder="Please enter a keyword"
-    :remote-method="remoteMethod"
-    :loading="loading">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-</el-select>             
+        <el-select
+            v-model="value"
+            filterable
+            remote
+            reserve-keyword
+            placeholder="Please enter a keyword"
+            :remote-method="remoteMethod"
+            :loading="loading">
+            <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+        </el-select>             
 
         <button @click="createInvoiceWithItems" class="btn btn-warning">Create invoice</button>
     </div>
@@ -37,12 +36,13 @@ export default {
                 { tool_id: 2, price: 2600, },
             ],
             invoiceWithItems: {},
-            //elements select starts below
-            options: [],
-            value: [],
+
+            //elements select starts below------------------------------------
+            options: [],//options are the offered options, after we type in some letters. If there are no letters typed in, there will be an empty options array = no options offered
+            value: [],//this will be the selected value, which will be sent to the invoice creating
             list: [],
-            loading: false,
-            states: [
+            loading: false,//this is the loading sign, which will appear, while we are downloading the data from the db
+            states: [//this currently simulates the "db"
                 "Alabama", "Alaska", "Arizona",
                 "Arkansas", "California", "Colorado",
                 "Connecticut", "Delaware", "Florida",
@@ -61,8 +61,6 @@ export default {
                 "Washington", "West Virginia", "Wisconsin",
                 "Wyoming"
             ]
-            
-             
         }
     },
     methods: {
@@ -83,13 +81,13 @@ export default {
         remoteMethod(query) {
             if (query !== '') {
                 this.loading = true;
-                setTimeout(() => {
-                this.loading = false;
-                this.options = this.list.filter(item => {
-                    return item.label.toLowerCase()
-                    .indexOf(query.toLowerCase()) > -1;
-                });
-                }, 200);
+                setTimeout(() => {//this here is simulating the waiting time for the requested data
+                    this.loading = false;
+                    this.options = this.list.filter(item => {
+                        return item.label.toLowerCase()
+                        .indexOf(query.toLowerCase()) > -1;
+                    });
+                }, 3000);
             } else {
                 this.options = [];
             }
@@ -97,7 +95,7 @@ export default {
         
     },
     mounted() {
-        this.list = this.states.map(item => {
+        this.list = this.states.map(item => {//this is the active search part
             return { value: `value:${item}`, label: `label:${item}` };
         });
     },

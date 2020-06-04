@@ -3940,7 +3940,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateInvoice',
@@ -3957,12 +3956,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         price: 2600
       }],
       invoiceWithItems: {},
-      //elements select starts below
+      //elements select starts below------------------------------------
       options: [],
+      //options are the offered options, after we type in some letters. If there are no letters typed in, there will be an empty options array = no options offered
       value: [],
+      //this will be the selected value, which will be sent to the invoice creating
       list: [],
       loading: false,
-      states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+      //this is the loading sign, which will appear, while we are downloading the data from the db
+      states: [//this currently simulates the "db"
+      "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
     };
   },
   methods: {
@@ -4010,11 +4013,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (query !== '') {
         this.loading = true;
         setTimeout(function () {
+          //this here is simulating the waiting time for the requested data
           _this2.loading = false;
           _this2.options = _this2.list.filter(function (item) {
             return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
           });
-        }, 200);
+        }, 3000);
       } else {
         this.options = [];
       }
@@ -4022,6 +4026,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.list = this.states.map(function (item) {
+      //this is the active search part
       return {
         value: "value:".concat(item),
         label: "label:".concat(item)
@@ -83910,7 +83915,6 @@ var render = function() {
         "el-select",
         {
           attrs: {
-            multiple: "",
             filterable: "",
             remote: "",
             "reserve-keyword": "",
