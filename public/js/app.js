@@ -3861,9 +3861,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3936,6 +3933,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateInvoice',
@@ -3952,17 +3957,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         price: 2600
       }],
       invoiceWithItems: {},
-      options: [{
-        value: 'Option1',
-        label: 'Option1'
-      }, {
-        value: 'Option2',
-        label: 'Option2'
-      }, {
-        value: 'Option3',
-        label: 'Option3'
-      }],
-      value: ''
+      //elements select starts below
+      options: [],
+      value: [],
+      list: [],
+      loading: false,
+      states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
     };
   },
   methods: {
@@ -4002,7 +4002,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee, null, [[3, 9]]);
       }))();
+    },
+    //elements select methods starts below
+    remoteMethod: function remoteMethod(query) {
+      var _this2 = this;
+
+      if (query !== '') {
+        this.loading = true;
+        setTimeout(function () {
+          _this2.loading = false;
+          _this2.options = _this2.list.filter(function (item) {
+            return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
+          });
+        }, 200);
+      } else {
+        this.options = [];
+      }
     }
+  },
+  mounted: function mounted() {
+    this.list = this.states.map(function (item) {
+      return {
+        value: "value:".concat(item),
+        label: "label:".concat(item)
+      };
+    });
   }
 });
 
@@ -83828,9 +83852,7 @@ var render = function() {
                   )
                 ])
               : _vm._e()
-          ]),
-          _vm._v(" "),
-          _vm._m(1)
+          ])
         ]
       )
     ]
@@ -83856,26 +83878,6 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", { staticClass: "form-inline my-2 my-lg-0" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "search", placeholder: "Search", "aria-label": "Search" }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-success my-2 my-sm-0",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Search")]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -83907,7 +83909,15 @@ var render = function() {
       _c(
         "el-select",
         {
-          attrs: { filterable: "", placeholder: "Select" },
+          attrs: {
+            multiple: "",
+            filterable: "",
+            remote: "",
+            "reserve-keyword": "",
+            placeholder: "Please enter a keyword",
+            "remote-method": _vm.remoteMethod,
+            loading: _vm.loading
+          },
           model: {
             value: _vm.value,
             callback: function($$v) {

@@ -2,14 +2,22 @@
     <div>
         <h2>Create invoice</h2>
 
-        <el-select v-model="value" filterable placeholder="Select">
-            <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-            </el-option>
-        </el-select>       
+<el-select
+    v-model="value"
+    multiple
+    filterable
+    remote
+    reserve-keyword
+    placeholder="Please enter a keyword"
+    :remote-method="remoteMethod"
+    :loading="loading">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+</el-select>             
 
         <button @click="createInvoiceWithItems" class="btn btn-warning">Create invoice</button>
     </div>
@@ -25,31 +33,35 @@ export default {
                 customer_id: 1,
             },
             invoice_items: [
-                { 
-                    tool_id: 1,
-                    price: 2200,
-                },
-                { 
-                    tool_id: 2,
-                    price: 2600,
-                },
+                { tool_id: 1, price: 2200, },
+                { tool_id: 2, price: 2600, },
             ],
             invoiceWithItems: {},
-            options: [
-                {
-                    value: 'Option1',
-                    label: 'Option1'
-                }, 
-                {
-                    value: 'Option2',
-                    label: 'Option2'
-                }, 
-                {
-                    value: 'Option3',
-                    label: 'Option3'
-                }
-            ],
-            value: ''
+            //elements select starts below
+            options: [],
+            value: [],
+            list: [],
+            loading: false,
+            states: [
+                "Alabama", "Alaska", "Arizona",
+                "Arkansas", "California", "Colorado",
+                "Connecticut", "Delaware", "Florida",
+                "Georgia", "Hawaii", "Idaho", "Illinois",
+                "Indiana", "Iowa", "Kansas", "Kentucky",
+                "Louisiana", "Maine", "Maryland",
+                "Massachusetts", "Michigan", "Minnesota",
+                "Mississippi", "Missouri", "Montana",
+                "Nebraska", "Nevada", "New Hampshire",
+                "New Jersey", "New Mexico", "New York",
+                "North Carolina", "North Dakota", "Ohio",
+                "Oklahoma", "Oregon", "Pennsylvania",
+                "Rhode Island", "South Carolina",
+                "South Dakota", "Tennessee", "Texas",
+                "Utah", "Vermont", "Virginia",
+                "Washington", "West Virginia", "Wisconsin",
+                "Wyoming"
+            ]
+            
              
         }
     },
@@ -67,8 +79,27 @@ export default {
             }
             console.log('This is bad');
         },
-
+        //elements select methods starts below
+        remoteMethod(query) {
+            if (query !== '') {
+                this.loading = true;
+                setTimeout(() => {
+                this.loading = false;
+                this.options = this.list.filter(item => {
+                    return item.label.toLowerCase()
+                    .indexOf(query.toLowerCase()) > -1;
+                });
+                }, 200);
+            } else {
+                this.options = [];
+            }
+        }
         
-    }
+    },
+    mounted() {
+        this.list = this.states.map(item => {
+            return { value: `value:${item}`, label: `label:${item}` };
+        });
+    },
 }
 </script>
