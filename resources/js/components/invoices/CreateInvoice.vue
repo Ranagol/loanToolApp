@@ -2,6 +2,15 @@
     <div>
         <h2>Create invoice</h2>
 
+        <el-select v-model="value" filterable placeholder="Select">
+            <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+        </el-select>       
+
         <button @click="createInvoiceWithItems" class="btn btn-warning">Create invoice</button>
     </div>
 </template>
@@ -26,6 +35,21 @@ export default {
                 },
             ],
             invoiceWithItems: {},
+            options: [
+                {
+                    value: 'Option1',
+                    label: 'Option1'
+                }, 
+                {
+                    value: 'Option2',
+                    label: 'Option2'
+                }, 
+                {
+                    value: 'Option3',
+                    label: 'Option3'
+                }
+            ],
+            value: ''
              
         }
     },
