@@ -6,6 +6,7 @@ use App\Invoice;
 use App\Invoiceitem;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Carbon\Carbon;
 class InvoiceController extends Controller
 {
     /**
@@ -47,10 +48,11 @@ class InvoiceController extends Controller
             $invoiceitem->invoice_id = $invoice->id;
             $invoiceitem->tool_id = $item['tool_id'];
             $invoiceitem->price = $item['price'];//because $item is an associative array now... 'price' is the key, and example 2200 is the value
+            $invoiceitem->taken = Carbon::now();
             $invoiceitem->save();
-            return response()->json($invoiceitem);
+            
         }
-        
+        return response()->json($invoice_items);
         
 
 
