@@ -43,6 +43,7 @@ class InvoiceController extends Controller
         $invoice->save();
 
         $invoice_items = $request->input(['invoice_items']);
+        $itemsToReturn = [];//this will be used simply to return all items to the frontend, as part of the OK response
         foreach ($invoice_items as $item) {
             $invoiceitem = new Invoiceitem();
             $invoiceitem->invoice_id = $invoice->id;
@@ -50,14 +51,12 @@ class InvoiceController extends Controller
             $invoiceitem->price = $item['price'];//because $item is an associative array now... 'price' is the key, and example 2200 is the value
             $invoiceitem->taken = Carbon::now();
             $invoiceitem->save();
-            
+            $itemsToReturn[] = $invoiceitem;
         }
-        return response()->json($invoice_items);
-        
-
-
-
-         
+        return response()->json([
+            0 => $invoice, 
+            1 => $itemsToReturn,
+        ]);
     }
 
     /**
