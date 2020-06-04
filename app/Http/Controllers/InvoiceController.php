@@ -34,13 +34,28 @@ class InvoiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //TODO when something is not OK, Laravel will usually show us what is wrong, what line, we will receive an error message. But this not works with L+Vue. How to solve this?
     public function store(Request $request)
     {
         $invoice = new Invoice();
         $invoice->customer_id = $request->input('invoice.customer_id');
         $invoice->save();
+
+        $invoice_items = $request->input(['invoice_items']);
+        foreach ($invoice_items as $item) {
+            $invoiceitem = new Invoiceitem();
+            $invoiceitem->invoice_id = $invoice->id;
+            $invoiceitem->tool_id = $item['tool_id'];
+            $invoiceitem->price = $item['price'];//because $item is an associative array now... 'price' is the key, and example 2200 is the value
+            $invoiceitem->save();
+            return response()->json($invoiceitem);
+        }
         
-        return response()->json($request->input('invoice.customer_id')); 
+        
+
+
+
+         
     }
 
     /**
