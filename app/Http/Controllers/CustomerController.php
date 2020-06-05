@@ -12,16 +12,23 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Customer::all();
+        if ($request->has('searchTerm')) {
+            $searchTerm = $request->searchTerm;
+            return Customer::where('name', 'like', '%' . $searchTerm . '%')->orderBy('name', 'asc')->get();
+        } else {
+            return Customer::all();
+        }
+        
+        
     }
 
     public function searchCustomers(Request $request){
         $searchTerm = request()->input('searchTerm');
         return Customer::where('name', 'like', '%' . $searchTerm . '%')->orderBy('name', 'asc')->get();
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *

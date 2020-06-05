@@ -2105,11 +2105,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Customers',
   data: function data() {
     return {
+      searchTerm: '',
       customers: []
     };
   },
@@ -2124,7 +2130,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return _service_customerService__WEBPACK_IMPORTED_MODULE_1__["default"].getCustomers();
+                return _service_customerService__WEBPACK_IMPORTED_MODULE_1__["default"].getCustomers(_this.searchTerm);
 
               case 3:
                 _this.customers = _context.sent;
@@ -21024,6 +21030,36 @@ var render = function() {
   return _c("div", [
     _c("h3", [_vm._v("Customers")]),
     _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.searchTerm,
+          expression: "searchTerm"
+        }
+      ],
+      staticClass: "form-control",
+      attrs: {
+        name: "searchTerm",
+        type: "search",
+        placeholder: "Search",
+        "aria-label": "Search"
+      },
+      domProps: { value: _vm.searchTerm },
+      on: {
+        input: [
+          function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.searchTerm = $event.target.value
+          },
+          _vm.getCustomers
+        ]
+      }
+    }),
+    _vm._v(" "),
     _c("p", [_vm._v(_vm._s(_vm.customers))])
   ])
 }
@@ -37307,9 +37343,16 @@ var CustomerService = /*#__PURE__*/function () {
 
   _createClass(CustomerService, [{
     key: "getCustomers",
-    value: function getCustomers() {
-      return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].get('/customers');
-    }
+    value: function getCustomers(searchTerm) {
+      return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].get('/customers', {
+        params: {
+          searchTerm: searchTerm
+        }
+      });
+    } // searchCustomers(searchTerm){
+    //     return HTTP.get('/search-customers', {params: {searchTerm: searchTerm}})//we are sending an object containing a search term.
+    // }
+
   }]);
 
   return CustomerService;

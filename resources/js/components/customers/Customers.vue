@@ -1,6 +1,11 @@
 <template>
     <div>
         <h3>Customers</h3>
+
+        <!-- SEARCH FIELD -->
+        <input @input="getCustomers" v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search" aria-label="Search">
+        
+
         <p>{{ customers }}</p>
     </div>
 </template>
@@ -11,6 +16,7 @@ export default {
     name: 'Customers',
     data(){
         return {
+            searchTerm: '',
             customers: [],
         }
     },
@@ -18,7 +24,7 @@ export default {
     methods: {
         async getCustomers(){
             try {
-                this.customers = await customerService.getCustomers();
+                this.customers = await customerService.getCustomers(this.searchTerm);
                 console.dir(this.customers);
             } catch (error) {
                 console.dir(error);
