@@ -33,6 +33,7 @@ Route::post('login', 'UserController@authenticate');
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'UserController@getAuthenticatedUser');
+    Route::get('/search-customers', 'CustomerController@searchCustomers');
     Route::resource('customers','CustomerController');
     Route::resource('invoiceitems','InvoiceitemController');
     Route::resource('invoices','InvoiceController');
