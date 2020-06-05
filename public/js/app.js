@@ -3910,6 +3910,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
+/* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/customerService */ "./resources/js/service/customerService.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3941,6 +3942,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateInvoice',
   data: function data() {
@@ -3965,7 +3967,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       loading: false,
       //this is the loading sign, which will appear, while we are downloading the data from the db
       states: [//this currently simulates the "db"
-      "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+      "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"],
+      customers: []
     };
   },
   methods: {
@@ -4018,20 +4021,53 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this2.options = _this2.list.filter(function (item) {
             return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
           });
-        }, 3000);
+        }, 1000);
       } else {
         this.options = [];
       }
     }
   },
   mounted: function mounted() {
-    this.list = this.states.map(function (item) {
+    this.list = this.customers.map(function (item) {
       //this is the frontend search. So, on mounted we are creating a list [] from the filtered states [].
       return {
-        value: "value:".concat(item),
-        label: "label:".concat(item)
+        value: "value:".concat(item.name),
+        label: "label:".concat(item.name)
       };
     });
+  },
+  created: function created() {
+    var _this3 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return _service_customerService__WEBPACK_IMPORTED_MODULE_2__["default"].getCustomers();
+
+            case 3:
+              response = _context2.sent;
+              _this3.customers = response.data;
+              console.dir(_this3.customers);
+              _context2.next = 11;
+              break;
+
+            case 8:
+              _context2.prev = 8;
+              _context2.t0 = _context2["catch"](0);
+              console.dir(_context2.t0);
+
+            case 11:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[0, 8]]);
+    }))();
   }
 });
 

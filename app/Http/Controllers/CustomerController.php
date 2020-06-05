@@ -19,7 +19,8 @@ class CustomerController extends Controller
     }
 
     public function searchCustomers(Request $request){
-
+        $searchTerm = request()->input('searchTerm');
+        return Customer::where('name', 'like', '%' . $searchTerm . '%')->orderBy('name', 'asc')->get();
     }
 
     /**
