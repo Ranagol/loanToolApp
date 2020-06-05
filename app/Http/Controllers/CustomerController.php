@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+
 class CustomerController extends Controller
 {
     /**
@@ -15,6 +16,10 @@ class CustomerController extends Controller
     public function index()
     {
         return Customer::all();
+    }
+
+    public function searchCustomers(Request $request){
+
     }
 
     /**

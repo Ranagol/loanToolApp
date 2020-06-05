@@ -42,25 +42,25 @@ export default {
             value: [],//this will be the selected value, which will be sent to the invoice creating
             list: [],
             loading: false,//this is the loading sign, which will appear, while we are downloading the data from the db
-            states: [//this currently simulates the "db"
-                "Alabama", "Alaska", "Arizona",
-                "Arkansas", "California", "Colorado",
-                "Connecticut", "Delaware", "Florida",
-                "Georgia", "Hawaii", "Idaho", "Illinois",
-                "Indiana", "Iowa", "Kansas", "Kentucky",
-                "Louisiana", "Maine", "Maryland",
-                "Massachusetts", "Michigan", "Minnesota",
-                "Mississippi", "Missouri", "Montana",
-                "Nebraska", "Nevada", "New Hampshire",
-                "New Jersey", "New Mexico", "New York",
-                "North Carolina", "North Dakota", "Ohio",
-                "Oklahoma", "Oregon", "Pennsylvania",
-                "Rhode Island", "South Carolina",
-                "South Dakota", "Tennessee", "Texas",
-                "Utah", "Vermont", "Virginia",
-                "Washington", "West Virginia", "Wisconsin",
-                "Wyoming"
-            ]
+            // states: [//this currently simulates the "db"
+            //     "Alabama", "Alaska", "Arizona",
+            //     "Arkansas", "California", "Colorado",
+            //     "Connecticut", "Delaware", "Florida",
+            //     "Georgia", "Hawaii", "Idaho", "Illinois",
+            //     "Indiana", "Iowa", "Kansas", "Kentucky",
+            //     "Louisiana", "Maine", "Maryland",
+            //     "Massachusetts", "Michigan", "Minnesota",
+            //     "Mississippi", "Missouri", "Montana",
+            //     "Nebraska", "Nevada", "New Hampshire",
+            //     "New Jersey", "New Mexico", "New York",
+            //     "North Carolina", "North Dakota", "Ohio",
+            //     "Oklahoma", "Oregon", "Pennsylvania",
+            //     "Rhode Island", "South Carolina",
+            //     "South Dakota", "Tennessee", "Texas",
+            //     "Utah", "Vermont", "Virginia",
+            //     "Washington", "West Virginia", "Wisconsin",
+            //     "Wyoming"
+            // ]
         }
     },
     methods: {
@@ -81,23 +81,42 @@ export default {
         remoteMethod(query) {
             if (query !== '') {
                 this.loading = true;
-                setTimeout(() => {//this here is simulating the waiting time for the requested data
-                    this.loading = false;
-                    this.options = this.list.filter(item => {
-                        return item.label.toLowerCase()
-                        .indexOf(query.toLowerCase()) > -1;
-                    });
-                }, 3000);
+                                   
+                    this.loading = false;//ezt majd bele kell dobni valahova az axios siker vegere
+                  
             } else {
                 this.options = [];
             }
         }
+
+
+
+
+
+
+
+
+        
+        // remoteMethod(query) {
+        //     if (query !== '') {
+        //         this.loading = true;
+        //         setTimeout(() => {//this here is simulating the waiting time for the requested data
+        //             this.loading = false;
+        //             this.options = this.list.filter(item => {
+        //                 return item.label.toLowerCase()
+        //                 .indexOf(query.toLowerCase()) > -1;
+        //             });
+        //         }, 3000);
+        //     } else {
+        //         this.options = [];
+        //     }
+        // }
         
     },
-    mounted() {
-        this.list = this.states.map(item => {//this is the active search part
-            return { value: `value:${item}`, label: `label:${item}` };
-        });
-    },
+    // mounted() {
+    //     this.list = this.states.map(item => {//this is the frontend search. So, on mounted we are creating a list [] from the filtered states [].
+    //         return { value: `value:${item}`, label: `label:${item}` };
+    //     });
+    // },
 }
 </script>

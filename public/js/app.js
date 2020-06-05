@@ -4026,7 +4026,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.list = this.states.map(function (item) {
-      //this is the active search part
+      //this is the frontend search. So, on mounted we are creating a list [] from the filtered states [].
       return {
         value: "value:".concat(item),
         label: "label:".concat(item)
@@ -100007,6 +100007,15 @@ var CustomerService = /*#__PURE__*/function () {
     key: "getCustomers",
     value: function getCustomers() {
       return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].get('/customers');
+    }
+  }, {
+    key: "searchCustomers",
+    value: function searchCustomers(searchTerm) {
+      return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].get('/search-customers', {
+        params: {
+          searchTerm: searchTerm
+        }
+      }); //we are sending an object containing a search term.
     }
   }]);
 
