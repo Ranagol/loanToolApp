@@ -2397,7 +2397,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     test: function test() {
-      console.dir(this.selected);
+      console.dir(this.selectedCustomer.id);
     }
   },
   created: function created() {
@@ -21992,7 +21992,7 @@ var render = function() {
     [
       _c("h2", [_vm._v("Create invoice")]),
       _vm._v(" "),
-      _c("p", [_vm._v("Selected customer: " + _vm._s(_vm.selected))]),
+      _c("p", [_vm._v("Selected customer: " + _vm._s(_vm.selectedCustomer))]),
       _vm._v(" "),
       _c("v-select", {
         attrs: { label: "name", options: _vm.customers },

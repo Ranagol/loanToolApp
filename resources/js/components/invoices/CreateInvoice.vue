@@ -2,7 +2,7 @@
     <div>
         <h2>Create invoice</h2>
         
-        <p>Selected customer: {{ selected }}</p>
+        <p>Selected customer: {{ selectedCustomer }}</p>
         <v-select  v-model="selectedCustomer" label="name" :options="customers"></v-select>
         
         
@@ -61,7 +61,7 @@ export default {
             console.log('This is bad');
         },
         test(){
-            console.dir(this.selected);
+            console.dir(this.selectedCustomer.id);
         }
     },
     async created(){
