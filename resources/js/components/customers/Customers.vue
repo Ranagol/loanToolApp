@@ -5,6 +5,7 @@
         <!-- SEARCH FIELD -->
         <input @input="getCustomers" v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search" aria-label="Search">
         
+        <!-- <button @click="throttledMethod()">Click me as fast as you can!</button> -->
 
         <table class="table">
             <tr>
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import customerService from '../../service/customerService';
 export default {
     name: 'Customers',
@@ -43,9 +45,14 @@ export default {
             } catch (error) {
                 console.dir(error);
             }
-        }
+        },
+        //_.debounce(func, [wait=0], [options={}])
+        //TODO how to use lodash debounce with the search? I don't want the axios to be activated for every letter immediatelly. Lodash is installed.
+        //https://lodash.com/docs/4.17.15#debounce
+        
+       
     },
-
+    
     created(){
         this.getCustomers();
     }

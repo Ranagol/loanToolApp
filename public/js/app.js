@@ -2091,7 +2091,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/customerService */ "./resources/js/service/customerService.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/customerService */ "./resources/js/service/customerService.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2123,6 +2125,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Customers',
@@ -2144,7 +2148,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return _service_customerService__WEBPACK_IMPORTED_MODULE_1__["default"].getCustomers(_this.searchTerm);
+                return _service_customerService__WEBPACK_IMPORTED_MODULE_2__["default"].getCustomers(_this.searchTerm);
 
               case 3:
                 response = _context.sent;
@@ -2165,7 +2169,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee, null, [[0, 8]]);
       }))();
-    }
+    } //_.debounce(func, [wait=0], [options={}])
+    //TODO how to use lodash debounce with the search? I don't want the axios to be activated for every letter immediatelly. Lodash is installed.
+    //https://lodash.com/docs/4.17.15#debounce
+
   },
   created: function created() {
     this.getCustomers();
