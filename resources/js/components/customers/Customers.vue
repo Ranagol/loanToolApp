@@ -6,7 +6,20 @@
         <input @input="getCustomers" v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search" aria-label="Search">
         
 
-        <p>{{ customers }}</p>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Comments</th>
+            </tr>
+            <tr v-for="(customer, i) in customers" :key="i">
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.address }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.comments }}</td>
+            </tr>
+        </table>
     </div>
 </template>
 
@@ -24,7 +37,8 @@ export default {
     methods: {
         async getCustomers(){
             try {
-                this.customers = await customerService.getCustomers(this.searchTerm);
+                const response = await customerService.getCustomers(this.searchTerm);
+                this.customers = response.data;
                 console.dir(this.customers);
             } catch (error) {
                 console.dir(error);
