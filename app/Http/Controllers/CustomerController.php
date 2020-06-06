@@ -20,8 +20,6 @@ class CustomerController extends Controller
         } else {
             return Customer::all();
         }
-        
-        
     }
 
     public function searchCustomers(Request $request){

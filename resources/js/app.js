@@ -2,6 +2,12 @@ require('./bootstrap');
 
 import Vue from 'vue';
 
+//vueSelect
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
+Vue.component("v-select", vSelect);
+
+
 //VueRouter code
 import VueRouter from 'vue-router';
 import { routes } from './routes';
