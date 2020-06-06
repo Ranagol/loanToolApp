@@ -3,13 +3,9 @@
         <h3>Customers</h3>
 
         <!-- SEARCH FIELD -->
-        <h3>MySearch</h3>
         <input @input="getCustomers" v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search" aria-label="Search">
         
-        <h3>vue-select</h3>
-        <v-select :options="fruits"></v-select>
-
-        <h3>Table</h3>
+        
         <table class="table">
             <tr>
                 <th>Name</th>
@@ -28,24 +24,17 @@
 </template>
 
 <script>
-import vSelect from 'vue-select';
+
 import _ from 'lodash';
 import customerService from '../../service/customerService';
 export default {
     name: 'Customers',
-    components: {
-        vSelect,
-    },
+    
     data(){
         return {
             searchTerm: '',
             customers: [],
-            options: [
-                'foo',
-                'bar',
-                'baz'
-            ],
-            fruits:["Mangoo","Apple","Orange","Melon","Pineapple","Lecy","Blueberry"],
+            selected: {},
         }
     },
 
@@ -62,8 +51,6 @@ export default {
         //_.debounce(func, [wait=0], [options={}])
         //TODO how to use lodash debounce with the search? I don't want the axios to be activated for every letter immediatelly. Lodash is installed.
         //https://lodash.com/docs/4.17.15#debounce
-        
-       
     },
     
     created(){

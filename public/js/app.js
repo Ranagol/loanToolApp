@@ -2091,11 +2091,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/customerService */ "./resources/js/service/customerService.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/customerService */ "./resources/js/service/customerService.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2127,24 +2125,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Customers',
-  components: {
-    vSelect: vue_select__WEBPACK_IMPORTED_MODULE_1___default.a
-  },
   data: function data() {
     return {
       searchTerm: '',
       customers: [],
-      options: ['foo', 'bar', 'baz'],
-      fruits: ["Mangoo", "Apple", "Orange", "Melon", "Pineapple", "Lecy", "Blueberry"]
+      selected: {}
     };
   },
   methods: {
@@ -2159,7 +2148,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return _service_customerService__WEBPACK_IMPORTED_MODULE_3__["default"].getCustomers(_this.searchTerm);
+                return _service_customerService__WEBPACK_IMPORTED_MODULE_2__["default"].getCustomers(_this.searchTerm);
 
               case 3:
                 response = _context.sent;
@@ -2319,7 +2308,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
+/* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/customerService */ "./resources/js/service/customerService.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2334,11 +2326,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateInvoice',
+  components: {
+    vSelect: vue_select__WEBPACK_IMPORTED_MODULE_1___default.a
+  },
   data: function data() {
     return {
+      searchTerm: '',
+      customers: [],
+      selectedCustomer: '',
       invoice: {
         customer_id: 1
       },
@@ -2366,7 +2372,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 console.dir(_this.invoiceWithItems);
                 _context.prev = 3;
                 _context.next = 6;
-                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_1__["default"].createInvoice(_this.invoiceWithItems);
+                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__["default"].createInvoice(_this.invoiceWithItems);
 
               case 6:
                 console.log('Invoice sent to api');
@@ -2389,7 +2395,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee, null, [[3, 9]]);
       }))();
+    },
+    test: function test() {
+      console.dir(this.selected);
     }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return _service_customerService__WEBPACK_IMPORTED_MODULE_3__["default"].getCustomers(_this2.searchTerm);
+
+            case 3:
+              response = _context2.sent;
+              _this2.customers = response.data;
+              console.dir(_this2.customers);
+              _context2.next = 11;
+              break;
+
+            case 8:
+              _context2.prev = 8;
+              _context2.t0 = _context2["catch"](0);
+              console.dir(_context2.t0);
+
+            case 11:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[0, 8]]);
+    }))();
   }
 });
 
@@ -21671,72 +21713,60 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h3", [_vm._v("Customers")]),
-      _vm._v(" "),
-      _c("h3", [_vm._v("MySearch")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.searchTerm,
-            expression: "searchTerm"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          name: "searchTerm",
-          type: "search",
-          placeholder: "Search",
-          "aria-label": "Search"
-        },
-        domProps: { value: _vm.searchTerm },
-        on: {
-          input: [
-            function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.searchTerm = $event.target.value
-            },
-            _vm.getCustomers
-          ]
+  return _c("div", [
+    _c("h3", [_vm._v("Customers")]),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.searchTerm,
+          expression: "searchTerm"
         }
-      }),
-      _vm._v(" "),
-      _c("h3", [_vm._v("vue-select")]),
-      _vm._v(" "),
-      _c("v-select", { attrs: { options: _vm.fruits } }),
-      _vm._v(" "),
-      _c("h3", [_vm._v("Table")]),
-      _vm._v(" "),
-      _c(
-        "table",
-        { staticClass: "table" },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._l(_vm.customers, function(customer, i) {
-            return _c("tr", { key: i }, [
-              _c("td", [_vm._v(_vm._s(customer.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(customer.address))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(customer.phone))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(customer.comments))])
-            ])
-          })
-        ],
-        2
-      )
-    ],
-    1
-  )
+      ],
+      staticClass: "form-control",
+      attrs: {
+        name: "searchTerm",
+        type: "search",
+        placeholder: "Search",
+        "aria-label": "Search"
+      },
+      domProps: { value: _vm.searchTerm },
+      on: {
+        input: [
+          function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.searchTerm = $event.target.value
+          },
+          _vm.getCustomers
+        ]
+      }
+    }),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.customers, function(customer, i) {
+          return _c("tr", { key: i }, [
+            _c("td", [_vm._v(_vm._s(customer.name))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(customer.address))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(customer.phone))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(customer.comments))])
+          ])
+        })
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -21957,18 +21987,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h2", [_vm._v("Create invoice")]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-warning",
-        on: { click: _vm.createInvoiceWithItems }
-      },
-      [_vm._v("Create invoice")]
-    )
-  ])
+  return _c(
+    "div",
+    [
+      _c("h2", [_vm._v("Create invoice")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Selected customer: " + _vm._s(_vm.selected))]),
+      _vm._v(" "),
+      _c("v-select", {
+        attrs: { label: "name", options: _vm.customers },
+        model: {
+          value: _vm.selectedCustomer,
+          callback: function($$v) {
+            _vm.selectedCustomer = $$v
+          },
+          expression: "selectedCustomer"
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", on: { click: _vm.test } },
+        [_vm._v("Test")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning",
+          on: { click: _vm.createInvoiceWithItems }
+        },
+        [_vm._v("Create invoice")]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38067,10 +38120,7 @@ var CustomerService = /*#__PURE__*/function () {
           searchTerm: searchTerm
         }
       });
-    } // searchCustomers(searchTerm){
-    //     return HTTP.get('/search-customers', {params: {searchTerm: searchTerm}})//we are sending an object containing a search term.
-    // }
-
+    }
   }]);
 
   return CustomerService;

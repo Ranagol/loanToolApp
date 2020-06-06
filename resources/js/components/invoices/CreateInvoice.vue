@@ -1,17 +1,33 @@
 <template>
     <div>
         <h2>Create invoice</h2>
-
+        
+        <p>Selected customer: {{ selected }}</p>
+        <v-select  v-model="selectedCustomer" label="name" :options="customers"></v-select>
+        
+        
+        
+        <button @click="test" class="btn btn-success">Test</button>
         <button @click="createInvoiceWithItems" class="btn btn-warning">Create invoice</button>
     </div>
 </template>
 
 <script>
+import vSelect from 'vue-select';
 import invoiceService from '../../service/invoiceService';
+import customerService from '../../service/customerService';
 export default {
     name: 'CreateInvoice',
+    components: {
+        vSelect,
+    },
     data(){
         return {
+            
+            searchTerm: '',
+            customers: [],
+            selectedCustomer: '',
+            
             invoice: {
                 customer_id: 1,
             },
@@ -26,9 +42,10 @@ export default {
                 },
             ],
             invoiceWithItems: {},
-             
+            
         }
     },
+    
     methods: {
         async createInvoiceWithItems(){
             this.invoiceWithItems.invoice = this.invoice;
@@ -43,8 +60,18 @@ export default {
             }
             console.log('This is bad');
         },
-
-        
+        test(){
+            console.dir(this.selected);
+        }
+    },
+    async created(){
+        try {
+            const response = await customerService.getCustomers(this.searchTerm);
+            this.customers = response.data;
+            console.dir(this.customers);
+        } catch (error) {
+            console.dir(error);
+        }
     }
 }
 </script>
