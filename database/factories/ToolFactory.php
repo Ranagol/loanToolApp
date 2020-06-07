@@ -15,6 +15,6 @@ $factory->define(Tool::class, function (Faker $faker) {
         'price' => $faker->numberBetween($min = 1000, $max = 3000),
         'onStock' => true,
         'tool_picture_url' => 'https://si.makitamedia.com/images/1_Makita/101_machines/10108_PNG_Web/HR2653T.png',
-        'comments' => $faker->realText(100),
+        'comments' => $faker->realText(40),
     ];
 });

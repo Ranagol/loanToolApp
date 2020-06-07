@@ -60,7 +60,7 @@ export default {
       .then(() => {
         //this.setLoggedIn();
         this.loading = false;
-        this.$router.push('/tools');
+        this.$router.push('/home');
         
       })
       .catch((error) => {

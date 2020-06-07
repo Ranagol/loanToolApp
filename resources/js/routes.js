@@ -3,11 +3,15 @@ import Register from './components/authentication/Register';
 import Customers from './components/customers/Customers';
 import Tools from './components/tools/Tools';
 import CreateInvoice from './components/invoices/CreateInvoice';
+import Home from './components/elements/Home';
 
 export const routes = [
     //AUTH
     { path: '/login', name: 'login', component: Login },
     { path: '/register', name: 'register', component: Register },
+
+    //ELEMENTS
+    { path: '/home', name: 'home', component: Home },
 
     //CUSTOMERS
     { path: '/customers', name: 'customers', component: Customers },

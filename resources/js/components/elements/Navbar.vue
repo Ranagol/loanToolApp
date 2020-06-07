@@ -17,6 +17,10 @@
         </li>
 
         <li v-if="userHasToken" class="nav-item">
+          <router-link class="nav-link" to="/home" >Home</router-link>
+        </li>
+
+        <li v-if="userHasToken" class="nav-item">
           <router-link class="nav-link" to="/customers" >Customers</router-link>
         </li>
 

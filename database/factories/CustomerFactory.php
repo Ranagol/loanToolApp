@@ -14,6 +14,6 @@ $factory->define(Customer::class, function (Faker $faker) {
         'phone' => $faker->e164PhoneNumber,
         'scan_doc' => 'https://blog.goranrakic.com/uploads/jfreesteelgui.png',
         'blacklist' => false,
-        'comments' => $faker->realText(180),
+        'comments' => $faker->realText(40),
     ];
 });
