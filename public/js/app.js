@@ -2354,27 +2354,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       customers: [],
+      //on start we pull in all customers here
       selectedCustomer: '',
+      //this is the selected customer
       toolsFromDb: [],
       //on start, we are getting all tools from the db, and we are sending this to the child SelecToolS.
       toolsToLoan: [],
       //we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
       components: ['one'],
+      //this is used to dynamically add more SelectTool components
       invoice: {
-        customer_id: 1
-      },
-      invoice_items: [{
-        tool_id: 1,
-        price: 2200
-      }, {
-        tool_id: 2,
-        price: 2600
-      }],
-      invoiceWithItems: {}
+        customer: {},
+        tools: {}
+      } //this invoice object will be sent to the db
+
     };
   },
   methods: {
-    createInvoiceWithItems: function createInvoiceWithItems() {
+    createInvoice: function createInvoice() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -2382,35 +2379,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this.invoiceWithItems.invoice = _this.invoice; //this is the hardcoded customer_id for planning/testing
+                _this.invoice.customer = _this.selectedCustomer; //adding customers
 
-                console.dir(_this.selectedCustomer);
-                _this.invoiceWithItems.invoice.customer = _this.selectedCustomer; //this is the actual selected customer
+                _this.invoice.tools = _this.toolsToLoan; //adding tools
 
-                _this.invoiceWithItems.invoice_items = _this.invoice_items; //invoice items...
+                console.dir(_this.invoice);
+                _context.prev = 3;
+                _context.next = 6;
+                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__["default"].createInvoice(_this.invoice);
 
-                console.dir(_this.invoiceWithItems);
-                _context.prev = 5;
-                _context.next = 8;
-                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__["default"].createInvoice(_this.invoiceWithItems);
-
-              case 8:
-                console.log('Invoice sent to api');
-                _context.next = 15;
+              case 6:
+                console.log('Invoice object sent to api');
+                _context.next = 13;
                 break;
 
-              case 11:
-                _context.prev = 11;
-                _context.t0 = _context["catch"](5);
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](3);
                 console.dir(_context.t0);
-                console.log('Something is wrong - createInvoiceWithItems()');
+                console.log('Something is wrong with invoice creating.');
 
-              case 15:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[5, 11]]);
+        }, _callee, null, [[3, 9]]);
       }))();
     },
     getCustomers: function getCustomers() {
@@ -22245,10 +22239,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "button",
-        {
-          staticClass: "btn btn-warning",
-          on: { click: _vm.createInvoiceWithItems }
-        },
+        { staticClass: "btn btn-warning", on: { click: _vm.createInvoice } },
         [_vm._v("Create invoice")]
       )
     ],

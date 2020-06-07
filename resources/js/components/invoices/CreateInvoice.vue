@@ -14,7 +14,7 @@
         <button @click="removeComponent" class="btn btn-info">Remove tool</button>
         
         <button @click="test" class="btn btn-success">Test</button>
-        <button @click="createInvoiceWithItems" class="btn btn-warning">Create invoice</button>
+        <button @click="createInvoice" class="btn btn-warning">Create invoice</button>
     </div>
 </template>
 
@@ -32,43 +32,31 @@ export default {
     },
     data(){
         return {
-            customers: [],
-            selectedCustomer: '',
+            customers: [],//on start we pull in all customers here
+            selectedCustomer: '',//this is the selected customer
             toolsFromDb: [],//on start, we are getting all tools from the db, and we are sending this to the child SelecToolS.
             toolsToLoan: [],//we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
-            components: ['one'],
-            
+            components: ['one'],//this is used to dynamically add more SelectTool components
             invoice: {
-                customer_id: 1,
-            },
-            invoice_items: [
-                { 
-                    tool_id: 1,
-                    price: 2200,
-                },
-                { 
-                    tool_id: 2,
-                    price: 2600,
-                },
-            ],
-            invoiceWithItems: {},
+                customer:{},
+                tools:{},
+            },//this invoice object will be sent to the db
+            
             
         }
     },
     
     methods: {
-        async createInvoiceWithItems(){
-            this.invoiceWithItems.invoice = this.invoice;//this is the hardcoded customer_id for planning/testing
-            console.dir(this.selectedCustomer);
-            this.invoiceWithItems.invoice.customer = this.selectedCustomer;//this is the actual selected customer
-            this.invoiceWithItems.invoice_items = this.invoice_items;//invoice items...
-            console.dir(this.invoiceWithItems);
+        async createInvoice(){
+            this.invoice.customer = this.selectedCustomer;//adding customers
+            this.invoice.tools = this.toolsToLoan;//adding tools
+            console.dir(this.invoice);
             try {
-                await invoiceService.createInvoice(this.invoiceWithItems);
-                console.log('Invoice sent to api');
+                await invoiceService.createInvoice(this.invoice);
+                console.log('Invoice object sent to api');
             } catch (error) {
                 console.dir(error);
-                console.log('Something is wrong - createInvoiceWithItems()');
+                console.log('Something is wrong with invoice creating.');
             }
             
         },
