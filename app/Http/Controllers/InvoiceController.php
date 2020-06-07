@@ -39,16 +39,16 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $invoice = new Invoice();
-        $invoice->customer_id = $request->input('invoice.customer.id');
+        $invoice->customer_id = $request->input('customer.id');
         $invoice->save();
 
-        $invoice_items = $request->input(['invoice_items']);
+        $invoice_items = $request->input(['tools']);
         $itemsToReturn = [];//this will be used simply to return all items to the frontend, as part of the OK response
-        foreach ($invoice_items as $item) {
+        foreach ($invoice_items as $tool) {
             $invoiceitem = new Invoiceitem();
             $invoiceitem->invoice_id = $invoice->id;
-            $invoiceitem->tool_id = $item['tool_id'];
-            $invoiceitem->price = $item['price'];//because $item is an associative array now... 'price' is the key, and example 2200 is the value
+            $invoiceitem->tool_id = $tool['id'];
+            $invoiceitem->price = $tool['price_for_24h'];//because $item is an associative array now... 'price' is the key, and example 2200 is the value
             $invoiceitem->taken = Carbon::now();
             $invoiceitem->save();
             $itemsToReturn[] = $invoiceitem;
