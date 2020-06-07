@@ -9,7 +9,7 @@ class Invoice extends Model
     protected $guarded = ['id'];
     
     public function invoiceitems(){
-        return $this->hasMany(Invoice_line::class);
+        return $this->hasMany(Invoiceitem::class);
     }
 
     public function customer(){

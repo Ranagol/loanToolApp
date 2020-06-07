@@ -2183,10 +2183,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     'navbar': _Navbar__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['getCustomers', 'getTools'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['getCustomers', 'getTools', 'getInvoices'])),
   created: function created() {
     this.getCustomers();
     this.getTools();
+    this.getInvoices();
   }
 });
 
@@ -2483,6 +2484,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2492,11 +2500,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Invoices',
   data: function data() {
-    return {};
-  }
+    return {
+      searchTerm: ''
+    };
+  },
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['invoices', 'errors'])), {}, {
+    filteredInvoices: function filteredInvoices() {
+      var _this = this;
+
+      return this.invoices.filter(function (element) {
+        return element.customer_name.toLowerCase().match(_this.searchTerm.toLowerCase());
+      });
+    }
+  })
 });
 
 /***/ }),
@@ -22338,16 +22365,39 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h4", [_vm._v("Invoices")]),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.searchTerm,
+          expression: "searchTerm"
+        }
+      ],
+      staticClass: "form-control",
+      attrs: { name: "searchTerm", type: "search", placeholder: "Search" },
+      domProps: { value: _vm.searchTerm },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.searchTerm = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    !_vm.invoices.length
+      ? _c("div", { staticClass: "alert alert-info" }, [
+          _c("h5", [_vm._v("Loading")])
+        ])
+      : _vm._e()
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h4", [_vm._v("Invoices")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -40098,6 +40148,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./service/customerService */ "./resources/js/service/customerService.js");
 /* harmony import */ var _service_toolService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./service/toolService */ "./resources/js/service/toolService.js");
+/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./service/invoiceService */ "./resources/js/service/invoiceService.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -40109,6 +40160,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 
+
 var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
   //GETTERS    
   getters: {
@@ -40117,6 +40169,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     },
     tools: function tools(state) {
       return state.tools;
+    },
+    invoices: function invoices(state) {
+      return state.invoices;
     },
     errors: function errors(state) {
       return state.errors;
@@ -40137,6 +40192,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     },
     getTools: function getTools(state, tools) {
       state.tools = tools;
+    },
+    getInvoices: function getInvoices(state, invoices) {
+      state.invoices = invoices;
     },
     errors: function errors(state, error) {
       state.errors = error;
@@ -40214,6 +40272,42 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
             }
           }
         }, _callee2, null, [[1, 11]]);
+      }))();
+    },
+    getInvoices: function getInvoices(_ref3) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var commit, response, invoices;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                commit = _ref3.commit;
+                _context3.prev = 1;
+                _context3.next = 4;
+                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_5__["default"].getInvoices();
+
+              case 4:
+                response = _context3.sent;
+                invoices = response.data;
+                console.log('getInvoices from actions has been activated');
+                console.dir(invoices);
+                commit('getInvoices', invoices);
+                _context3.next = 16;
+                break;
+
+              case 11:
+                _context3.prev = 11;
+                _context3.t0 = _context3["catch"](1);
+                console.log('Error with getInvoices() in actions');
+                console.dir(_context3.t0);
+                commit('errors', _context3.t0);
+
+              case 16:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[1, 11]]);
       }))();
     }
   }

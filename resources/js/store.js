@@ -4,12 +4,14 @@ Vue.use(Vuex);
 
 import customerService from './service/customerService';
 import toolService from './service/toolService';
+import invoiceService from './service/invoiceService';
 export const store = new Vuex.Store({
   
 //GETTERS    
 getters: {
     customers: state => state.customers,
     tools: state => state.tools,
+    invoices: state => state.invoices,
     errors: state => state.errors,
     
 },
@@ -30,6 +32,9 @@ mutations: {
     },
     getTools(state, tools){
         state.tools = tools;
+    },
+    getInvoices(state, invoices){
+        state.invoices = invoices;
     },
 
     errors(state, error){
@@ -67,6 +72,20 @@ actions: {
             commit('errors', error);
         }
     },
+
+    async getInvoices( {commit} ){
+        try {
+            const response = await invoiceService.getInvoices();
+            const invoices = response.data;
+            console.log( 'getInvoices from actions has been activated');
+            console.dir(invoices);
+            commit('getInvoices', invoices);
+        } catch (error) {
+            console.log('Error with getInvoices() in actions');
+            console.dir(error);
+            commit('errors', error);
+        }
+    }
 }
 
 
