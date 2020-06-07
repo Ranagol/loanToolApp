@@ -5,7 +5,7 @@
         <v-select  v-model="selectedCustomer" label="name" :options="customers"></v-select>
         <p>Selected customer: {{ selectedCustomer }}</p>
         <hr>
-        <select-tool :toolsFromDb = 'toolsFromDb'></select-tool>
+        <select-tool :toolsFromDb = 'toolsFromDb' @toolSelected="AddToToolsToLoan"></select-tool>
         
         <button @click="test" class="btn btn-success">Test</button>
         <button @click="createInvoiceWithItems" class="btn btn-warning">Create invoice</button>
@@ -28,7 +28,8 @@ export default {
         return {
             customers: [],
             selectedCustomer: '',
-            toolsFromDb: [],
+            toolsFromDb: [],//on start, we are getting all tools from the db, and we are sending this to the child SelecToolS.
+            toolsToLoan: [],//we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
             
             invoice: {
                 customer_id: 1,
@@ -81,6 +82,11 @@ export default {
             } catch (error) {
                 console.dir(error);
             }
+        },
+        AddToToolsToLoan(tool){
+            this.toolsToLoan.push(tool);
+            console.log('Selected tool succesfully added to parent');
+            console.dir(this.toolsToLoan);
         },
         test(){
             console.dir(this.selectedCustomer.id);

@@ -2350,6 +2350,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       customers: [],
       selectedCustomer: '',
       toolsFromDb: [],
+      //on start, we are getting all tools from the db, and we are sending this to the child SelecToolS.
+      toolsToLoan: [],
+      //we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
       invoice: {
         customer_id: 1
       },
@@ -2469,6 +2472,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3, null, [[0, 8]]);
       }))();
     },
+    AddToToolsToLoan: function AddToToolsToLoan(tool) {
+      this.toolsToLoan.push(tool);
+      console.log('Selected tool succesfully added to parent');
+      console.dir(this.toolsToLoan);
+    },
     test: function test() {
       console.dir(this.selectedCustomer.id);
     }
@@ -2506,6 +2514,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2515,8 +2525,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SelectTool',
+  components: {
+    vSelect: vue_select__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
   data: function data() {
     return {
       selectedTool: {}
@@ -2529,6 +2545,12 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return [];
       }
+    }
+  },
+  watch: {
+    selectedTool: function selectedTool() {
+      console.log('You just choose a new tool.');
+      this.$emit('toolSelected', this.selectedTool);
     }
   }
 });
@@ -22182,7 +22204,10 @@ var render = function() {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("select-tool", { attrs: { toolsFromDb: _vm.toolsFromDb } }),
+      _c("select-tool", {
+        attrs: { toolsFromDb: _vm.toolsFromDb },
+        on: { toolSelected: _vm.AddToToolsToLoan }
+      }),
       _vm._v(" "),
       _c(
         "button",
@@ -22224,13 +22249,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h4", [_vm._v("SelectTool")]),
-    _vm._v(" "),
-    _c("p", [_vm._v("Selected tool: " + _vm._s(_vm.selectedTool))]),
-    _vm._v(" "),
-    _c("hr")
-  ])
+  return _c(
+    "div",
+    [
+      _c("h4", [_vm._v("SelectTool")]),
+      _vm._v(" "),
+      _c("v-select", {
+        attrs: { label: "model", options: _vm.toolsFromDb },
+        model: {
+          value: _vm.selectedTool,
+          callback: function($$v) {
+            _vm.selectedTool = $$v
+          },
+          expression: "selectedTool"
+        }
+      }),
+      _vm._v(" "),
+      _c("p", [_vm._v("Selected tool: " + _vm._s(_vm.selectedTool))]),
+      _vm._v(" "),
+      _c("hr")
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
