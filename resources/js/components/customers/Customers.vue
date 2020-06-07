@@ -3,7 +3,13 @@
         <h3>Customers</h3>
 
         <!-- SEARCH FIELD -->
-        <input @input="getCustomers" v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <input v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search" aria-label="Search">
+
+        <!-- If there is no data in the db... -->
+        <div v-if="!customers.length" class="alert alert-info">
+            <h5>There is no data.</h5>
+        </div>
+
         
         
         <table class="table">
@@ -25,6 +31,7 @@
 
 <script>
 import _ from 'lodash';
+import { mapActions, mapGetters } from 'vuex';
 import customerService from '../../service/customerService';
 export default {
     name: 'Customers',
@@ -32,28 +39,23 @@ export default {
     data(){
         return {
             searchTerm: '',
-            customers: [],
             selected: {},
         }
     },
+    computed: {
+        ...mapGetters(['customers', 'errors']),
+    },
 
     methods: {
-        async getCustomers(){
-            try {
-                const response = await customerService.getCustomers(this.searchTerm);
-                this.customers = response.data;
-                console.dir(this.customers);
-            } catch (error) {
-                console.dir(error);
-            }
-        },
-        //_.debounce(func, [wait=0], [options={}])
-        //TODO how to use lodash debounce with the search? I don't want the axios to be activated for every letter immediatelly. Lodash is installed.
-        //https://lodash.com/docs/4.17.15#debounce
+        ...mapActions(['getCustomers']),
     },
     
     created(){
         this.getCustomers();
     }
+
+    //_.debounce(func, [wait=0], [options={}])
+        //TODO how to use lodash debounce with the search? I don't want the axios to be activated for every letter immediatelly. Lodash is installed.
+        //https://lodash.com/docs/4.17.15#debounce
 }
 </script>

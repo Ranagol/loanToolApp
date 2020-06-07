@@ -1,6 +1,8 @@
 require('./bootstrap');
-
 import Vue from 'vue';
+
+//vuex
+import { store } from './store';
 
 //vueSelect
 import vSelect from "vue-select";
@@ -44,6 +46,7 @@ Vue.component('App', require('./components/elements/App.vue').default);
 let app = new Vue({
     el: '#app',
     router,
+    store,
 });
 
 
