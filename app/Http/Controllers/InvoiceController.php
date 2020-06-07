@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Invoice;
 use App\Invoiceitem;
+use App\Tool;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Carbon\Carbon;
@@ -56,11 +57,17 @@ class InvoiceController extends Controller
             $invoiceitem->price = $tool['price'];//because $item is an associative array now... 'price' is the key, and example 2200 is the value
             $invoiceitem->taken = Carbon::now();
             $invoiceitem->save();
-            $tools[] = $invoiceitem;
+            $invoiceitems[] = $invoiceitem;
+            //setting tools onStock to false
+            $tool = Tool::find($invoiceitem->tool_id);
+            $tool->onStock = false;
+            $tool->save();
+            $tools[] = $tool;
         }
         return response()->json([
             0 => $invoice, 
-            1 => $tools,
+            1 => $invoiceitems,
+            2 => $tools
         ]);
     }
 
