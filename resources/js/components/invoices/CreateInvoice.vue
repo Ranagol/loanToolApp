@@ -21,9 +21,9 @@
 <script>
 import vSelect from 'vue-select';
 import invoiceService from '../../service/invoiceService';
-import customerService from '../../service/customerService';
 import SelectTool from '../tools/SelectTool';
 import toolService from '../../service/toolService';
+import { mapGetters } from 'vuex';
 export default {
     name: 'CreateInvoice',
     components: {
@@ -32,7 +32,6 @@ export default {
     },
     data(){
         return {
-            customers: [],//on start we pull in all customers here
             selectedCustomer: '',//this is the selected customer
             toolsFromDb: [],//on start, we are getting all tools from the db, and we are sending this to the child SelecToolS.
             toolsToLoan: [],//we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
@@ -45,9 +44,13 @@ export default {
             
         }
     },
+    computed: {
+        ...mapGetters(['customers']),
+    },
     
     methods: {
         async createInvoice(){
+            //LATER HERE I WILL HAVE TO LEAD THIS INTO VUEX
             this.invoice.customer = this.selectedCustomer;//adding customers
             this.invoice.tools = this.toolsToLoan;//adding tools
             console.dir(this.invoice);
@@ -60,15 +63,7 @@ export default {
             }
             
         },
-        async getCustomers(){
-            try {
-                const response = await customerService.getCustomers(this.searchTerm);
-                this.customers = response.data;
-                console.dir(this.customers);
-            } catch (error) {
-                console.dir(error);
-            }
-        },
+        
         async getTools(){
             try {
                 const response = await toolService.getTools(this.searchTerm);
@@ -94,7 +89,6 @@ export default {
         }
     },
     async created(){
-        this.getCustomers();
         this.getTools();
     }
 }

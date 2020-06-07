@@ -2128,8 +2128,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -2137,12 +2135,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: 'Customers',
   data: function data() {
     return {
-      searchTerm: '',
-      selected: {}
+      searchTerm: ''
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['customers', 'errors'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['getCustomers'])) //_.debounce(func, [wait=0], [options={}])
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['customers', 'errors'])), {}, {
+    filteredCustomers: function filteredCustomers() {
+      var _this = this;
+
+      return this.customers.filter(function (element) {
+        return element.name.toLowerCase().match(_this.searchTerm.toLowerCase());
+      });
+    }
+  }) //_.debounce(func, [wait=0], [options={}])
   //TODO how to use lodash debounce with the search? I don't want the axios to be activated for every letter immediatelly. Lodash is installed.
   //https://lodash.com/docs/4.17.15#debounce
 
@@ -2204,15 +2208,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-// import { mapActions } from 'vuex';
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Welcome' // methods: {
-  //     ...mapActions(['getCustomers']),
-  // },
-  // created(){
-  //     this.getCustomers();
-  // }
-
+  name: 'Home'
 });
 
 /***/ }),
@@ -2304,6 +2301,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   beforeDestroy: function beforeDestroy() {
+    //Losi advice
     _eventbus__WEBPACK_IMPORTED_MODULE_1__["EventBus"].$off('loginSuccesfullyDone');
   }
 });
@@ -2324,14 +2322,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
-/* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/customerService */ "./resources/js/service/customerService.js");
-/* harmony import */ var _tools_SelectTool__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../tools/SelectTool */ "./resources/js/components/tools/SelectTool.vue");
-/* harmony import */ var _service_toolService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../service/toolService */ "./resources/js/service/toolService.js");
+/* harmony import */ var _tools_SelectTool__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/SelectTool */ "./resources/js/components/tools/SelectTool.vue");
+/* harmony import */ var _service_toolService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../service/toolService */ "./resources/js/service/toolService.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
 //
@@ -2362,12 +2366,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: 'CreateInvoice',
   components: {
     vSelect: vue_select__WEBPACK_IMPORTED_MODULE_1___default.a,
-    'select-tool': _tools_SelectTool__WEBPACK_IMPORTED_MODULE_4__["default"]
+    'select-tool': _tools_SelectTool__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
-      customers: [],
-      //on start we pull in all customers here
       selectedCustomer: '',
       //this is the selected customer
       toolsFromDb: [],
@@ -2383,6 +2385,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     };
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapGetters"])(['customers'])),
   methods: {
     createInvoice: function createInvoice() {
       var _this = this;
@@ -2392,6 +2395,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                //LATER HERE I WILL HAVE TO LEAD THIS INTO VUEX
                 _this.invoice.customer = _this.selectedCustomer; //adding customers
 
                 _this.invoice.tools = _this.toolsToLoan; //adding tools
@@ -2420,7 +2424,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, null, [[3, 9]]);
       }))();
     },
-    getCustomers: function getCustomers() {
+    getTools: function getTools() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
@@ -2431,12 +2435,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return _service_customerService__WEBPACK_IMPORTED_MODULE_3__["default"].getCustomers(_this2.searchTerm);
+                return _service_toolService__WEBPACK_IMPORTED_MODULE_4__["default"].getTools(_this2.searchTerm);
 
               case 3:
                 response = _context2.sent;
-                _this2.customers = response.data;
-                console.dir(_this2.customers);
+                _this2.toolsFromDb = response.data;
+                console.dir(_this2.toolsFromDb);
                 _context2.next = 11;
                 break;
 
@@ -2451,39 +2455,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2, null, [[0, 8]]);
-      }))();
-    },
-    getTools: function getTools() {
-      var _this3 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.prev = 0;
-                _context3.next = 3;
-                return _service_toolService__WEBPACK_IMPORTED_MODULE_5__["default"].getTools(_this3.searchTerm);
-
-              case 3:
-                response = _context3.sent;
-                _this3.toolsFromDb = response.data;
-                console.dir(_this3.toolsFromDb);
-                _context3.next = 11;
-                break;
-
-              case 8:
-                _context3.prev = 8;
-                _context3.t0 = _context3["catch"](0);
-                console.dir(_context3.t0);
-
-              case 11:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, null, [[0, 8]]);
       }))();
     },
     AddToToolsToLoan: function AddToToolsToLoan(tool) {
@@ -2502,23 +2473,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this3 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              _this4.getCustomers();
+              _this3.getTools();
 
-              _this4.getTools();
-
-            case 2:
+            case 1:
             case "end":
-              return _context4.stop();
+              return _context3.stop();
           }
         }
-      }, _callee4);
+      }, _callee3);
     }))();
   }
 });
@@ -21944,12 +21913,7 @@ var render = function() {
         }
       ],
       staticClass: "form-control",
-      attrs: {
-        name: "searchTerm",
-        type: "search",
-        placeholder: "Search",
-        "aria-label": "Search"
-      },
+      attrs: { name: "searchTerm", type: "search", placeholder: "Search" },
       domProps: { value: _vm.searchTerm },
       on: {
         input: function($event) {
@@ -21963,7 +21927,7 @@ var render = function() {
     _vm._v(" "),
     !_vm.customers.length
       ? _c("div", { staticClass: "alert alert-info" }, [
-          _c("h5", [_vm._v("There is no data.")])
+          _c("h5", [_vm._v("Loading")])
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -21973,7 +21937,7 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._l(_vm.customers, function(customer, i) {
+        _vm._l(_vm.filteredCustomers, function(customer, i) {
           return _c("tr", { key: i }, [
             _c("td", [_vm._v(_vm._s(customer.name))]),
             _vm._v(" "),
@@ -22083,7 +22047,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "nav",
-    { staticClass: "navbar navbar-expand-lg navbar-light bg-light" },
+    { staticClass: "navbar navbar-expand navbar-light bg-light" },
     [
       _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
         _vm._v("LoanToolApp")

@@ -3,15 +3,13 @@
         <h3>Customers</h3>
 
         <!-- SEARCH FIELD -->
-        <input v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <input v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search">
 
         <!-- If there is no data in the db... -->
         <div v-if="!customers.length" class="alert alert-info">
-            <h5>There is no data.</h5>
+            <h5>Loading</h5>
         </div>
 
-        
-        
         <table class="table">
             <tr>
                 <th>Name</th>
@@ -19,7 +17,7 @@
                 <th>Phone</th>
                 <th>Comments</th>
             </tr>
-            <tr v-for="(customer, i) in customers" :key="i">
+            <tr v-for="(customer, i) in filteredCustomers" :key="i">
                 <td>{{ customer.name }}</td>
                 <td>{{ customer.address }}</td>
                 <td>{{ customer.phone }}</td>
@@ -31,7 +29,7 @@
 
 <script>
 import _ from 'lodash';
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import customerService from '../../service/customerService';
 export default {
     name: 'Customers',
@@ -39,16 +37,18 @@ export default {
     data(){
         return {
             searchTerm: '',
-            selected: {},
         }
     },
     computed: {
         ...mapGetters(['customers', 'errors']),
+        filteredCustomers(){
+            return this.customers.filter((element) => {
+                return element.name.toLowerCase().match(this.searchTerm.toLowerCase());
+            });
+        }
     },
 
-    methods: {
-        ...mapActions(['getCustomers']),
-    },
+    
     
 
     //_.debounce(func, [wait=0], [options={}])
