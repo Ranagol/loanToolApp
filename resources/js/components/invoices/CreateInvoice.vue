@@ -53,14 +53,14 @@ export default {
             this.invoiceWithItems.invoice.customer = this.selectedCustomer;//this is the actual selected customer
             this.invoiceWithItems.invoice_items = this.invoice_items;//invoice items...
             console.dir(this.invoiceWithItems);
-            // try {
-            //     await invoiceService.createInvoice(this.invoiceWithItems);
-            //     console.log('Invoice sent to api');
-            // } catch (error) {
-            //     console.dir(error);
-            //     console.log('Something is wrong');
-            // }
-            // console.log('This is bad');
+            try {
+                await invoiceService.createInvoice(this.invoiceWithItems);
+                console.log('Invoice sent to api');
+            } catch (error) {
+                console.dir(error);
+                console.log('Something is wrong - createInvoiceWithItems()');
+            }
+            console.log('This is bad - createInvoiceWithItems()');
         },
         test(){
             console.dir(this.selectedCustomer.id);

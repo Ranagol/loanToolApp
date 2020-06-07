@@ -39,7 +39,7 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $invoice = new Invoice();
-        $invoice->customer_id = $request->input('invoice.customer_id');
+        $invoice->customer_id = $request->input('invoice.customer.id');
         $invoice->save();
 
         $invoice_items = $request->input(['invoice_items']);

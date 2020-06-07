@@ -2374,21 +2374,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.invoiceWithItems.invoice_items = _this.invoice_items; //invoice items...
 
-                console.dir(_this.invoiceWithItems); // try {
-                //     await invoiceService.createInvoice(this.invoiceWithItems);
-                //     console.log('Invoice sent to api');
-                // } catch (error) {
-                //     console.dir(error);
-                //     console.log('Something is wrong');
-                // }
-                // console.log('This is bad');
+                console.dir(_this.invoiceWithItems);
+                _context.prev = 5;
+                _context.next = 8;
+                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__["default"].createInvoice(_this.invoiceWithItems);
 
-              case 5:
+              case 8:
+                console.log('Invoice sent to api');
+                _context.next = 15;
+                break;
+
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](5);
+                console.dir(_context.t0);
+                console.log('Something is wrong - createInvoiceWithItems()');
+
+              case 15:
+                console.log('This is bad - createInvoiceWithItems()');
+
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[5, 11]]);
       }))();
     },
     test: function test() {
