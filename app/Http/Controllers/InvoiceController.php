@@ -38,24 +38,29 @@ class InvoiceController extends Controller
     //TODO when something is not OK, Laravel will usually show us what is wrong, what line, we will receive an error message. But this not works with L+Vue. How to solve this?
     public function store(Request $request)
     {
+        //invoice handling
         $invoice = new Invoice();
         $invoice->customer_id = $request->input('customer.id');
+        $invoice->customer_name = $request->input('customer.name');
         $invoice->save();
 
+        //invoice items (tool handling)
         $invoice_items = $request->input(['tools']);
         $itemsToReturn = [];//this will be used simply to return all items to the frontend, as part of the OK response
         foreach ($invoice_items as $tool) {
             $invoiceitem = new Invoiceitem();
             $invoiceitem->invoice_id = $invoice->id;
+            $invoiceitem->customer_name = $request->input('customer.name');
+            $invoiceitem->model = $tool['model'];
             $invoiceitem->tool_id = $tool['id'];
             $invoiceitem->price = $tool['price_for_24h'];//because $item is an associative array now... 'price' is the key, and example 2200 is the value
             $invoiceitem->taken = Carbon::now();
             $invoiceitem->save();
-            $itemsToReturn[] = $invoiceitem;
+            $tools[] = $invoiceitem;
         }
         return response()->json([
             0 => $invoice, 
-            1 => $itemsToReturn,
+            1 => $tools,
         ]);
     }
 

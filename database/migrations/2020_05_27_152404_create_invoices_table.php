@@ -16,6 +16,7 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id');
+            $table->string('customer_name')->nullable();
             $table->integer('sum_for_paying')->nullable();
             $table->boolean('invoice_closed')->default(false);
             $table->text('comments')->nullable();

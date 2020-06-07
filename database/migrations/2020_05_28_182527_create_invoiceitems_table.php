@@ -17,6 +17,8 @@ class CreateInvoiceitemsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('invoice_id');
             $table->unsignedBigInteger('tool_id');
+            $table->string('customer_name')->nullable();
+            $table->string('model')->nullable();
             $table->integer('price');
             $table->date('taken')->nullable();
             $table->date('returned')->nullable();

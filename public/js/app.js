@@ -2556,6 +2556,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     selectedTool: function selectedTool() {
+      //we are watching the selectedTool, because as soon the user has selected a tool, the value of the this.selectedTool will change from an empty {} to a real tool object. When this happens, we want to send this tool object to the parent component.
       console.log('You just choose a new tool.');
       this.$emit('toolSelected', this.selectedTool);
     }
