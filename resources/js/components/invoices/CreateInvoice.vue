@@ -48,17 +48,19 @@ export default {
     
     methods: {
         async createInvoiceWithItems(){
-            this.invoiceWithItems.invoice = this.invoice;
-            this.invoiceWithItems.invoice_items = this.invoice_items;
+            this.invoiceWithItems.invoice = this.invoice;//this is the hardcoded customer_id for planning/testing
+            console.dir(this.selectedCustomer);
+            this.invoiceWithItems.invoice.customer = this.selectedCustomer;//this is the actual selected customer
+            this.invoiceWithItems.invoice_items = this.invoice_items;//invoice items...
             console.dir(this.invoiceWithItems);
-            try {
-                await invoiceService.createInvoice(this.invoiceWithItems);
-                console.log('Invoice sent to api');
-            } catch (error) {
-                console.dir(error);
-                console.log('Something is wrong');
-            }
-            console.log('This is bad');
+            // try {
+            //     await invoiceService.createInvoice(this.invoiceWithItems);
+            //     console.log('Invoice sent to api');
+            // } catch (error) {
+            //     console.dir(error);
+            //     console.log('Something is wrong');
+            // }
+            // console.log('This is bad');
         },
         test(){
             console.dir(this.selectedCustomer.id);

@@ -2367,33 +2367,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this.invoiceWithItems.invoice = _this.invoice;
-                _this.invoiceWithItems.invoice_items = _this.invoice_items;
-                console.dir(_this.invoiceWithItems);
-                _context.prev = 3;
-                _context.next = 6;
-                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__["default"].createInvoice(_this.invoiceWithItems);
+                _this.invoiceWithItems.invoice = _this.invoice; //this is the hardcoded customer_id for planning/testing
 
-              case 6:
-                console.log('Invoice sent to api');
-                _context.next = 13;
-                break;
+                console.dir(_this.selectedCustomer);
+                _this.invoiceWithItems.invoice.customer = _this.selectedCustomer; //this is the actual selected customer
 
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](3);
-                console.dir(_context.t0);
-                console.log('Something is wrong');
+                _this.invoiceWithItems.invoice_items = _this.invoice_items; //invoice items...
 
-              case 13:
-                console.log('This is bad');
+                console.dir(_this.invoiceWithItems); // try {
+                //     await invoiceService.createInvoice(this.invoiceWithItems);
+                //     console.log('Invoice sent to api');
+                // } catch (error) {
+                //     console.dir(error);
+                //     console.log('Something is wrong');
+                // }
+                // console.log('This is bad');
 
-              case 14:
+              case 5:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 9]]);
+        }, _callee);
       }))();
     },
     test: function test() {
