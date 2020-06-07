@@ -14,12 +14,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('searchTerm')) {
-            $searchTerm = $request->searchTerm;
-            return Customer::where('name', 'like', '%' . $searchTerm . '%')->orderBy('name', 'asc')->get();
-        } else {
-            return Customer::all();
-        }
+        return Customer::all();
     }
 
     public function searchCustomers(Request $request){

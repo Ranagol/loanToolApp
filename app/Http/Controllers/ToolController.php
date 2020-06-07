@@ -14,12 +14,7 @@ class ToolController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('searchTerm')) {
-            $searchTerm = $request->searchTerm;
-            return Tool::where('brand', 'like', '%' . $searchTerm . '%')->orWhere('model', 'like', '%' . $searchTerm . '%')->orWhere('description', 'like', '%' . $searchTerm . '%')->orderBy('brand', 'asc')->get();
-        } else {
-            return Tool::all();
-        }
+        return Tool::all();
     }
 
     /**

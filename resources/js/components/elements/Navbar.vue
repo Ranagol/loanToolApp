@@ -33,6 +33,14 @@
         </li>
 
         <li v-if="userHasToken" class="nav-item">
+          <router-link class="nav-link" to="/invoices" >All invoices</router-link>
+        </li>
+
+        <li v-if="userHasToken" class="nav-item">
+          <router-link class="nav-link" to="/invoiceitems" >History</router-link>
+        </li>
+
+        <li v-if="userHasToken" class="nav-item">
           <a @click="logout" class="nav-link" href="#">Logout</a>
         </li>
 

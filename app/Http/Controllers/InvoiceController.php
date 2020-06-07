@@ -53,7 +53,7 @@ class InvoiceController extends Controller
             $invoiceitem->customer_name = $request->input('customer.name');
             $invoiceitem->model = $tool['model'];
             $invoiceitem->tool_id = $tool['id'];
-            $invoiceitem->price = $tool['price_for_24h'];//because $item is an associative array now... 'price' is the key, and example 2200 is the value
+            $invoiceitem->price = $tool['price'];//because $item is an associative array now... 'price' is the key, and example 2200 is the value
             $invoiceitem->taken = Carbon::now();
             $invoiceitem->save();
             $tools[] = $invoiceitem;

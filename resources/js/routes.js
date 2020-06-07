@@ -4,6 +4,8 @@ import Customers from './components/customers/Customers';
 import Tools from './components/tools/Tools';
 import CreateInvoice from './components/invoices/CreateInvoice';
 import Home from './components/elements/Home';
+import Invoices  from './components/invoices/Invoices';
+import Invoiceitems  from './components/invoiceitems/Invoiceitems';
 
 export const routes = [
     //AUTH
@@ -21,7 +23,10 @@ export const routes = [
 
     //INVOICES
     { path: '/create-invoice', name:'CreateInvoice', component: CreateInvoice },
+    { path: '/invoices', name:'invoices', component: Invoices },
 
+    //INVOICEITEMS
+    { path: '/invoiceitems', name:'invoiceitems', component: Invoiceitems },
 
 ];
 

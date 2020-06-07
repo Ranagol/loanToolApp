@@ -24,7 +24,7 @@
                 <td>{{ tool.model }}</td>
                 <td>{{ tool.description }}</td>
                 <td>{{ tool.serial_number }}</td>
-                <td>{{ tool.price_for_24h }}</td>
+                <td>{{ tool.price }}</td>
                 <td>{{ tool.onStock }}</td>
             </tr>
         </table>
