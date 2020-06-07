@@ -15,4 +15,8 @@ class Invoice extends Model
     public function customer(){
         return $this->belongsTo(Customer::class);
     }
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+    ];
 }

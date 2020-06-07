@@ -2507,6 +2507,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Invoices',
@@ -22394,10 +22419,69 @@ var render = function() {
       ? _c("div", { staticClass: "alert alert-info" }, [
           _c("h5", [_vm._v("Loading")])
         ])
-      : _vm._e()
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "table",
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.invoices, function(invoice, i) {
+          return _c("tr", { key: i }, [
+            _c("td", [_vm._v(_vm._s(invoice.id))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoice.customer_name))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoice.sum_for_paying))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoice.comments))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoice.created_at))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoice.closing_date))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoice.invoice_closed || "not closed"))]),
+            _vm._v(" "),
+            _vm._m(1, true)
+          ])
+        })
+      ],
+      2
+    )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Nr#")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Customer")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("To pay")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Comments")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Created")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Closing date")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Invoce closed?")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Close invoice")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("button", { staticClass: "btn btn-success btn-sm" }, [_vm._v("Close")])
+    ])
+  }
+]
 render._withStripped = true
 
 

@@ -19,7 +19,8 @@ class CreateInvoicesTable extends Migration
             $table->string('customer_name')->nullable();
             $table->integer('sum_for_paying')->nullable();
             $table->boolean('invoice_closed')->default(false);
-            $table->text('comments')->nullable();
+            $table->integer('closing_date')->nullable();
+            $table->date('comments')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();
         });
