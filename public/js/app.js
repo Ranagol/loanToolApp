@@ -2334,6 +2334,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2353,6 +2359,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       //on start, we are getting all tools from the db, and we are sending this to the child SelecToolS.
       toolsToLoan: [],
       //we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
+      components: ['one'],
       invoice: {
         customer_id: 1
       },
@@ -2476,6 +2483,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.toolsToLoan.push(tool);
       console.log('Selected tool succesfully added to parent');
       console.dir(this.toolsToLoan);
+    },
+    addComponent: function addComponent() {
+      this.components.push('another component');
+    },
+    removeComponent: function removeComponent() {
+      this.components.pop();
     },
     test: function test() {
       console.dir(this.selectedCustomer.id);
@@ -22204,10 +22217,25 @@ var render = function() {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("select-tool", {
-        attrs: { toolsFromDb: _vm.toolsFromDb },
-        on: { toolSelected: _vm.AddToToolsToLoan }
+      _vm._l(_vm.components, function(component, i) {
+        return _c("select-tool", {
+          key: i,
+          attrs: { toolsFromDb: _vm.toolsFromDb },
+          on: { toolSelected: _vm.AddToToolsToLoan }
+        })
       }),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-info", on: { click: _vm.addComponent } },
+        [_vm._v("Add another tool")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-info", on: { click: _vm.removeComponent } },
+        [_vm._v("Remove tool")]
+      ),
       _vm._v(" "),
       _c(
         "button",
@@ -22224,7 +22252,7 @@ var render = function() {
         [_vm._v("Create invoice")]
       )
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []

@@ -5,7 +5,13 @@
         <v-select  v-model="selectedCustomer" label="name" :options="customers"></v-select>
         <p>Selected customer: {{ selectedCustomer }}</p>
         <hr>
-        <select-tool :toolsFromDb = 'toolsFromDb' @toolSelected="AddToToolsToLoan"></select-tool>
+
+        <!-- SelectTool.vue -->
+        <select-tool v-for="(component, i) in components" :key="i" :toolsFromDb = 'toolsFromDb' @toolSelected="AddToToolsToLoan"></select-tool>
+
+        <button @click="addComponent" class="btn btn-info">Add another tool</button>
+
+        <button @click="removeComponent" class="btn btn-info">Remove tool</button>
         
         <button @click="test" class="btn btn-success">Test</button>
         <button @click="createInvoiceWithItems" class="btn btn-warning">Create invoice</button>
@@ -30,6 +36,7 @@ export default {
             selectedCustomer: '',
             toolsFromDb: [],//on start, we are getting all tools from the db, and we are sending this to the child SelecToolS.
             toolsToLoan: [],//we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
+            components: ['one'],
             
             invoice: {
                 customer_id: 1,
@@ -87,6 +94,12 @@ export default {
             this.toolsToLoan.push(tool);
             console.log('Selected tool succesfully added to parent');
             console.dir(this.toolsToLoan);
+        },
+        addComponent(){
+            this.components.push('another component');
+        },
+        removeComponent(){
+            this.components.pop();
         },
         test(){
             console.dir(this.selectedCustomer.id);
