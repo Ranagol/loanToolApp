@@ -19,8 +19,7 @@ class CreateToolsTable extends Migration
             $table->string('model');
             $table->string('description');
             $table->string('serial_number')->nullable();
-            $table->integer('price_for_4h');
-            $table->integer('price_for_24h');
+            $table->integer('price');
             $table->boolean('onStock')->default(true);
             $table->string('tool_picture_url')->nullable();
             $table->text('comments')->nullable();
