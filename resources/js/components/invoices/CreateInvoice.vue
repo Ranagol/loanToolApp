@@ -5,7 +5,7 @@
         <v-select  v-model="selectedCustomer" label="name" :options="customers"></v-select>
         <p>Selected customer: {{ selectedCustomer }}</p>
         <hr>
-        <select-tool></select-tool>
+        <select-tool :toolsFromDb = 'toolsFromDb'></select-tool>
         
         <button @click="test" class="btn btn-success">Test</button>
         <button @click="createInvoiceWithItems" class="btn btn-warning">Create invoice</button>
@@ -28,6 +28,7 @@ export default {
         return {
             customers: [],
             selectedCustomer: '',
+            toolsFromDb: [],
             
             invoice: {
                 customer_id: 1,
@@ -63,23 +64,31 @@ export default {
             }
             
         },
+        async getCustomers(){
+            try {
+                const response = await customerService.getCustomers(this.searchTerm);
+                this.customers = response.data;
+                console.dir(this.customers);
+            } catch (error) {
+                console.dir(error);
+            }
+        },
+        async getTools(){
+            try {
+                const response = await toolService.getTools(this.searchTerm);
+                this.toolsFromDb = response.data;
+                console.dir(this.toolsFromDb);
+            } catch (error) {
+                console.dir(error);
+            }
+        },
         test(){
             console.dir(this.selectedCustomer.id);
         }
     },
     async created(){
-        try {
-            const response = await customerService.getCustomers();
-            this.customers = response.data;
-            console.dir(this.customers);
-        } catch (error) {
-            console.dir(error);
-        }
-        try {
-            
-        } catch (error) {
-            
-        }
+        this.getCustomers();
+        this.getTools();
     }
 }
 </script>

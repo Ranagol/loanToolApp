@@ -2349,6 +2349,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       customers: [],
       selectedCustomer: '',
+      toolsFromDb: [],
       invoice: {
         customer_id: 1
       },
@@ -2402,44 +2403,94 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, null, [[5, 11]]);
       }))();
     },
+    getCustomers: function getCustomers() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _service_customerService__WEBPACK_IMPORTED_MODULE_3__["default"].getCustomers(_this2.searchTerm);
+
+              case 3:
+                response = _context2.sent;
+                _this2.customers = response.data;
+                console.dir(_this2.customers);
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                console.dir(_context2.t0);
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8]]);
+      }))();
+    },
+    getTools: function getTools() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return _service_toolService__WEBPACK_IMPORTED_MODULE_5__["default"].getTools(_this3.searchTerm);
+
+              case 3:
+                response = _context3.sent;
+                _this3.toolsFromDb = response.data;
+                console.dir(_this3.toolsFromDb);
+                _context3.next = 11;
+                break;
+
+              case 8:
+                _context3.prev = 8;
+                _context3.t0 = _context3["catch"](0);
+                console.dir(_context3.t0);
+
+              case 11:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 8]]);
+      }))();
+    },
     test: function test() {
       console.dir(this.selectedCustomer.id);
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this4 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-      var response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return _service_customerService__WEBPACK_IMPORTED_MODULE_3__["default"].getCustomers();
+              _this4.getCustomers();
 
-            case 3:
-              response = _context2.sent;
-              _this2.customers = response.data;
-              console.dir(_this2.customers);
-              _context2.next = 11;
-              break;
+              _this4.getTools();
 
-            case 8:
-              _context2.prev = 8;
-              _context2.t0 = _context2["catch"](0);
-              console.dir(_context2.t0);
-
-            case 11:
-              try {} catch (error) {}
-
-            case 12:
+            case 2:
             case "end":
-              return _context2.stop();
+              return _context4.stop();
           }
         }
-      }, _callee2, null, [[0, 8]]);
+      }, _callee4);
     }))();
   }
 });
@@ -2468,9 +2519,17 @@ __webpack_require__.r(__webpack_exports__);
   name: 'SelectTool',
   data: function data() {
     return {
-      tools: [],
       selectedTool: {}
     };
+  },
+  props: {
+    toolsFromDb: {
+      type: Array,
+      required: true,
+      "default": function _default() {
+        return [];
+      }
+    }
   }
 });
 
@@ -22123,7 +22182,7 @@ var render = function() {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("select-tool"),
+      _c("select-tool", { attrs: { toolsFromDb: _vm.toolsFromDb } }),
       _vm._v(" "),
       _c(
         "button",

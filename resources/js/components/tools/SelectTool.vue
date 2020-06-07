@@ -12,10 +12,19 @@ export default {
     name: 'SelectTool',
     data(){
         return {
-            tools: [],
             selectedTool: {},
 
         }
+    },
+    props: {
+        toolsFromDb: {
+            type: Array,
+            required:true,
+            default: function(){
+                return [];
+            }
+        }
+        
     }
 }
 </script>
