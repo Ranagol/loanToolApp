@@ -2,10 +2,10 @@
     <div>
         <h2>Create invoice</h2>
         
-        <p>Selected customer: {{ selectedCustomer }}</p>
         <v-select  v-model="selectedCustomer" label="name" :options="customers"></v-select>
-        
-        
+        <p>Selected customer: {{ selectedCustomer }}</p>
+        <hr>
+        <select-tool></select-tool>
         
         <button @click="test" class="btn btn-success">Test</button>
         <button @click="createInvoiceWithItems" class="btn btn-warning">Create invoice</button>
@@ -16,15 +16,16 @@
 import vSelect from 'vue-select';
 import invoiceService from '../../service/invoiceService';
 import customerService from '../../service/customerService';
+import SelectTool from '../tools/SelectTool';
+import toolService from '../../service/toolService';
 export default {
     name: 'CreateInvoice',
     components: {
         vSelect,
+        'select-tool': SelectTool,
     },
     data(){
         return {
-            
-            searchTerm: '',
             customers: [],
             selectedCustomer: '',
             
@@ -68,11 +69,16 @@ export default {
     },
     async created(){
         try {
-            const response = await customerService.getCustomers(this.searchTerm);
+            const response = await customerService.getCustomers();
             this.customers = response.data;
             console.dir(this.customers);
         } catch (error) {
             console.dir(error);
+        }
+        try {
+            
+        } catch (error) {
+            
         }
     }
 }

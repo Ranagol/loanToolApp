@@ -24,7 +24,6 @@
 </template>
 
 <script>
-
 import _ from 'lodash';
 import customerService from '../../service/customerService';
 export default {
