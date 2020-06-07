@@ -50,9 +50,6 @@ export default {
         ...mapActions(['getCustomers']),
     },
     
-    created(){
-        this.getCustomers();
-    }
 
     //_.debounce(func, [wait=0], [options={}])
         //TODO how to use lodash debounce with the search? I don't want the axios to be activated for every letter immediatelly. Lodash is installed.

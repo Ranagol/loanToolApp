@@ -7,10 +7,17 @@
 
 <script>
 import Navbar from './Navbar';
+import { mapActions } from 'vuex';
 export default {
     name: 'App',
     components: {
         'navbar': Navbar,
+    },
+    methods: {
+        ...mapActions(['getCustomers']),
+    },
+    created(){
+        this.getCustomers();
     }
 }
 </script>

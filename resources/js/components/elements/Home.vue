@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+// import { mapActions } from 'vuex';
 export default {
     name: 'Welcome',
-    methods: {
-        ...mapActions(['getCustomers']),
-    },
-    created(){
-        this.getCustomers();
-    }
+    // methods: {
+    //     ...mapActions(['getCustomers']),
+    // },
+    // created(){
+    //     this.getCustomers();
+    // }
 }
 </script>
