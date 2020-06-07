@@ -2391,9 +2391,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 console.log('Something is wrong - createInvoiceWithItems()');
 
               case 15:
-                console.log('This is bad - createInvoiceWithItems()');
-
-              case 16:
               case "end":
                 return _context.stop();
             }

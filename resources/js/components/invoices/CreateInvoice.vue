@@ -60,7 +60,7 @@ export default {
                 console.dir(error);
                 console.log('Something is wrong - createInvoiceWithItems()');
             }
-            console.log('This is bad - createInvoiceWithItems()');
+            
         },
         test(){
             console.dir(this.selectedCustomer.id);
