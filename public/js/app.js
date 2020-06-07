@@ -2092,7 +2092,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/customerService */ "./resources/js/service/customerService.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2128,7 +2127,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2185,9 +2183,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     'navbar': _Navbar__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['getCustomers'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['getCustomers', 'getTools'])),
   created: function created() {
     this.getCustomers();
+    this.getTools();
   }
 });
 
@@ -2323,8 +2322,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
 /* harmony import */ var _tools_SelectTool__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/SelectTool */ "./resources/js/components/tools/SelectTool.vue");
-/* harmony import */ var _service_toolService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../service/toolService */ "./resources/js/service/toolService.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2361,7 +2359,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateInvoice',
   components: {
@@ -2372,8 +2369,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       selectedCustomer: '',
       //this is the selected customer
-      toolsFromDb: [],
-      //on start, we are getting all tools from the db, and we are sending this to the child SelecToolS.
       toolsToLoan: [],
       //we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
       components: ['one'],
@@ -2385,7 +2380,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapGetters"])(['customers'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapGetters"])(['customers', 'tools'])),
   methods: {
     createInvoice: function createInvoice() {
       var _this = this;
@@ -2424,40 +2419,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee, null, [[3, 9]]);
       }))();
     },
-    getTools: function getTools() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return _service_toolService__WEBPACK_IMPORTED_MODULE_4__["default"].getTools(_this2.searchTerm);
-
-              case 3:
-                response = _context2.sent;
-                _this2.toolsFromDb = response.data;
-                console.dir(_this2.toolsFromDb);
-                _context2.next = 11;
-                break;
-
-              case 8:
-                _context2.prev = 8;
-                _context2.t0 = _context2["catch"](0);
-                console.dir(_context2.t0);
-
-              case 11:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[0, 8]]);
-      }))();
-    },
     AddToToolsToLoan: function AddToToolsToLoan(tool) {
+      //used for receiving tool objects from SelectTool components
       this.toolsToLoan.push(tool);
       console.log('Selected tool succesfully added to parent');
       console.dir(this.toolsToLoan);
@@ -2471,24 +2434,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     test: function test() {
       console.dir(this.selectedCustomer.id);
     }
-  },
-  created: function created() {
-    var _this3 = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _this3.getTools();
-
-            case 1:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3);
-    }))();
   }
 });
 
@@ -2528,7 +2473,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    toolsFromDb: {
+    tools: {
       type: Array,
       required: true,
       "default": function _default() {
@@ -2556,15 +2501,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _service_toolService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/toolService */ "./resources/js/service/toolService.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2598,49 +2546,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: 'Tools',
   data: function data() {
     return {
-      searchTerm: '',
-      tools: [],
-      selected: {}
+      searchTerm: ''
     };
   },
-  methods: {
-    getTools: function getTools() {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['tools'])), {}, {
+    filteredTools: function filteredTools() {
       var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return _service_toolService__WEBPACK_IMPORTED_MODULE_1__["default"].getTools(_this.searchTerm);
-
-              case 3:
-                response = _context.sent;
-                _this.tools = response.data;
-                console.dir(_this.tools);
-                _context.next = 11;
-                break;
-
-              case 8:
-                _context.prev = 8;
-                _context.t0 = _context["catch"](0);
-                console.dir(_context.t0);
-
-              case 11:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[0, 8]]);
-      }))();
+      return this.tools.filter(function (element) {
+        return element.model.toLowerCase().match(_this.searchTerm.toLowerCase());
+      });
     }
-  },
-  created: function created() {
-    this.getTools();
-  }
+  })
 });
 
 /***/ }),
@@ -22241,7 +22158,7 @@ var render = function() {
       _vm._l(_vm.components, function(component, i) {
         return _c("select-tool", {
           key: i,
-          attrs: { toolsFromDb: _vm.toolsFromDb },
+          attrs: { tools: _vm.tools },
           on: { toolSelected: _vm.AddToToolsToLoan }
         })
       }),
@@ -22301,7 +22218,7 @@ var render = function() {
       _c("h4", [_vm._v("SelectTool")]),
       _vm._v(" "),
       _c("v-select", {
-        attrs: { label: "model", options: _vm.toolsFromDb },
+        attrs: { label: "model", options: _vm.tools },
         model: {
           value: _vm.selectedTool,
           callback: function($$v) {
@@ -22353,25 +22270,23 @@ var render = function() {
         }
       ],
       staticClass: "form-control",
-      attrs: {
-        name: "searchTerm",
-        type: "search",
-        placeholder: "Search",
-        "aria-label": "Search"
-      },
+      attrs: { name: "searchTerm", type: "search", placeholder: "Search" },
       domProps: { value: _vm.searchTerm },
       on: {
-        input: [
-          function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.searchTerm = $event.target.value
-          },
-          _vm.getTools
-        ]
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.searchTerm = $event.target.value
+        }
       }
     }),
+    _vm._v(" "),
+    !_vm.tools.length
+      ? _c("div", { staticClass: "alert alert-info" }, [
+          _c("h5", [_vm._v("Loading")])
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "table",
@@ -22379,7 +22294,7 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._l(_vm.tools, function(tool, i) {
+        _vm._l(_vm.filteredTools, function(tool, i) {
           return _c("tr", { key: i }, [
             _c("td", [_vm._v(_vm._s(tool.brand))]),
             _vm._v(" "),
@@ -38769,7 +38684,7 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
@@ -38817,7 +38732,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('App', __webpack_require__(
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
   router: router,
-  store: _store__WEBPACK_IMPORTED_MODULE_6__["store"]
+  store: _store__WEBPACK_IMPORTED_MODULE_1__["store"]
 });
 
 /***/ }),
@@ -39892,6 +39807,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     customers: function customers(state) {
       return state.customers;
     },
+    tools: function tools(state) {
+      return state.tools;
+    },
     errors: function errors(state) {
       return state.errors;
     }
@@ -39908,6 +39826,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
   mutations: {
     getCustomers: function getCustomers(state, customers) {
       state.customers = customers;
+    },
+    getTools: function getTools(state, tools) {
+      state.tools = tools;
     },
     errors: function errors(state, error) {
       state.errors = error;
@@ -39949,6 +39870,42 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
             }
           }
         }, _callee, null, [[1, 11]]);
+      }))();
+    },
+    getTools: function getTools(_ref2) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var commit, response, tools;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                commit = _ref2.commit;
+                _context2.prev = 1;
+                _context2.next = 4;
+                return _service_toolService__WEBPACK_IMPORTED_MODULE_4__["default"].getTools();
+
+              case 4:
+                response = _context2.sent;
+                tools = response.data;
+                console.log('getTools from actions has been activated');
+                console.dir(tools);
+                commit('getTools', tools);
+                _context2.next = 16;
+                break;
+
+              case 11:
+                _context2.prev = 11;
+                _context2.t0 = _context2["catch"](1);
+                console.log('Error with getTools() in actions');
+                console.dir(_context2.t0);
+                commit('errors', _context2.t0);
+
+              case 16:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[1, 11]]);
       }))();
     }
   }

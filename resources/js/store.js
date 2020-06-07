@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
 //GETTERS    
 getters: {
     customers: state => state.customers,
+    tools: state => state.tools,
     errors: state => state.errors,
     
 },
@@ -27,6 +28,10 @@ mutations: {
     getCustomers(state, customers){
         state.customers = customers;
     },
+    getTools(state, tools){
+        state.tools = tools;
+    },
+
     errors(state, error){
         state.errors = error;
     }
@@ -35,7 +40,7 @@ mutations: {
 
 //ACTIONS
 actions: {
-    async getCustomers( {commit}){
+    async getCustomers( {commit} ){
         try {
             const response = await customerService.getCustomers();
             const customers = response.data;
@@ -47,7 +52,21 @@ actions: {
             console.dir(error);
             commit('errors', error);
         }
-    }
+    },
+
+    async getTools( {commit} ){
+        try {
+            const response = await toolService.getTools();
+            const tools = response.data;
+            console.log( 'getTools from actions has been activated');
+            console.dir(tools);
+            commit('getTools', tools);
+        } catch (error) {
+            console.log('Error with getTools() in actions');
+            console.dir(error);
+            commit('errors', error);
+        }
+    },
 }
 
 

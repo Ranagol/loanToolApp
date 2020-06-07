@@ -30,10 +30,8 @@
 <script>
 import _ from 'lodash';
 import { mapGetters } from 'vuex';
-import customerService from '../../service/customerService';
 export default {
     name: 'Customers',
-    
     data(){
         return {
             searchTerm: '',

@@ -7,7 +7,7 @@
         <hr>
 
         <!-- SelectTool.vue -->
-        <select-tool v-for="(component, i) in components" :key="i" :toolsFromDb = 'toolsFromDb' @toolSelected="AddToToolsToLoan"></select-tool>
+        <select-tool v-for="(component, i) in components" :key="i" :tools = 'tools' @toolSelected="AddToToolsToLoan"></select-tool>
 
         <button @click="addComponent" class="btn btn-info">Add another tool</button>
 
@@ -22,7 +22,6 @@
 import vSelect from 'vue-select';
 import invoiceService from '../../service/invoiceService';
 import SelectTool from '../tools/SelectTool';
-import toolService from '../../service/toolService';
 import { mapGetters } from 'vuex';
 export default {
     name: 'CreateInvoice',
@@ -33,7 +32,6 @@ export default {
     data(){
         return {
             selectedCustomer: '',//this is the selected customer
-            toolsFromDb: [],//on start, we are getting all tools from the db, and we are sending this to the child SelecToolS.
             toolsToLoan: [],//we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
             components: ['one'],//this is used to dynamically add more SelectTool components
             invoice: {
@@ -45,7 +43,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['customers']),
+        ...mapGetters(['customers', 'tools']),
     },
     
     methods: {
@@ -64,16 +62,7 @@ export default {
             
         },
         
-        async getTools(){
-            try {
-                const response = await toolService.getTools(this.searchTerm);
-                this.toolsFromDb = response.data;
-                console.dir(this.toolsFromDb);
-            } catch (error) {
-                console.dir(error);
-            }
-        },
-        AddToToolsToLoan(tool){
+        AddToToolsToLoan(tool){//used for receiving tool objects from SelectTool components
             this.toolsToLoan.push(tool);
             console.log('Selected tool succesfully added to parent');
             console.dir(this.toolsToLoan);
@@ -88,8 +77,6 @@ export default {
             console.dir(this.selectedCustomer.id);
         }
     },
-    async created(){
-        this.getTools();
-    }
+    
 }
 </script>

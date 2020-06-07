@@ -3,7 +3,12 @@
         <h3>Tools</h3>
 
         <!-- SEARCH FIELD -->
-        <input @input="getTools" v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <input v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search">
+
+        <!-- If there is no data in the db... -->
+        <div v-if="!tools.length" class="alert alert-info">
+            <h5>Loading</h5>
+        </div>
 
         <table class="table">
             <tr>
@@ -14,7 +19,7 @@
                 <th>Price</th>
                 <th>onStock</th>
             </tr>
-            <tr v-for="(tool, i) in tools" :key="i">
+            <tr v-for="(tool, i) in filteredTools" :key="i">
                 <td>{{ tool.brand }}</td>
                 <td>{{ tool.model }}</td>
                 <td>{{ tool.description }}</td>
@@ -27,30 +32,24 @@
 </template>
 
 <script>
-import toolService from '../../service/toolService';
+import { mapGetters } from 'vuex';
 export default {
     name: 'Tools',
     data(){
         return {
             searchTerm: '',
-            tools: [],
-            selected: {},
         }
     },
-    methods: {
-        async getTools(){
-            try {
-                const response = await toolService.getTools(this.searchTerm);
-                this.tools = response.data;
-                console.dir(this.tools);
-            } catch (error) {
-                console.dir(error);
-            }
-        },
+    computed: {
+        ...mapGetters(['tools']),
+        filteredTools(){
+            return this.tools.filter((element) => {
+                return element.model.toLowerCase().match(this.searchTerm.toLowerCase());
+            });
+        }
     },
     
-    created(){
-        this.getTools();
-    }
+    
+    
 }
 </script>

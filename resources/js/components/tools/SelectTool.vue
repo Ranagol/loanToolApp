@@ -1,7 +1,7 @@
 <template>
     <div>
         <h4>SelectTool</h4>
-        <v-select  v-model="selectedTool" label="model" :options="toolsFromDb"></v-select>
+        <v-select  v-model="selectedTool" label="model" :options="tools"></v-select>
         <!-- TODO there are a lot of warnings here, would be good to check... -->
         <p>Selected tool: {{ selectedTool }}</p>
 
@@ -23,7 +23,7 @@ export default {
         }
     },
     props: {
-        toolsFromDb: {
+        tools: {
             type: Array,
             required:true,
             default: function(){

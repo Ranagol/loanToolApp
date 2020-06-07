@@ -14,10 +14,11 @@ export default {
         'navbar': Navbar,
     },
     methods: {
-        ...mapActions(['getCustomers']),
+        ...mapActions(['getCustomers', 'getTools']),
     },
     created(){
         this.getCustomers();
+        this.getTools();
     }
 }
 </script>
