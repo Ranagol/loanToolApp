@@ -32,17 +32,15 @@ export default {
         }
     },
     methods: {
-        closeInvoice(){
+        async closeInvoice(){
             //set the new, updated parameters of the invoice
-            console.dir(this.invoice);
             let updatedInvoice = this.invoice;
             updatedInvoice.invoice_closed = true;
             let sumToPay = 0;
             updatedInvoice.invoiceitems.forEach(invoiceitem => {
                 invoiceitem.returned = moment();
-                console.dir(invoiceitem.returned);
-                invoiceitem.time_on_field = moment.duration(invoiceitem.returned.diff(invoiceitem.created_at));
-                console.dir(invoiceitem.time_on_field);
+                let durationObject = moment.duration(invoiceitem.returned.diff(invoiceitem.created_at));
+                invoiceitem.time_on_field = durationObject._data.days;
                 invoiceitem.to_pay = invoiceitem.time_on_field * invoiceitem.price;
                 sumToPay += invoiceitem.to_pay;
                 invoiceitem.invoice_line_closed = true;
@@ -51,15 +49,15 @@ export default {
             console.log('This is the update invoice below:');
             console.dir(updatedInvoice);
 
-            //update vuex
+            //update vuex - leave this for later
 
             //update db
-            // try {
-            //   await invoiceService.updateInvoice(this.invoiceId, updatedInvoice);  
-            // } catch (error) {
-            //     console.log('Error during closeInvoice.');
-            //     console.dir(error);
-            // }
+            try {
+              await invoiceService.updateInvoice(this.invoiceId, updatedInvoice);  
+            } catch (error) {
+                console.log('Error during closeInvoice.');
+                console.dir(error);
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ class InvoiceService {
         return HTTP.get("/open-invoices");
     }
 
-    updateInvoice(id){
+    updateInvoice(id, invoice){
         return HTTP.patch(`/invoices/${id}`, invoice);
     }
 
