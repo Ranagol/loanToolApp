@@ -35,14 +35,18 @@ export default {
         async closeInvoice(){
             //set the new, updated parameters of the invoice
             let updatedInvoice = this.invoice;
+            let now = moment().format("YYYY-MM-DD HH:mm:ss");
             updatedInvoice.invoice_closed = true;
-            updatedInvoice.closing_date = moment().format("YYYY-MM-DD HH:mm:ss");
+            updatedInvoice.closing_date = now;
             console.log('See the date format below:');
             console.log(updatedInvoice.closing_date);
             let sumToPay = 0;
             updatedInvoice.invoiceitems.forEach(invoiceitem => {
-                invoiceitem.returned = moment();
-                let durationObject = moment.duration(invoiceitem.returned.diff(invoiceitem.created_at));
+                invoiceitem.returned = now;
+                let loanDate = moment(invoiceitem.created_at);
+                console.log('This is the loanDate:', loanDate);
+                let durationObject = moment.duration(now.diff(loanDate));
+                //let durationObject = moment.duration(now.diff(invoiceitem.created_at));
                 invoiceitem.time_on_field = durationObject._data.days;
                 invoiceitem.to_pay = invoiceitem.time_on_field * invoiceitem.price;
                 sumToPay += invoiceitem.to_pay;

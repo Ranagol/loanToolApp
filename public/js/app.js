@@ -2410,21 +2410,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var updatedInvoice, sumToPay;
+        var updatedInvoice, now, sumToPay;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 //set the new, updated parameters of the invoice
                 updatedInvoice = _this2.invoice;
+                now = moment__WEBPACK_IMPORTED_MODULE_1___default()().format("YYYY-MM-DD HH:mm:ss");
                 updatedInvoice.invoice_closed = true;
-                updatedInvoice.closing_date = moment__WEBPACK_IMPORTED_MODULE_1___default()().format("YYYY-MM-DD HH:mm:ss");
+                updatedInvoice.closing_date = now;
                 console.log('See the date format below:');
                 console.log(updatedInvoice.closing_date);
                 sumToPay = 0;
                 updatedInvoice.invoiceitems.forEach(function (invoiceitem) {
-                  invoiceitem.returned = moment__WEBPACK_IMPORTED_MODULE_1___default()();
-                  var durationObject = moment__WEBPACK_IMPORTED_MODULE_1___default.a.duration(invoiceitem.returned.diff(invoiceitem.created_at));
+                  invoiceitem.returned = now;
+                  var loanDate = moment__WEBPACK_IMPORTED_MODULE_1___default()(invoiceitem.created_at);
+                  console.log('This is the loanDate:', loanDate);
+                  var durationObject = moment__WEBPACK_IMPORTED_MODULE_1___default.a.duration(now.diff(loanDate)); //let durationObject = moment.duration(now.diff(invoiceitem.created_at));
+
                   invoiceitem.time_on_field = durationObject._data.days;
                   invoiceitem.to_pay = invoiceitem.time_on_field * invoiceitem.price;
                   sumToPay += invoiceitem.to_pay;
@@ -2435,26 +2439,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 console.dir(updatedInvoice); //update vuex - leave this for later
                 //update db
 
-                _context.prev = 10;
-                _context.next = 13;
+                _context.prev = 11;
+                _context.next = 14;
                 return _service_invoiceService__WEBPACK_IMPORTED_MODULE_3__["default"].updateInvoice(_this2.invoiceId, updatedInvoice);
 
-              case 13:
-                _context.next = 19;
+              case 14:
+                _context.next = 20;
                 break;
 
-              case 15:
-                _context.prev = 15;
-                _context.t0 = _context["catch"](10);
+              case 16:
+                _context.prev = 16;
+                _context.t0 = _context["catch"](11);
                 console.log('Error during closeInvoice.');
                 console.dir(_context.t0);
 
-              case 19:
+              case 20:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[10, 15]]);
+        }, _callee, null, [[11, 16]]);
       }))();
     }
   }

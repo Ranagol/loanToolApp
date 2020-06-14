@@ -1,8 +1,8 @@
 require('./bootstrap');
 import Vue from 'vue';
 
-//moment
-import moment from 'moment';
+
+
 
 //vuex
 import { store } from './store';
