@@ -2352,8 +2352,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2380,7 +2388,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CloseInvoice',
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['invoices'])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['invoices'])), {}, {
     invoice: function invoice() {
       var _this = this;
 
@@ -2395,7 +2403,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: {
-    closeInvoice: function closeInvoice() {}
+    closeInvoice: function closeInvoice() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                //set the new, updated parameters of the invoice
+                updatedInvoice = _this2.invoice;
+                updatedInvoice.invoice_closed = true;
+                updatedInvoice.invoiceitems.forEach(function (invoiceitem) {
+                  invoiceitem.returned = new Date(); //invoiceitem.time_on_field =
+                }); //updatedInvoice.sum_for_paying = xxxxxxxxx
+
+                console.log('This is the update invoice below:');
+                console.dir(updatedInvoice); //update vuex
+                //update db
+
+                _context.prev = 5;
+                _context.next = 8;
+                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__["default"].updateInvoice(_this2.invoiceId, updatedInvoice);
+
+              case 8:
+                _context.next = 14;
+                break;
+
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](5);
+                console.log('Error during closeInvoice.');
+                console.dir(_context.t0);
+
+              case 14:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[5, 10]]);
+      }))();
+    }
   }
 });
 
@@ -40346,7 +40394,7 @@ var InvoiceService = /*#__PURE__*/function () {
   }, {
     key: "updateInvoice",
     value: function updateInvoice(id) {
-      return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].patch("/invoices/".concat(id));
+      return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].patch("/invoices/".concat(id), invoice);
     }
   }, {
     key: "deleteInvoice",

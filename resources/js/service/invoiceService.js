@@ -19,7 +19,7 @@ class InvoiceService {
     }
 
     updateInvoice(id){
-        return HTTP.patch(`/invoices/${id}`);
+        return HTTP.patch(`/invoices/${id}`, invoice);
     }
 
     deleteInvoice(id){
