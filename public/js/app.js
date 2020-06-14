@@ -2352,6 +2352,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2359,8 +2367,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'CloseInvoice'
+  name: 'CloseInvoice',
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['invoices'])), {}, {
+    invoice: function invoice() {
+      var _this = this;
+
+      return this.invoices.find(function (invoice) {
+        return invoice.id == _this.invoiceId;
+      });
+    }
+  }),
+  data: function data() {
+    return {
+      invoiceId: this.$route.params.id
+    };
+  },
+  methods: {
+    closeInvoice: function closeInvoice() {}
+  }
 });
 
 /***/ }),
@@ -22340,16 +22376,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h3", [_vm._v("Close invoice")]),
+    _vm._v(" "),
+    !this.invoices.length
+      ? _c("div", { staticClass: "alert alert-info" }, [
+          _c("h5", [_vm._v("Loading")])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("p", [_vm._v("Invoice id: " + _vm._s(_vm.invoiceId))]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.invoice))]),
+    _vm._v(" "),
+    _c(
+      "button",
+      { staticClass: "btn btn-success", on: { click: _vm.closeInvoice } },
+      [_vm._v("Close invoice")]
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h3", [_vm._v("Close invoice")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -40295,6 +40342,11 @@ var InvoiceService = /*#__PURE__*/function () {
     key: "getOpenInvoices",
     value: function getOpenInvoices() {
       return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].get("/open-invoices");
+    }
+  }, {
+    key: "updateInvoice",
+    value: function updateInvoice(id) {
+      return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].patch("/invoices/".concat(id));
     }
   }, {
     key: "deleteInvoice",

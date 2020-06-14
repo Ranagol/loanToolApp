@@ -18,6 +18,10 @@ class InvoiceService {
         return HTTP.get("/open-invoices");
     }
 
+    updateInvoice(id){
+        return HTTP.patch(`/invoices/${id}`);
+    }
+
     deleteInvoice(id){
         return HTTP.delete(`/invoices/${id}`);
     }
