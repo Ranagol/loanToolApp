@@ -36,6 +36,9 @@ export default {
             //set the new, updated parameters of the invoice
             let updatedInvoice = this.invoice;
             updatedInvoice.invoice_closed = true;
+            updatedInvoice.closing_date = moment().format("YYYY-MM-DD HH:mm:ss");
+            console.log('See the date format below:');
+            console.log(updatedInvoice.closing_date);
             let sumToPay = 0;
             updatedInvoice.invoiceitems.forEach(invoiceitem => {
                 invoiceitem.returned = moment();

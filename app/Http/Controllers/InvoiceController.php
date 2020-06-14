@@ -102,9 +102,29 @@ class InvoiceController extends Controller
      * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Invoice $invoice)
+    public function update(Request $request, $id)
     {
-        $invoice->update($request->all());
+        //INVOICE
+        $invoice = Invoice::find($id);
+        $invoice->sum_for_paying = $request->sum_for_paying;
+        $invoice->invoice_closed = true;
+        $invoice->closing_date = $request->closing_date;
+        $invoice->save();
+
+        //INVOICE ITEM
+        $invoiceitems = $request->input(['invoiceitems']);
+        foreach ($invoiceitems as $invoiceitem) {
+            $invoiceitem = Invoiceitem::find($invoiceitem['id']);
+            $invoiceitem->returned = $invoiceitem['returned'];
+            $invoiceitem->time_on_field = $invoiceitem['time_on_field'];
+            $invoiceitem->to_pay = $invoiceitem['to_pay'];
+            $invoiceitem->invoice_line_closed = true;
+            $invoiceitem->save();
+        }
+
+        //SET TOOLS TO ONSTOCK AGAIN
+
+
         return $invoice;
     }
 

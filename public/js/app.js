@@ -2418,6 +2418,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 //set the new, updated parameters of the invoice
                 updatedInvoice = _this2.invoice;
                 updatedInvoice.invoice_closed = true;
+                updatedInvoice.closing_date = moment__WEBPACK_IMPORTED_MODULE_1___default()().format("YYYY-MM-DD HH:mm:ss");
+                console.log('See the date format below:');
+                console.log(updatedInvoice.closing_date);
                 sumToPay = 0;
                 updatedInvoice.invoiceitems.forEach(function (invoiceitem) {
                   invoiceitem.returned = moment__WEBPACK_IMPORTED_MODULE_1___default()();
@@ -2432,26 +2435,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 console.dir(updatedInvoice); //update vuex - leave this for later
                 //update db
 
-                _context.prev = 7;
-                _context.next = 10;
+                _context.prev = 10;
+                _context.next = 13;
                 return _service_invoiceService__WEBPACK_IMPORTED_MODULE_3__["default"].updateInvoice(_this2.invoiceId, updatedInvoice);
 
-              case 10:
-                _context.next = 16;
+              case 13:
+                _context.next = 19;
                 break;
 
-              case 12:
-                _context.prev = 12;
-                _context.t0 = _context["catch"](7);
+              case 15:
+                _context.prev = 15;
+                _context.t0 = _context["catch"](10);
                 console.log('Error during closeInvoice.');
                 console.dir(_context.t0);
 
-              case 16:
+              case 19:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[7, 12]]);
+        }, _callee, null, [[10, 15]]);
       }))();
     }
   }
