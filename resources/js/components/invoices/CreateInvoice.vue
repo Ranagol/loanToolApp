@@ -67,10 +67,10 @@ export default {
             console.log('Selected tool succesfully added to parent');
             console.dir(this.toolsToLoan);
         },
-        addComponent(){
+        addComponent(){//for addind another loan tool
             this.components.push('another component');
         },
-        removeComponent(){
+        removeComponent(){//for removing a loan tool line
             this.components.pop();
         },
         test(){

@@ -2591,9 +2591,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.dir(this.toolsToLoan);
     },
     addComponent: function addComponent() {
+      //for addind another loan tool
       this.components.push('another component');
     },
     removeComponent: function removeComponent() {
+      //for removing a loan tool line
       this.components.pop();
     },
     test: function test() {
