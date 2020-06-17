@@ -2427,7 +2427,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   invoiceitem.returned = now;
                   var loanDate = moment__WEBPACK_IMPORTED_MODULE_1___default()(invoiceitem.created_at);
                   console.log('This is the loanDate:', loanDate);
-                  var durationObject = moment__WEBPACK_IMPORTED_MODULE_1___default.a.duration(now.diff(loanDate)); //let durationObject = moment.duration(now.diff(invoiceitem.created_at));
+                  var durationObject = moment__WEBPACK_IMPORTED_MODULE_1___default.a.duration(now.diff(loanDate)); //now.diff is not a function"
+                  //let durationObject = moment.duration(now.diff(invoiceitem.created_at));
 
                   invoiceitem.time_on_field = durationObject._data.days;
                   invoiceitem.to_pay = invoiceitem.time_on_field * invoiceitem.price;

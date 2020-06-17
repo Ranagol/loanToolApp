@@ -45,7 +45,7 @@ export default {
                 invoiceitem.returned = now;
                 let loanDate = moment(invoiceitem.created_at);
                 console.log('This is the loanDate:', loanDate);
-                let durationObject = moment.duration(now.diff(loanDate));
+                let durationObject = moment.duration(now.diff(loanDate));//now.diff is not a function"
                 //let durationObject = moment.duration(now.diff(invoiceitem.created_at));
                 invoiceitem.time_on_field = durationObject._data.days;
                 invoiceitem.to_pay = invoiceitem.time_on_field * invoiceitem.price;
