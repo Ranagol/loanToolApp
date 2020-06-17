@@ -2421,23 +2421,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 updatedInvoice = _this2.invoice;
                 now = moment__WEBPACK_IMPORTED_MODULE_1___default()();
                 updatedInvoice.invoice_closed = true;
-                updatedInvoice.closing_date = now;
+                updatedInvoice.closing_date = now.format('YYYY-MM-DD');
                 sumToPay = 0; //Invoiceitem level
 
                 updatedInvoice.invoiceitems.forEach(function (invoiceitem) {
-                  invoiceitem.returned = now.format('YYYY-MM-DD');
-                  console.log('This is the problematic date:', invoiceitem.returned);
+                  invoiceitem.returned = now.format('YYYY-MM-DD'); //counting the time period while the tool was on field
+
                   var loanDate = moment__WEBPACK_IMPORTED_MODULE_1___default()(invoiceitem.created_at);
-                  var durationObject = moment__WEBPACK_IMPORTED_MODULE_1___default.a.duration(now.diff(loanDate));
-                  var days = durationObject.asDays();
-                  days = Math.ceil(days);
+                  var durationObject = moment__WEBPACK_IMPORTED_MODULE_1___default.a.duration(now.diff(loanDate)); //here we are creating a moment duration object which is a time period between two moments
+
+                  var days = durationObject.asDays(); //show this time period in days
+
+                  days = Math.ceil(days); //round up the time period
+                  //-------------------
+
                   invoiceitem.time_on_field = days;
                   invoiceitem.to_pay = days * invoiceitem.price;
                   sumToPay += invoiceitem.to_pay;
                   invoiceitem.invoice_line_closed = true;
                 });
                 updatedInvoice.sum_for_paying = sumToPay;
-                console.log('This is the update invoice below:');
+                console.log('This is the final closed invoice object below:');
                 console.dir(updatedInvoice); //update vuex - leave this for later
                 //update db
 

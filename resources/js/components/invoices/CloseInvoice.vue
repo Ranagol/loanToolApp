@@ -39,23 +39,24 @@ export default {
             let updatedInvoice = this.invoice;
             let now = moment();
             updatedInvoice.invoice_closed = true;
-            updatedInvoice.closing_date = now;
+            updatedInvoice.closing_date = now.format('YYYY-MM-DD');
             let sumToPay = 0;
             //Invoiceitem level
             updatedInvoice.invoiceitems.forEach(invoiceitem => {
                 invoiceitem.returned = now.format('YYYY-MM-DD');
-                console.log('This is the problematic date:', invoiceitem.returned);
+                //counting the time period while the tool was on field
                 let loanDate = moment(invoiceitem.created_at);
-                let durationObject = moment.duration(now.diff(loanDate));
-                let days = durationObject.asDays();
-                days = Math.ceil(days);
+                let durationObject = moment.duration(now.diff(loanDate));//here we are creating a moment duration object which is a time period between two moments
+                let days = durationObject.asDays();//show this time period in days
+                days = Math.ceil(days);//round up the time period
+                //-------------------
                 invoiceitem.time_on_field = days;
                 invoiceitem.to_pay = days * invoiceitem.price;
                 sumToPay += invoiceitem.to_pay;
                 invoiceitem.invoice_line_closed = true;
             });
             updatedInvoice.sum_for_paying = sumToPay;
-            console.log('This is the update invoice below:');
+            console.log('This is the final closed invoice object below:');
             console.dir(updatedInvoice);
 
             //update vuex - leave this for later
