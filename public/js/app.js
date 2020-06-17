@@ -2386,6 +2386,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -2415,23 +2417,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                //set the new, updated parameters of the invoice
+                //Invoice level
                 updatedInvoice = _this2.invoice;
-                now = moment__WEBPACK_IMPORTED_MODULE_1___default()().format("YYYY-MM-DD HH:mm:ss");
+                now = moment__WEBPACK_IMPORTED_MODULE_1___default()();
                 updatedInvoice.invoice_closed = true;
                 updatedInvoice.closing_date = now;
-                console.log('See the date format below:');
-                console.log(updatedInvoice.closing_date);
-                sumToPay = 0;
-                updatedInvoice.invoiceitems.forEach(function (invoiceitem) {
-                  invoiceitem.returned = now;
-                  var loanDate = moment__WEBPACK_IMPORTED_MODULE_1___default()(invoiceitem.created_at);
-                  console.log('This is the loanDate:', loanDate);
-                  var durationObject = moment__WEBPACK_IMPORTED_MODULE_1___default.a.duration(now.diff(loanDate)); //now.diff is not a function"
-                  //let durationObject = moment.duration(now.diff(invoiceitem.created_at));
+                sumToPay = 0; //Invoiceitem level
 
-                  invoiceitem.time_on_field = durationObject._data.days;
-                  invoiceitem.to_pay = invoiceitem.time_on_field * invoiceitem.price;
+                updatedInvoice.invoiceitems.forEach(function (invoiceitem) {
+                  invoiceitem.returned = now.format('YYYY-MM-DD');
+                  console.log('This is the problematic date:', invoiceitem.returned);
+                  var loanDate = moment__WEBPACK_IMPORTED_MODULE_1___default()(invoiceitem.created_at);
+                  var durationObject = moment__WEBPACK_IMPORTED_MODULE_1___default.a.duration(now.diff(loanDate));
+                  var days = durationObject.asDays();
+                  days = Math.ceil(days);
+                  invoiceitem.time_on_field = days;
+                  invoiceitem.to_pay = days * invoiceitem.price;
                   sumToPay += invoiceitem.to_pay;
                   invoiceitem.invoice_line_closed = true;
                 });
@@ -2440,26 +2441,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 console.dir(updatedInvoice); //update vuex - leave this for later
                 //update db
 
-                _context.prev = 11;
-                _context.next = 14;
+                _context.prev = 9;
+                _context.next = 12;
                 return _service_invoiceService__WEBPACK_IMPORTED_MODULE_3__["default"].updateInvoice(_this2.invoiceId, updatedInvoice);
 
-              case 14:
-                _context.next = 20;
+              case 12:
+                _context.next = 18;
                 break;
 
-              case 16:
-                _context.prev = 16;
-                _context.t0 = _context["catch"](11);
+              case 14:
+                _context.prev = 14;
+                _context.t0 = _context["catch"](9);
                 console.log('Error during closeInvoice.');
                 console.dir(_context.t0);
 
-              case 20:
+              case 18:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[11, 16]]);
+        }, _callee, null, [[9, 14]]);
       }))();
     }
   }

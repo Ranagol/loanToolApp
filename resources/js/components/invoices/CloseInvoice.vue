@@ -10,6 +10,8 @@
         <p>Invoice id: {{ invoiceId }}</p>
         <p>{{ invoice }}</p>
         <button @click="closeInvoice" class="btn btn-success">Close invoice</button>
+
+        
         
     </div>
 </template>
@@ -33,22 +35,22 @@ export default {
     },
     methods: {
         async closeInvoice(){
-            //set the new, updated parameters of the invoice
+            //Invoice level
             let updatedInvoice = this.invoice;
-            let now = moment().format("YYYY-MM-DD HH:mm:ss");
+            let now = moment();
             updatedInvoice.invoice_closed = true;
             updatedInvoice.closing_date = now;
-            console.log('See the date format below:');
-            console.log(updatedInvoice.closing_date);
             let sumToPay = 0;
+            //Invoiceitem level
             updatedInvoice.invoiceitems.forEach(invoiceitem => {
-                invoiceitem.returned = now;
+                invoiceitem.returned = now.format('YYYY-MM-DD');
+                console.log('This is the problematic date:', invoiceitem.returned);
                 let loanDate = moment(invoiceitem.created_at);
-                console.log('This is the loanDate:', loanDate);
-                let durationObject = moment.duration(now.diff(loanDate));//now.diff is not a function"
-                //let durationObject = moment.duration(now.diff(invoiceitem.created_at));
-                invoiceitem.time_on_field = durationObject._data.days;
-                invoiceitem.to_pay = invoiceitem.time_on_field * invoiceitem.price;
+                let durationObject = moment.duration(now.diff(loanDate));
+                let days = durationObject.asDays();
+                days = Math.ceil(days);
+                invoiceitem.time_on_field = days;
+                invoiceitem.to_pay = days * invoiceitem.price;
                 sumToPay += invoiceitem.to_pay;
                 invoiceitem.invoice_line_closed = true;
             });
@@ -66,6 +68,7 @@ export default {
                 console.dir(error);
             }
         }
+        
     }
 }
 </script>
