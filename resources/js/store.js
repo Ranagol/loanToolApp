@@ -117,11 +117,12 @@ actions: {
 
     async createCustomer( {commit}, customer ){
         try {
-            await customerService.createCustomer(customer);
-            commit('createCustomer', customer);
+            await customerService.createCustomer(customer);//for db
+            commit('createCustomer', customer);//for vuex
         } catch (error) {
             console.log('Error with createCustomer in actions');
             console.dir(error);
+            alert(error);
             commit('errors', error);
         }
     }

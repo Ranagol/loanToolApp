@@ -62559,8 +62559,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
                 return _service_customerService__WEBPACK_IMPORTED_MODULE_3__["default"].createCustomer(customer);
 
               case 4:
-                commit('createCustomer', customer);
-                _context5.next = 12;
+                //for db
+                commit('createCustomer', customer); //for vuex
+
+                _context5.next = 13;
                 break;
 
               case 7:
@@ -62568,9 +62570,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
                 _context5.t0 = _context5["catch"](1);
                 console.log('Error with createCustomer in actions');
                 console.dir(_context5.t0);
+                alert(_context5.t0);
                 commit('errors', _context5.t0);
 
-              case 12:
+              case 13:
               case "end":
                 return _context5.stop();
             }
