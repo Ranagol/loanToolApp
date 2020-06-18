@@ -2342,6 +2342,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'InvoiceItems',
@@ -43489,10 +43512,62 @@ var render = function() {
   return _c("div", [
     _c("h4", [_vm._v("History/InvoiceItems")]),
     _vm._v(" "),
-    _c("p", [_vm._v(" " + _vm._s(_vm.invoiceitems))])
+    _c("p", [_vm._v(" " + _vm._s(_vm.invoiceitems))]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.invoiceitems, function(invoiceitem, i) {
+          return _c("tr", { key: i }, [
+            _c("td", [_vm._v(_vm._s(invoiceitem.invoice_id))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoiceitem.customer_name))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoiceitem.model))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoiceitem.taken))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoiceitem.returned))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoiceitem.time_on_field))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoiceitem.to_pay))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoiceitem.invoice_line_closed))])
+          ])
+        })
+      ],
+      2
+    )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Invoice nr")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Customer")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Tool")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Loan date")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Return date")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Time on field")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("To pay")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Closed?")])
+    ])
+  }
+]
 render._withStripped = true
 
 
