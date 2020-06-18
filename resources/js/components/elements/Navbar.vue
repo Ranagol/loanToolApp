@@ -21,7 +21,15 @@
         </li>
 
         <li v-if="userHasToken" class="nav-item">
+          <router-link class="nav-link" to="/create-customer" >Create customer</router-link>
+        </li>
+
+        <li v-if="userHasToken" class="nav-item">
           <router-link class="nav-link" to="/customers" >Customers</router-link>
+        </li>
+
+        <li v-if="userHasToken" class="nav-item">
+          <router-link class="nav-link" to="/create-tool" >Create tool</router-link>
         </li>
 
         <li v-if="userHasToken" class="nav-item">

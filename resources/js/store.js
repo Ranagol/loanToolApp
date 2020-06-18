@@ -41,6 +41,10 @@ mutations: {
     getInvoiceitems(state, invoiceitems){
         state.invoiceitems = invoiceitems;
     },
+    createCustomer(state, customer){
+        state.customers.push(customer);
+        alert('Your customer ' + customer.name + ' was created.');
+    },
     // createInvoiceInStore(state, invoice){
     //     state.invoices.push(invoice);
     //     console.log('New invoice was added, see below:');
@@ -111,10 +115,16 @@ actions: {
         }
     },
 
-    // createInvoiceInStore( {commit}, invoice ){
-    //     console.log('createInvoice from actions/vuex is triggered');
-    //     commit('createInvoiceInStore', invoice);
-    // }
+    async createCustomer( {commit}, customer ){
+        try {
+            await customerService.createCustomer(customer);
+            commit('createCustomer', customer);
+        } catch (error) {
+            console.log('Error with createCustomer in actions');
+            console.dir(error);
+            commit('errors', error);
+        }
+    }
 }
 
 

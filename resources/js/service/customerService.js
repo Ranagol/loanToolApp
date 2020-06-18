@@ -6,6 +6,10 @@ class CustomerService {
         return HTTP.get('/customers', {params: {searchTerm: searchTerm}});
     }
 
+    createCustomer(customer){
+        return HTTP.post('/customers', customer);
+    }
+
     
 }
 

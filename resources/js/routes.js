@@ -1,13 +1,25 @@
+//AUTH
 import Login from './components/authentication/Login';
 import Register from './components/authentication/Register';
+
+//ELEMENTS
+import Home from './components/elements/Home';
+//CUSTOMERS
 import Customers from './components/customers/Customers';
+import CreateCustomer from './components/customers/CreateCustomer';
+
+//TOOLS
 import Tools from './components/tools/Tools';
+
+//INVOICES
 import CreateInvoice from './components/invoices/CreateInvoice';
 import CloseInvoice from './components/invoices/CloseInvoice';
-import Home from './components/elements/Home';
 import Invoices  from './components/invoices/Invoices';
-import Invoiceitems  from './components/invoiceitems/Invoiceitems';
 import OpenInvoices  from './components/invoices/OpenInvoices';
+
+//INVOICEITEMS
+import Invoiceitems  from './components/invoiceitems/Invoiceitems';
+
 
 export const routes = [
     //AUTH
@@ -19,6 +31,7 @@ export const routes = [
 
     //CUSTOMERS
     { path: '/customers', name: 'customers', component: Customers },
+    { path: '/create-customer', name: 'create-customer', component: CreateCustomer },
 
     //TOOLS
     { path: '/tools', name:'tools', component: Tools },

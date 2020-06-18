@@ -1,9 +1,11 @@
 <template>
     <div>
         <h2>Create invoice</h2>
+        <p>Select a customer:
+            <v-select  v-model="selectedCustomer" label="name" :options="customers"></v-select>
+            <!-- <p>Selected customer: {{ selectedCustomer }}</p> -->
+        </p>
         
-        <v-select  v-model="selectedCustomer" label="name" :options="customers"></v-select>
-        <!-- <p>Selected customer: {{ selectedCustomer }}</p> -->
         <hr>
 
         <!-- SelectTool.vue -->
@@ -80,7 +82,7 @@ export default {
             console.log('Selected tool succesfully added to parent');
             console.dir(this.toolsToLoan);
         },
-        addComponent(){//for addind another loan tool
+        addComponent(){//for adding another loan tool
             this.components.push('another component');
         },
         removeComponent(){//for removing a loan tool line
