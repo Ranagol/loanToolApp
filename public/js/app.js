@@ -59592,6 +59592,21 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var r=function(r){return function(r){return!!r&&"object"==typeof r}(r)&&!function(r){var t=Object.prototype.toString.call(r);return"[object RegExp]"===t||"[object Date]"===t||function(r){return r.$$typeof===e}(r)}(r)},e="function"==typeof Symbol&&Symbol.for?Symbol.for("react.element"):60103;function t(r,e){return!1!==e.clone&&e.isMergeableObject(r)?c(Array.isArray(r)?[]:{},r,e):r}function n(r,e,n){return r.concat(e).map(function(r){return t(r,n)})}function o(r){return Object.keys(r).concat(function(r){return Object.getOwnPropertySymbols?Object.getOwnPropertySymbols(r).filter(function(e){return r.propertyIsEnumerable(e)}):[]}(r))}function u(r,e){try{return e in r}catch(r){return!1}}function c(e,i,a){(a=a||{}).arrayMerge=a.arrayMerge||n,a.isMergeableObject=a.isMergeableObject||r,a.cloneUnlessOtherwiseSpecified=t;var f=Array.isArray(i);return f===Array.isArray(e)?f?a.arrayMerge(e,i,a):function(r,e,n){var i={};return n.isMergeableObject(r)&&o(r).forEach(function(e){i[e]=t(r[e],n)}),o(e).forEach(function(o){(function(r,e){return u(r,e)&&!(Object.hasOwnProperty.call(r,e)&&Object.propertyIsEnumerable.call(r,e))})(r,o)||(i[o]=u(r,o)&&n.isMergeableObject(e[o])?function(r,e){if(!e.customMerge)return c;var t=e.customMerge(r);return"function"==typeof t?t:c}(o,n)(r[o],e[o],n):t(e[o],n))}),i}(e,i,a):t(i,a)}c.all=function(r,e){if(!Array.isArray(r))throw new Error("first argument should be an array");return r.reduce(function(r,t){return c(r,t,e)},{})};var i=c;/* harmony default export */ __webpack_exports__["default"] = (function(r){var e=(r=r||{}).storage||window&&window.localStorage,t=r.key||"vuex";(r.assertStorage||function(){e.setItem("@@",1),e.removeItem("@@")})(e);var n,o=function(){return(r.getState||function(r,e){var t;try{return(t=e.getItem(r))&&void 0!==t?JSON.parse(t):void 0}catch(r){}})(t,e)};return r.fetchBeforeUse&&(n=o()),function(u){r.fetchBeforeUse||(n=o()),"object"==typeof n&&null!==n&&(u.replaceState(r.overwrite?n:i(u.state,n,{arrayMerge:r.arrayMerger||function(r,e){return e},clone:!1})),(r.rehydrated||function(){})(u)),(r.subscriber||function(r){return function(e){return r.subscribe(e)}})(u)(function(n,o){(r.filter||function(){return!0})(n)&&(r.setState||function(r,e,t){return t.setItem(r,JSON.stringify(e))})(t,(r.reducer||function(r,e){return Array.isArray(e)?e.reduce(function(e,t){return function(r,e,t,n){return(e=e.split?e.split("."):e).slice(0,-1).reduce(function(r,e){return r[e]=r[e]||{}},r)[e.pop()]=t,r}(e,t,function(r,e,t){return void 0===(r=(e.split?e.split("."):e).reduce(function(r,e){return r&&r[e]},r))?void 0:r}(r,t))},{}):r})(o,r.paths),e)})}});
+//# sourceMappingURL=vuex-persistedstate.es.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/vuex/dist/vuex.esm.js":
 /*!********************************************!*\
   !*** ./node_modules/vuex/dist/vuex.esm.js ***!
@@ -62329,15 +62344,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./service/customerService */ "./resources/js/service/customerService.js");
-/* harmony import */ var _service_toolService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./service/toolService */ "./resources/js/service/toolService.js");
-/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./service/invoiceService */ "./resources/js/service/invoiceService.js");
-/* harmony import */ var _service_invoiceitemService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./service/invoiceitemService */ "./resources/js/service/invoiceitemService.js");
+/* harmony import */ var vuex_persistedstate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex-persistedstate */ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js");
+/* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./service/customerService */ "./resources/js/service/customerService.js");
+/* harmony import */ var _service_toolService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./service/toolService */ "./resources/js/service/toolService.js");
+/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./service/invoiceService */ "./resources/js/service/invoiceService.js");
+/* harmony import */ var _service_invoiceitemService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./service/invoiceitemService */ "./resources/js/service/invoiceitemService.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -62347,6 +62364,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
 
 
 var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
+  //vuex-persistedstate
+  plugins: [Object(vuex_persistedstate__WEBPACK_IMPORTED_MODULE_3__["default"])()],
   //GETTERS    
   getters: {
     customers: function customers(state) {
@@ -62412,7 +62431,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
                 commit = _ref.commit;
                 _context.prev = 1;
                 _context.next = 4;
-                return _service_customerService__WEBPACK_IMPORTED_MODULE_3__["default"].getCustomers();
+                return _service_customerService__WEBPACK_IMPORTED_MODULE_4__["default"].getCustomers();
 
               case 4:
                 response = _context.sent;
@@ -62448,7 +62467,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
                 commit = _ref2.commit;
                 _context2.prev = 1;
                 _context2.next = 4;
-                return _service_toolService__WEBPACK_IMPORTED_MODULE_4__["default"].getTools();
+                return _service_toolService__WEBPACK_IMPORTED_MODULE_5__["default"].getTools();
 
               case 4:
                 response = _context2.sent;
@@ -62484,7 +62503,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
                 commit = _ref3.commit;
                 _context3.prev = 1;
                 _context3.next = 4;
-                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_5__["default"].getInvoices();
+                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_6__["default"].getInvoices();
 
               case 4:
                 response = _context3.sent;
@@ -62520,7 +62539,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
                 commit = _ref4.commit;
                 _context4.prev = 1;
                 _context4.next = 4;
-                return _service_invoiceitemService__WEBPACK_IMPORTED_MODULE_6__["default"].getInvoiceitems();
+                return _service_invoiceitemService__WEBPACK_IMPORTED_MODULE_7__["default"].getInvoiceitems();
 
               case 4:
                 response = _context4.sent;
@@ -62556,7 +62575,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
                 commit = _ref5.commit;
                 _context5.prev = 1;
                 _context5.next = 4;
-                return _service_customerService__WEBPACK_IMPORTED_MODULE_3__["default"].createCustomer(customer);
+                return _service_customerService__WEBPACK_IMPORTED_MODULE_4__["default"].createCustomer(customer);
 
               case 4:
                 //for db

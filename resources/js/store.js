@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 import customerService from './service/customerService';
@@ -7,7 +8,10 @@ import toolService from './service/toolService';
 import invoiceService from './service/invoiceService';
 import invoiceitemService from './service/invoiceitemService';
 export const store = new Vuex.Store({
-  
+
+//vuex-persistedstate
+plugins: [createPersistedState()],
+
 //GETTERS    
 getters: {
     customers: state => state.customers,
