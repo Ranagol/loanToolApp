@@ -111,17 +111,13 @@ class InvoiceController extends Controller
         $invoice->closing_date = $request->closing_date;
         $invoice->save();
 
-        //INVOICE ITEM
+        //INVOICE ITEM(s)
         $invoiceitems = $request->input(['invoiceitems']);
         foreach ($invoiceitems as $invoiceitemx) {
-            //----------------------------------------
             $invoiceitem = Invoiceitem::find($invoiceitemx['id']);//this gives the id, it works
-            //return $invoiceitem;
             $invoiceitem->returned = $invoiceitemx['returned'];
             $invoiceitem->time_on_field = $invoiceitemx['time_on_field'];
             $invoiceitem->to_pay = $invoiceitemx['to_pay'];
-            //------------------------------------------
-            
             $invoiceitem->invoice_line_closed = true;
             $invoiceitem->save();
         }

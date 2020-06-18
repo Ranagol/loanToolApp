@@ -2183,11 +2183,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     'navbar': _Navbar__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['getCustomers', 'getTools', 'getInvoices'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['getCustomers', 'getTools', 'getInvoices', 'getInvoiceitems'])),
   created: function created() {
     this.getCustomers();
     this.getTools();
     this.getInvoices();
+    this.getInvoiceitems();
   }
 });
 
@@ -2325,6 +2326,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2334,8 +2342,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'InvoiceItems',
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['invoiceitems'])),
   data: function data() {
     return {};
   }
@@ -2518,8 +2528,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -2539,6 +2547,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       components: ['one'],
       //this is used to dynamically add more SelectTool components
       invoice: {
+        //this will be the newly created inovice, that will be sent to vuex and db
         customer: {},
         tools: {}
       } //this invoice object will be sent to the db
@@ -2546,7 +2555,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapGetters"])(['customers', 'tools'])),
-  methods: {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapActions"])(['createInvoiceInStore'])), {}, {
     createInvoice: function createInvoice() {
       var _this = this;
 
@@ -2555,12 +2564,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                //LATER HERE I WILL HAVE TO LEAD THIS INTO VUEX
                 _this.invoice.customer = _this.selectedCustomer; //adding customers
 
                 _this.invoice.tools = _this.toolsToLoan; //adding tools
 
-                console.dir(_this.invoice);
+                console.dir(_this.invoice); //ADD NEW INVOICE TO VUEX
+                // let invoiceForVuex = {
+                //     closing_date = null,
+                //     comments = null,
+                //     customer_id = this.customer.id,
+                //     customer_name = this.customer.name,
+                //     id: 17,
+                //     invoice_closed: 0,
+                //     invoiceitems: Array(1),//what happened here and who did this?
+                //     sum_for_paying: null,
+                // };
+                //this.$store.dispatch('createInvoiceInStore', invoiceForVuex);
+                //SET TOOL not on stock
+
                 _context.prev = 3;
                 _context.next = 6;
                 return _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__["default"].createInvoice(_this.invoice);
@@ -2574,7 +2595,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context.prev = 9;
                 _context.t0 = _context["catch"](3);
                 console.dir(_context.t0);
-                console.log('Something is wrong with invoice creating.');
+                console.log('Something is wrong with invoice creating in the db.');
 
               case 13:
               case "end":
@@ -2601,7 +2622,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     test: function test() {
       console.dir(this.selectedCustomer.id);
     }
-  }
+  })
 });
 
 /***/ }),
@@ -43465,16 +43486,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h4", [_vm._v("History/InvoiceItems")]),
+    _vm._v(" "),
+    _c("p", [_vm._v(" " + _vm._s(_vm.invoiceitems))])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h4", [_vm._v("History/InvoiceItems")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -43576,12 +43594,6 @@ var render = function() {
         "button",
         { staticClass: "btn btn-info", on: { click: _vm.removeComponent } },
         [_vm._v("Remove tool")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success", on: { click: _vm.test } },
-        [_vm._v("Test")]
       ),
       _vm._v(" "),
       _c(
@@ -61483,6 +61495,59 @@ var invoiceService = new InvoiceService();
 
 /***/ }),
 
+/***/ "./resources/js/service/invoiceitemService.js":
+/*!****************************************************!*\
+  !*** ./resources/js/service/invoiceitemService.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _baseService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./baseService */ "./resources/js/service/baseService.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var InvoiceitemService = /*#__PURE__*/function () {
+  function InvoiceitemService() {
+    _classCallCheck(this, InvoiceitemService);
+  }
+
+  _createClass(InvoiceitemService, [{
+    key: "getInvoiceitems",
+    value: function getInvoiceitems() {
+      return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].get('/invoiceitems');
+    }
+  }, {
+    key: "getInvoiceitemById",
+    value: function getInvoiceitemById(id) {
+      return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].get("/invoiceitems/".concat(id));
+    }
+  }, {
+    key: "createInvoiceitem",
+    value: function createInvoiceitem(invoiceitem) {
+      return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"].post('/invoiceitems', invoiceitem);
+    }
+  }, {
+    key: "deleteInvoiceitem",
+    value: function deleteInvoiceitem(id) {
+      return _baseService__WEBPACK_IMPORTED_MODULE_0__["HTTP"]["delete"]("/invoiceitems/".concat(id));
+    }
+  }]);
+
+  return InvoiceitemService;
+}();
+
+var invoiceitemService = new InvoiceitemService();
+/* harmony default export */ __webpack_exports__["default"] = (invoiceitemService);
+
+/***/ }),
+
 /***/ "./resources/js/service/toolService.js":
 /*!*********************************************!*\
   !*** ./resources/js/service/toolService.js ***!
@@ -61543,6 +61608,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _service_customerService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./service/customerService */ "./resources/js/service/customerService.js");
 /* harmony import */ var _service_toolService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./service/toolService */ "./resources/js/service/toolService.js");
 /* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./service/invoiceService */ "./resources/js/service/invoiceService.js");
+/* harmony import */ var _service_invoiceitemService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./service/invoiceitemService */ "./resources/js/service/invoiceitemService.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -61552,6 +61618,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
 
 
 
@@ -61566,6 +61633,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     },
     invoices: function invoices(state) {
       return state.invoices;
+    },
+    invoiceitems: function invoiceitems(state) {
+      return state.invoiceitems;
     },
     errors: function errors(state) {
       return state.errors;
@@ -61590,6 +61660,14 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     getInvoices: function getInvoices(state, invoices) {
       state.invoices = invoices;
     },
+    getInvoiceitems: function getInvoiceitems(state, invoiceitems) {
+      state.invoiceitems = invoiceitems;
+    },
+    // createInvoiceInStore(state, invoice){
+    //     state.invoices.push(invoice);
+    //     console.log('New invoice was added, see below:');
+    //     console.dir(state.invoices);
+    // },
     errors: function errors(state, error) {
       state.errors = error;
     }
@@ -61703,7 +61781,47 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
           }
         }, _callee3, null, [[1, 11]]);
       }))();
-    }
+    },
+    getInvoiceitems: function getInvoiceitems(_ref4) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var commit, response, invoiceitems;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                commit = _ref4.commit;
+                _context4.prev = 1;
+                _context4.next = 4;
+                return _service_invoiceitemService__WEBPACK_IMPORTED_MODULE_6__["default"].getInvoiceitems();
+
+              case 4:
+                response = _context4.sent;
+                invoiceitems = response.data;
+                console.log('getInvoiceitems from actions has been activated');
+                console.dir(invoiceitems);
+                commit('getInvoiceitems', invoiceitems);
+                _context4.next = 16;
+                break;
+
+              case 11:
+                _context4.prev = 11;
+                _context4.t0 = _context4["catch"](1);
+                console.log('Error with getInvoiceitems() in actions');
+                console.dir(_context4.t0);
+                commit('errors', _context4.t0);
+
+              case 16:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[1, 11]]);
+      }))();
+    } // createInvoiceInStore( {commit}, invoice ){
+    //     console.log('createInvoice from actions/vuex is triggered');
+    //     commit('createInvoiceInStore', invoice);
+    // }
+
   }
 });
 

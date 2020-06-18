@@ -2,26 +2,22 @@ import { HTTP } from './baseService';
 
 class InvoiceitemService {
 
-    getInvoices(){
-        return HTTP.get('/invoices');
+    getInvoiceitems(){
+        return HTTP.get('/invoiceitems');
     }
-    getInvoiceById(id){
-        return HTTP.get(`/invoices/${id}`);
-    }
-
-    createInvoice(invoice){
-        return HTTP.post('/invoices', invoice);
+    getInvoiceitemById(id){
+        return HTTP.get(`/invoiceitems/${id}`);
     }
 
-    getOpenInvoices(){
-        return HTTP.get("/open-invoices");
+    createInvoiceitem(invoiceitem){
+        return HTTP.post('/invoiceitems', invoiceitem);
     }
 
-    deleteInvoice(id){
-        return HTTP.delete(`/invoices/${id}`);
+    deleteInvoiceitem(id){
+        return HTTP.delete(`/invoiceitems/${id}`);
     }
     
 }
 
-const invoiceService = new InvoiceService();
-export default invoiceService;
+const invoiceitemService = new InvoiceitemService();
+export default invoiceitemService;

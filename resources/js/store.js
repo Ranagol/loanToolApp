@@ -5,6 +5,7 @@ Vue.use(Vuex);
 import customerService from './service/customerService';
 import toolService from './service/toolService';
 import invoiceService from './service/invoiceService';
+import invoiceitemService from './service/invoiceitemService';
 export const store = new Vuex.Store({
   
 //GETTERS    
@@ -12,6 +13,7 @@ getters: {
     customers: state => state.customers,
     tools: state => state.tools,
     invoices: state => state.invoices,
+    invoiceitems: state => state.invoiceitems,
     errors: state => state.errors,
     
 },
@@ -36,6 +38,14 @@ mutations: {
     getInvoices(state, invoices){
         state.invoices = invoices;
     },
+    getInvoiceitems(state, invoiceitems){
+        state.invoiceitems = invoiceitems;
+    },
+    // createInvoiceInStore(state, invoice){
+    //     state.invoices.push(invoice);
+    //     console.log('New invoice was added, see below:');
+    //     console.dir(state.invoices);
+    // },
 
     errors(state, error){
         state.errors = error;
@@ -85,7 +95,26 @@ actions: {
             console.dir(error);
             commit('errors', error);
         }
-    }
+    },
+
+    async getInvoiceitems( {commit} ){
+        try {
+            const response = await invoiceitemService.getInvoiceitems();
+            const invoiceitems = response.data;
+            console.log( 'getInvoiceitems from actions has been activated');
+            console.dir(invoiceitems);
+            commit('getInvoiceitems', invoiceitems);
+        } catch (error) {
+            console.log('Error with getInvoiceitems() in actions');
+            console.dir(error);
+            commit('errors', error);
+        }
+    },
+
+    // createInvoiceInStore( {commit}, invoice ){
+    //     console.log('createInvoice from actions/vuex is triggered');
+    //     commit('createInvoiceInStore', invoice);
+    // }
 }
 
 
