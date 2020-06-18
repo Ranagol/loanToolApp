@@ -33,6 +33,10 @@
         </li>
 
         <li v-if="userHasToken" class="nav-item">
+          <router-link class="nav-link" to="/open-invoices" >Close invoice</router-link>
+        </li>
+
+        <li v-if="userHasToken" class="nav-item">
           <router-link class="nav-link" to="/invoices" >All invoices</router-link>
         </li>
 

@@ -16,6 +16,7 @@ export default {
     methods: {
         ...mapActions(['getCustomers', 'getTools', 'getInvoices', 'getInvoiceitems']),
     },
+    
     created(){
         this.getCustomers();
         this.getTools();

@@ -1,7 +1,6 @@
 <template>
     <div>
         <h4>History/InvoiceItems</h4>
-        <p> {{ invoiceitems }}</p>
 
         <table class="table">
             <tr>

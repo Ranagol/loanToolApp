@@ -3,7 +3,7 @@
         <h2>Create invoice</h2>
         
         <v-select  v-model="selectedCustomer" label="name" :options="customers"></v-select>
-        <p>Selected customer: {{ selectedCustomer }}</p>
+        <!-- <p>Selected customer: {{ selectedCustomer }}</p> -->
         <hr>
 
         <!-- SelectTool.vue -->

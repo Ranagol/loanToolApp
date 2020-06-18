@@ -18,7 +18,8 @@
                 <th>Comments</th>
                 <th>Created</th>
                 <th>Closing date</th>
-                <th>Invoce closed?</th>
+                <th>Invoice closed?</th>
+                <th>Close invoice</th>
             </tr>
             <tr v-for="(invoice, i) in filteredInvoices" :key="i">
                 <td>{{ invoice.id }}</td>
@@ -28,6 +29,7 @@
                 <td>{{ invoice.created_at }}</td>
                 <td>{{ invoice.closing_date }}</td>
                 <td>{{ invoice.invoice_closed || 'not closed' }}</td>
+                <td><button @click="goToCloseInvoice(invoice.id)" class="btn btn-success btn-sm" >Close</button></td>
             </tr>
         </table>
 
@@ -40,7 +42,7 @@
 <script>
 import { mapGetters } from 'vuex';
 export default {
-    name: 'Invoices',
+    name: 'OpenInvoices',
     data(){
         return {
             searchTerm:'',
@@ -49,14 +51,21 @@ export default {
     },
     computed: {
         ...mapGetters(['invoices', 'errors']),
-        filteredInvoices(){
+        openInvoices(){
             return this.invoices.filter((element) => {
+                return element.invoice_closed == false;
+            });
+        },
+        filteredInvoices(){
+            return this.openInvoices.filter((element) => {
                 return element.customer_name.toLowerCase().match(this.searchTerm.toLowerCase());
             });
         }
     },
     methods: {
-        
+        goToCloseInvoice(invoiceId){
+            this.$router.push(`/close-invoice/${invoiceId}`);
+        }
     }
     
 }
