@@ -2,6 +2,11 @@
     <div>
         <h4>History/InvoiceItems</h4>
 
+        <!-- If there is no data in the db... -->
+        <div v-if="!invoiceitems.length" class="alert alert-info">
+            <h5>Loading</h5>
+        </div>
+
         <table class="table">
             <tr>
                 <th>Invoice nr</th>
@@ -9,7 +14,7 @@
                 <th>Tool</th>
                 <th>Loan date</th>
                 <th>Return date</th>
-                <th>Time on field</th>
+                <th>Days on field</th>
                 <th>To pay</th>
                 <th>Closed?</th>
             </tr>

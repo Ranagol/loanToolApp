@@ -14,20 +14,16 @@
             <tr>
                 <th>Nr#</th>
                 <th>Customer</th>
-                <th>To pay</th>
                 <th>Comments</th>
                 <th>Created</th>
-                <th>Closing date</th>
                 <th>Invoice closed?</th>
                 <th>Close invoice</th>
             </tr>
             <tr v-for="(invoice, i) in filteredInvoices" :key="i">
                 <td>{{ invoice.id }}</td>
                 <td>{{ invoice.customer_name }}</td>
-                <td>{{ invoice.sum_for_paying }}</td>
                 <td>{{ invoice.comments }}</td>
                 <td>{{ invoice.created_at }}</td>
-                <td>{{ invoice.closing_date }}</td>
                 <td>{{ invoice.invoice_closed || 'not closed' }}</td>
                 <td><button @click="goToCloseInvoice(invoice.id)" class="btn btn-success btn-sm" >Close</button></td>
             </tr>

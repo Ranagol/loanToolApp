@@ -13,15 +13,17 @@
         <table class="table">
             <tr>
                 <th>Name</th>
+                <th>City</th>
                 <th>Address</th>
                 <th>Phone</th>
-                <th>Comments</th>
+                <th>Blacklist</th>
             </tr>
             <tr v-for="(customer, i) in filteredCustomers" :key="i">
                 <td>{{ customer.name }}</td>
+                <td>{{ customer.city }}</td>
                 <td>{{ customer.address }}</td>
                 <td>{{ customer.phone }}</td>
-                <td>{{ customer.comments }}</td>
+                <td>{{ customer.blacklist }}</td>
             </tr>
         </table>
     </div>

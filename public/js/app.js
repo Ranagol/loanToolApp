@@ -2127,6 +2127,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2337,6 +2339,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2746,10 +2753,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
 //
 //
 //
@@ -43284,11 +43287,13 @@ var render = function() {
           return _c("tr", { key: i }, [
             _c("td", [_vm._v(_vm._s(customer.name))]),
             _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(customer.city))]),
+            _vm._v(" "),
             _c("td", [_vm._v(_vm._s(customer.address))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(customer.phone))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(customer.comments))])
+            _c("td", [_vm._v(_vm._s(customer.blacklist))])
           ])
         })
       ],
@@ -43304,11 +43309,13 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", [_vm._v("Name")]),
       _vm._v(" "),
+      _c("th", [_vm._v("City")]),
+      _vm._v(" "),
       _c("th", [_vm._v("Address")]),
       _vm._v(" "),
       _c("th", [_vm._v("Phone")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Comments")])
+      _c("th", [_vm._v("Blacklist")])
     ])
   }
 ]
@@ -43615,6 +43622,12 @@ var render = function() {
   return _c("div", [
     _c("h4", [_vm._v("History/InvoiceItems")]),
     _vm._v(" "),
+    !_vm.invoiceitems.length
+      ? _c("div", { staticClass: "alert alert-info" }, [
+          _c("h5", [_vm._v("Loading")])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c(
       "table",
       { staticClass: "table" },
@@ -43661,7 +43674,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Return date")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Time on field")]),
+      _c("th", [_vm._v("Days on field")]),
       _vm._v(" "),
       _c("th", [_vm._v("To pay")]),
       _vm._v(" "),
@@ -43944,13 +43957,9 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoice.customer_name))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(invoice.sum_for_paying))]),
-            _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoice.comments))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoice.created_at))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(invoice.closing_date))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoice.invoice_closed || "not closed"))]),
             _vm._v(" "),
@@ -43985,13 +43994,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Customer")]),
       _vm._v(" "),
-      _c("th", [_vm._v("To pay")]),
-      _vm._v(" "),
       _c("th", [_vm._v("Comments")]),
       _vm._v(" "),
       _c("th", [_vm._v("Created")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Closing date")]),
       _vm._v(" "),
       _c("th", [_vm._v("Invoice closed?")]),
       _vm._v(" "),
