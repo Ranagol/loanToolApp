@@ -42,8 +42,8 @@ class ToolController extends Controller
             'description' => 'string|min:3|max:255',
             'serial_number' => 'string|required|min:3|max:100',
             'price' => 'numeric|required',
-            'tool_picture_url' => 'string|required|min:3|max:255',
-            'comments' => 'string|required|min:3|max:255',
+            'tool_picture_url' => 'string|min:3|max:255',
+            'comments' => 'string|min:3|max:255',
         ]);
 
         $tool = Tool::create($request->all());

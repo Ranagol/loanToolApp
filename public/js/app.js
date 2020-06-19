@@ -62942,12 +62942,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     },
     createTool: function createTool(_ref6, tool) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-        var commit;
+        var commit, dispatch;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                commit = _ref6.commit;
+                commit = _ref6.commit, dispatch = _ref6.dispatch;
                 _context6.prev = 1;
                 _context6.next = 4;
                 return _service_toolService__WEBPACK_IMPORTED_MODULE_5__["default"].createTool(tool);
@@ -62956,23 +62956,24 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
                 //for db
                 commit('createTool', tool); //for vuex
 
-                _context6.next = 13;
+                dispatch('getTools');
+                _context6.next = 14;
                 break;
 
-              case 7:
-                _context6.prev = 7;
+              case 8:
+                _context6.prev = 8;
                 _context6.t0 = _context6["catch"](1);
                 console.log('Error with createTool in actions');
                 console.dir(_context6.t0);
                 alert(_context6.t0);
                 commit('errors', _context6.t0);
 
-              case 13:
+              case 14:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[1, 7]]);
+        }, _callee6, null, [[1, 8]]);
       }))();
     }
   }

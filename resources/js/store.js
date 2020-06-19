@@ -136,10 +136,11 @@ actions: {
         }
     },
 
-    async createTool( {commit}, tool ){
+    async createTool( { commit, dispatch}, tool ){
         try {
             await toolService.createTool(tool);//for db
             commit('createTool', tool);//for vuex
+            dispatch('getTools');
         } catch (error) {
             console.log('Error with createTool in actions');
             console.dir(error);
