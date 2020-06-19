@@ -2998,7 +2998,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     _eventbus__WEBPACK_IMPORTED_MODULE_1__["EventBus"].$on('invoiceCreated', function () {
-      _this.selectedTool = '';
+      _this.selectedTool = ''; //once the invoice was created, the parent will send an invoiceCreated event, and then we empty the selectedTool.
     });
   }
 });

@@ -43,7 +43,7 @@ export default {
     },
     created(){
         EventBus.$on('invoiceCreated', () => {
-            this.selectedTool = '';
+            this.selectedTool = '';//once the invoice was created, the parent will send an invoiceCreated event, and then we empty the selectedTool.
         })
     }
     
