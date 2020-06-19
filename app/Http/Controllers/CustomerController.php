@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Validator;
 class CustomerController extends Controller
 {
     /**
@@ -40,6 +41,15 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'string|required|min:3|max:100',
+            'city' => 'string|required|min:3|max:100',
+            'address' => 'string|required|min:3|max:100',
+            'phone' => 'string|required|min:3|max:100',
+            'scan_doc' => 'string|required|min:3|max:100',
+            'comments' => 'string|required|min:3|max:100',
+        ]);
+
         $customer = Customer::create($request->all());
         return $customer;
     }
