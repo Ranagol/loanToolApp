@@ -44,7 +44,6 @@ class ToolController extends Controller
             'price' => 'numeric|required',
             'tool_picture_url' => 'string|required|min:3|max:255',
             'comments' => 'string|required|min:3|max:255',
-            
         ]);
 
         $tool = Tool::create($request->all());
