@@ -2591,6 +2591,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
 /* harmony import */ var _tools_SelectTool__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/SelectTool */ "./resources/js/components/tools/SelectTool.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _eventbus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../eventbus */ "./resources/js/eventbus.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2623,6 +2624,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+
 
 
 
@@ -2682,22 +2684,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__["default"].createInvoice(_this.invoice);
 
               case 6:
-                console.log('Invoice object sent to api');
-                _context.next = 13;
+                console.log('Invoice created in the db');
+                _this.selectedCustomer = ''; //remove the selected customer
+
+                _this.toolsToLoan = []; //remove all selected tool from the parent
+
+                _eventbus__WEBPACK_IMPORTED_MODULE_5__["EventBus"].$emit('invoiceCreated'); //TODO remove individual selected tool from ToolSelect component
+
+                _context.next = 16;
                 break;
 
-              case 9:
-                _context.prev = 9;
+              case 12:
+                _context.prev = 12;
                 _context.t0 = _context["catch"](3);
                 console.dir(_context.t0);
                 console.log('Something is wrong with invoice creating in the db.');
 
-              case 13:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 9]]);
+        }, _callee, null, [[3, 12]]);
       }))();
     },
     AddToToolsToLoan: function AddToToolsToLoan(tool) {
@@ -2943,6 +2951,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _eventbus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../eventbus */ "./resources/js/eventbus.js");
 //
 //
 //
@@ -2957,6 +2966,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SelectTool',
   components: {
@@ -2964,11 +2974,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      selectedTool: {}
+      selectedTool: ''
     };
   },
   props: {
     tools: {
+      //this component is receiving all the tool options from the parent
       type: Array,
       required: true,
       "default": function _default() {
@@ -2982,6 +2993,13 @@ __webpack_require__.r(__webpack_exports__);
       console.log('You just choose a new tool.');
       this.$emit('toolSelected', this.selectedTool);
     }
+  },
+  created: function created() {
+    var _this = this;
+
+    _eventbus__WEBPACK_IMPORTED_MODULE_1__["EventBus"].$on('invoiceCreated', function () {
+      _this.selectedTool = '';
+    });
   }
 });
 
@@ -62907,12 +62925,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     },
     createCustomer: function createCustomer(_ref5, customer) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-        var commit;
+        var commit, dispatch;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                commit = _ref5.commit;
+                commit = _ref5.commit, dispatch = _ref5.dispatch;
                 _context5.prev = 1;
                 _context5.next = 4;
                 return _service_customerService__WEBPACK_IMPORTED_MODULE_4__["default"].createCustomer(customer);
@@ -62921,23 +62939,24 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
                 //for db
                 commit('createCustomer', customer); //for vuex
 
-                _context5.next = 13;
+                dispatch('getCustomers');
+                _context5.next = 14;
                 break;
 
-              case 7:
-                _context5.prev = 7;
+              case 8:
+                _context5.prev = 8;
                 _context5.t0 = _context5["catch"](1);
                 console.log('Error with createCustomer in actions');
                 console.dir(_context5.t0);
                 alert(_context5.t0);
                 commit('errors', _context5.t0);
 
-              case 13:
+              case 14:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[1, 7]]);
+        }, _callee5, null, [[1, 8]]);
       }))();
     },
     createTool: function createTool(_ref6, tool) {
@@ -62956,7 +62975,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
                 //for db
                 commit('createTool', tool); //for vuex
 
-                dispatch('getTools');
+                dispatch('getTools'); //immediatelly getting the new data with the new id from db
+
                 _context6.next = 14;
                 break;
 

@@ -124,10 +124,11 @@ actions: {
         }
     },
 
-    async createCustomer( {commit}, customer ){
+    async createCustomer( {commit, dispatch}, customer ){
         try {
             await customerService.createCustomer(customer);//for db
             commit('createCustomer', customer);//for vuex
+            dispatch('getCustomers');
         } catch (error) {
             console.log('Error with createCustomer in actions');
             console.dir(error);
@@ -140,7 +141,7 @@ actions: {
         try {
             await toolService.createTool(tool);//for db
             commit('createTool', tool);//for vuex
-            dispatch('getTools');
+            dispatch('getTools');//immediatelly getting the new data with the new id from db
         } catch (error) {
             console.log('Error with createTool in actions');
             console.dir(error);

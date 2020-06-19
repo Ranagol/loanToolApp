@@ -13,6 +13,7 @@
 
 <script>
 import vSelect from 'vue-select';
+import { EventBus } from '../../eventbus';
 export default {
     name: 'SelectTool',
     components:{
@@ -20,18 +21,18 @@ export default {
     },
     data(){
         return {
-            selectedTool: {},
+            selectedTool: '',
 
         }
     },
     props: {
-        tools: {
+        tools: {//this component is receiving all the tool options from the parent
             type: Array,
             required:true,
             default: function(){
                 return [];
             }
-        }
+        },
         
     },
     watch: {
@@ -39,6 +40,12 @@ export default {
             console.log('You just choose a new tool.');
             this.$emit('toolSelected', this.selectedTool);
         }
+    },
+    created(){
+        EventBus.$on('invoiceCreated', () => {
+            this.selectedTool = '';
+        })
     }
+    
 }
 </script>

@@ -23,6 +23,7 @@ import vSelect from 'vue-select';
 import invoiceService from '../../service/invoiceService';
 import SelectTool from '../tools/SelectTool';
 import { mapGetters, mapActions } from 'vuex';
+import { EventBus } from '../../eventbus';
 export default {
     name: 'CreateInvoice',
     components: {
@@ -70,7 +71,10 @@ export default {
 
             try {
                 await invoiceService.createInvoice(this.invoice);
-                console.log('Invoice object sent to api');
+                console.log('Invoice created in the db');
+                this.selectedCustomer = '';//remove the selected customer
+                this.toolsToLoan = [];//remove all selected tool from the parent
+                EventBus.$emit('invoiceCreated');//TODO remove individual selected tool from ToolSelect component
             } catch (error) {
                 console.dir(error);
                 console.log('Something is wrong with invoice creating in the db.');
