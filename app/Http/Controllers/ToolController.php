@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tool;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Validator;
 class ToolController extends Controller
 {
     /**
@@ -35,6 +36,17 @@ class ToolController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'brand' => 'string|required|min:3|max:100',
+            'model' => 'string|required|min:3|max:100',
+            'description' => 'string|min:3|max:255',
+            'serial_number' => 'string|required|min:3|max:100',
+            'price' => 'numeric|required',
+            'tool_picture_url' => 'string|required|min:3|max:255',
+            'comments' => 'string|required|min:3|max:255',
+            
+        ]);
+
         $tool = Tool::create($request->all());
         return $tool;
     }
