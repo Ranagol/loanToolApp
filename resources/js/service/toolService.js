@@ -6,6 +6,10 @@ class ToolService {
         return HTTP.get('/tools', {params: {searchTerm: searchTerm}});
     }
 
+    createTool(tool){
+        return HTTP.post('/tools', tool);
+    }
+
     
 }
 

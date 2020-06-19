@@ -10,6 +10,7 @@ import CreateCustomer from './components/customers/CreateCustomer';
 
 //TOOLS
 import Tools from './components/tools/Tools';
+import CreateTool from './components/tools/CreateTool';
 
 //INVOICES
 import CreateInvoice from './components/invoices/CreateInvoice';
@@ -35,6 +36,7 @@ export const routes = [
 
     //TOOLS
     { path: '/tools', name:'tools', component: Tools },
+    { path: '/create-tool', name: 'create-tool', component: CreateTool },
 
     //INVOICES
     { path: '/create-invoice', name:'CreateInvoice', component: CreateInvoice },

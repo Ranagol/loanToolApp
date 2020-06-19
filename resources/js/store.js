@@ -49,6 +49,11 @@ mutations: {
         state.customers.push(customer);
         alert('Your customer ' + customer.name + ' was created.');
     },
+    createTool(state, tool){
+        state.tools.push(tool);
+        alert('Your tool ' + tool.model + ' was created.');
+    },
+
     // createInvoiceInStore(state, invoice){
     //     state.invoices.push(invoice);
     //     console.log('New invoice was added, see below:');
@@ -125,6 +130,18 @@ actions: {
             commit('createCustomer', customer);//for vuex
         } catch (error) {
             console.log('Error with createCustomer in actions');
+            console.dir(error);
+            alert(error);
+            commit('errors', error);
+        }
+    },
+
+    async createTool( {commit}, tool ){
+        try {
+            await toolService.createTool(tool);//for db
+            commit('createTool', tool);//for vuex
+        } catch (error) {
+            console.log('Error with createTool in actions');
             console.dir(error);
             alert(error);
             commit('errors', error);
