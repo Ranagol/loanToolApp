@@ -52,7 +52,7 @@ export default {
                 created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
                 updated_at: null,
                 closing_date: null,
-                invoiceitems: [],
+                invoiceitems: this.toolsToLoan,
             }
         }
     },
@@ -60,19 +60,17 @@ export default {
     methods: {
         ...mapActions(['createInvoice']),
         createInvoice(){
-            
             console.log('This below is the new invoice object, just created:')
             console.dir(this.invoice);
             //SET TOOL not on stock missing here
-            this.$store.dispatch('createInvoice', this.invoice);//send to vuex actions
-            //this.eraseInvoice();
+            this.$store.dispatch('createInvoice', this.invoice);//send invoice to vuex actions
+            this.eraseInvoice();//removes all invoice data after a successfull invoice creation
         },
 
         eraseInvoice(){
-            //removes all invoice data after a successfull invoice creation
             this.selectedCustomer = '';
             this.toolsToLoan = [];
-            EventBus.$emit('invoiceCreated');//removes selected tools from SelectTool component
+            EventBus.$emit('invoiceCreated');//removes selected tools from SelectTool child component
         },
         
         AddToToolsToLoan(tool){//used for receiving tool objects from SelectTool components

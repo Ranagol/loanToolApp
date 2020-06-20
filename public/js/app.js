@@ -2653,7 +2653,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         created_at: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD HH:mm:ss'),
         updated_at: null,
         closing_date: null,
-        invoiceitems: []
+        invoiceitems: this.toolsToLoan
       };
     }
   }),
@@ -2662,14 +2662,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log('This below is the new invoice object, just created:');
       console.dir(this.invoice); //SET TOOL not on stock missing here
 
-      this.$store.dispatch('createInvoice', this.invoice); //send to vuex actions
-      //this.eraseInvoice();
+      this.$store.dispatch('createInvoice', this.invoice); //send invoice to vuex actions
+
+      this.eraseInvoice(); //removes all invoice data after a successfull invoice creation
     },
     eraseInvoice: function eraseInvoice() {
-      //removes all invoice data after a successfull invoice creation
       this.selectedCustomer = '';
       this.toolsToLoan = [];
-      _eventbus__WEBPACK_IMPORTED_MODULE_5__["EventBus"].$emit('invoiceCreated'); //removes selected tools from SelectTool component
+      _eventbus__WEBPACK_IMPORTED_MODULE_5__["EventBus"].$emit('invoiceCreated'); //removes selected tools from SelectTool child component
     },
     AddToToolsToLoan: function AddToToolsToLoan(tool) {
       //used for receiving tool objects from SelectTool components
@@ -62729,8 +62729,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
       alert('Your tool ' + tool.model + ' was created.');
     },
     createInvoice: function createInvoice(state, invoice) {
-      state.invoices.push(invoice);
-      alert('Your new invoice was created.');
+      state.invoices.push(invoice); //alert('Your new invoice was created.');
     },
     errors: function errors(state, error) {
       state.errors = error;
@@ -62957,19 +62956,41 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
       }))();
     },
     createInvoice: function createInvoice(_ref7, invoice) {
-      var commit = _ref7.commit,
-          dispatch = _ref7.dispatch;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var commit, dispatch;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                commit = _ref7.commit, dispatch = _ref7.dispatch;
+                _context7.prev = 1;
+                _context7.next = 4;
+                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_6__["default"].createInvoice(invoice);
 
-      try {
-        //await invoiceService.createInvoice(invoice);//for db
-        commit('createInvoice', invoice); //for vuex, temporary data
-        //dispatch('getInvoices');//immediatelly getting the new data with the new id from db
-      } catch (error) {
-        console.log('Error with createInvoice in actions');
-        console.dir(error);
-        alert(error);
-        commit('errors', error);
-      }
+              case 4:
+                //for db
+                commit('createInvoice', invoice); //for vuex, temporary data
+
+                dispatch('getInvoices'); //immediatelly getting the new data with the new id from db
+
+                _context7.next = 14;
+                break;
+
+              case 8:
+                _context7.prev = 8;
+                _context7.t0 = _context7["catch"](1);
+                console.log('Error with createInvoice in actions');
+                console.dir(_context7.t0);
+                alert(_context7.t0);
+                commit('errors', _context7.t0);
+
+              case 14:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, null, [[1, 8]]);
+      }))();
     }
   }
 });

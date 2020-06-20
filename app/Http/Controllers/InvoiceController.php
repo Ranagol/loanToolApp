@@ -43,23 +43,23 @@ class InvoiceController extends Controller
     {
         //invoice handling
         $invoice = new Invoice();
-        $invoice->customer_id = $request->input('customer.id');
-        $invoice->customer_name = $request->input('customer.name');
+        $invoice->customer_id = $request->input('customer_id');
+        $invoice->customer_name = $request->input('customer_name');
         $invoice->save();
 
         //invoice items (tool handling)
-        $invoice_items = $request->input(['tools']);
+        $invoiceitems = $request->input(['invoiceitems']);
         $itemsToReturn = [];//this will be used simply to return all items to the frontend, as part of the OK response
-        foreach ($invoice_items as $tool) {
+        foreach ($invoiceitems as $tool) {
             $invoiceitem = new Invoiceitem();
             $invoiceitem->invoice_id = $invoice->id;
-            $invoiceitem->customer_name = $request->input('customer.name');
+            $invoiceitem->customer_name = $request->input('customer_name');
             $invoiceitem->model = $tool['model'];
             $invoiceitem->tool_id = $tool['id'];
             $invoiceitem->price = $tool['price'];//because $item is an associative array now... 'price' is the key, and example 2200 is the value
             $invoiceitem->taken = Carbon::now();
             $invoiceitem->save();
-            $invoiceitems[] = $invoiceitem;
+            $itemsToReturn[] = $invoiceitem;
             //setting tools onStock to false
             $tool = Tool::find($invoiceitem->tool_id);
             $tool->onStock = false;
@@ -68,7 +68,7 @@ class InvoiceController extends Controller
         }
         return response()->json([
             0 => $invoice, 
-            1 => $invoiceitems,
+            1 => $itemsToReturn,
             2 => $tools
         ]);
     }

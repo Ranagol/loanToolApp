@@ -55,7 +55,7 @@ mutations: {
     },
     createInvoice(state, invoice){
         state.invoices.push(invoice);
-        alert('Your new invoice was created.');
+        //alert('Your new invoice was created.');
     },
 
     
@@ -150,11 +150,11 @@ actions: {
         }
     },
 
-    createInvoice( {commit, dispatch}, invoice){
+    async createInvoice( {commit, dispatch}, invoice){
         try {
-            //await invoiceService.createInvoice(invoice);//for db
+            await invoiceService.createInvoice(invoice);//for db
             commit('createInvoice', invoice);//for vuex, temporary data
-            //dispatch('getInvoices');//immediatelly getting the new data with the new id from db
+            dispatch('getInvoices');//immediatelly getting the new data with the new id from db
         } catch (error) {
             console.log('Error with createInvoice in actions');
             console.dir(error);
