@@ -1,19 +1,69 @@
 <template>
     <div>
-        <h2>Create invoice</h2>
-        <p>Select a customer:
-            <v-select  v-model="selectedCustomer" label="name" :options="customers"></v-select>
-            <!-- <p>Selected customer: {{ selectedCustomer }}</p> -->
-        </p>
         
+
+
+        <div class="d-flew row justify-content-around">
+            <div class="col-3">
+                
+
+                <!-- SelectTool.vue -->
+                <select-tool v-for="(component, i) in components" :key="i" :tools = 'tools' @toolSelected="AddToToolsToLoan"></select-tool>
+            </div>
+            <div class="d-flex flex-column col-1 align-items-end">
+                <!-- Buttons for adding or removing tools -->
+                <button @click="addComponent" class="btn btn-success  btn-sm">Add tool</button>
+                <button @click="removeComponent" class="btn btn-warning btn-sm">Remove tool</button>
+            </div>
+            <div class="col-5">
+                <!-- Loan document data -->
+                <h2>Loan document</h2>
+                <p>Loan document number: {{ loanDocumentNumber }}</p>
+                <p>Date and time: {{ date }}</p>
+                <p>Number of days for tool loaning: <input v-model="days" class="form-control" type="text"></p>
+                
+            </div>
+            <div class="col-3">
+                <!-- customer data display -->
+                <p>Select a customer:
+                    <v-select  v-model="selectedCustomer" label="name" :options="customers"></v-select>
+                </p>
+                <p>{{ selectedCustomer.city }}</p>
+                <p>{{ selectedCustomer.address }}</p>
+                <p>{{ selectedCustomer.phone }}</p>
+            </div>
+        </div>
         <hr>
+        
+        <p>Tools to loan:</p>
+        <table class="table">
+            <tr>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Serial number</th>
+                <th>Price/day</th>
+                <th>Days</th>
+                <th>Total price</th>
+            </tr>
+            <tr v-for="(tool, i) in toolsToLoan" :key="i">
+                <td>{{ tool.brand }}</td>
+                <td>{{ tool.model }}</td>
+                <td>{{ tool.serial_number }}</td>
+                <td>{{ tool.price }}</td>
+                <td>{{ days }}</td>
+                <td>{{ tool.price * days }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>TOTAL TO PAY: {{ total }}</td>
+            </tr>
+        </table>
+        
 
-        <!-- SelectTool.vue -->
-        <select-tool v-for="(component, i) in components" :key="i" :tools = 'tools' @toolSelected="AddToToolsToLoan"></select-tool>
-
-        <!-- Buttons -->
-        <button @click="addComponent" class="btn btn-info">Add another tool</button>
-        <button @click="removeComponent" class="btn btn-info">Remove tool</button>
         <button @click="createInvoice" class="btn btn-warning">Create invoice</button>
     </div>
 </template>
@@ -37,10 +87,20 @@ export default {
             toolsToLoan: [],//we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
             components: ['one'],//this is used to dynamically add more SelectTool components
             //invoice: {//this will be the newly created inovice, that will be sent to vuex and db
+            loanDocumentNumber: moment().format('YYYYMMDD-HHmm'),
+            date: moment().format('YYYY-MM-DD HH:mm'),
+            days: 1,
         }
     },
     computed: {
         ...mapGetters(['customers', 'tools']),
+        total(){
+            let totalx = 0;
+            this.toolsToLoan.forEach(element => {
+               totalx += element.price * this.days; 
+            });
+            return totalx;
+        },
         invoice(){
             return {
                 id: '',

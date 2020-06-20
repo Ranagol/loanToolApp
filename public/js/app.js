@@ -2622,6 +2622,56 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2640,12 +2690,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //this is the selected customer
       toolsToLoan: [],
       //we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
-      components: ['one'] //this is used to dynamically add more SelectTool components
+      components: ['one'],
+      //this is used to dynamically add more SelectTool components
       //invoice: {//this will be the newly created inovice, that will be sent to vuex and db
-
+      loanDocumentNumber: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYYMMDD-HHmm'),
+      date: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD HH:mm'),
+      days: 1
     };
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapGetters"])(['customers', 'tools'])), {}, {
+    total: function total() {
+      var _this = this;
+
+      var totalx = 0;
+      this.toolsToLoan.forEach(function (element) {
+        totalx += element.price * _this.days;
+      });
+      return totalx;
+    },
     invoice: function invoice() {
       return {
         id: '',
@@ -2661,14 +2723,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
     },
     invoiceitems: function invoiceitems() {
-      var _this = this;
+      var _this2 = this;
 
       //here we are manually creating temporary invoiceitems for vuex. This data will be replaced with permanent invoiceitem from db, as soon the data arrives from db.
       var invoiceitemsx = [];
       this.toolsToLoan.forEach(function (element) {
         var invoiceitem = {
           tool_id: element.id,
-          customer_name: _this.selectedCustomer.name,
+          customer_name: _this2.selectedCustomer.name,
           model: element.model,
           price: element.price,
           taken: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD HH:mm:ss')
@@ -2935,9 +2997,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _eventbus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../eventbus */ "./resources/js/eventbus.js");
-//
-//
-//
 //
 //
 //
@@ -44072,61 +44131,173 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h2", [_vm._v("Create invoice")]),
-      _vm._v(" "),
+  return _c("div", [
+    _c("div", { staticClass: "d-flew row justify-content-around" }, [
       _c(
-        "p",
-        [
-          _vm._v("Select a customer:\n        "),
-          _c("v-select", {
-            attrs: { label: "name", options: _vm.customers },
-            model: {
-              value: _vm.selectedCustomer,
-              callback: function($$v) {
-                _vm.selectedCustomer = $$v
-              },
-              expression: "selectedCustomer"
-            }
+        "div",
+        { staticClass: "col-3" },
+        _vm._l(_vm.components, function(component, i) {
+          return _c("select-tool", {
+            key: i,
+            attrs: { tools: _vm.tools },
+            on: { toolSelected: _vm.AddToToolsToLoan }
           })
-        ],
+        }),
         1
       ),
       _vm._v(" "),
-      _c("hr"),
+      _c("div", { staticClass: "d-flex flex-column col-1 align-items-end" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success  btn-sm",
+            on: { click: _vm.addComponent }
+          },
+          [_vm._v("Add tool")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-warning btn-sm",
+            on: { click: _vm.removeComponent }
+          },
+          [_vm._v("Remove tool")]
+        )
+      ]),
       _vm._v(" "),
-      _vm._l(_vm.components, function(component, i) {
-        return _c("select-tool", {
-          key: i,
-          attrs: { tools: _vm.tools },
-          on: { toolSelected: _vm.AddToToolsToLoan }
-        })
-      }),
+      _c("div", { staticClass: "col-5" }, [
+        _c("h2", [_vm._v("Loan document")]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("Loan document number: " + _vm._s(_vm.loanDocumentNumber))
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Date and time: " + _vm._s(_vm.date))]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("Number of days for tool loaning: "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.days,
+                expression: "days"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.days },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.days = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
       _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-info", on: { click: _vm.addComponent } },
-        [_vm._v("Add another tool")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-info", on: { click: _vm.removeComponent } },
-        [_vm._v("Remove tool")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-warning", on: { click: _vm.createInvoice } },
-        [_vm._v("Create invoice")]
-      )
-    ],
-    2
-  )
+      _c("div", { staticClass: "col-3" }, [
+        _c(
+          "p",
+          [
+            _vm._v("Select a customer:\n                "),
+            _c("v-select", {
+              attrs: { label: "name", options: _vm.customers },
+              model: {
+                value: _vm.selectedCustomer,
+                callback: function($$v) {
+                  _vm.selectedCustomer = $$v
+                },
+                expression: "selectedCustomer"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(_vm.selectedCustomer.city))]),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(_vm.selectedCustomer.address))]),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(_vm.selectedCustomer.phone))])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("p", [_vm._v("Tools to loan:")]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.toolsToLoan, function(tool, i) {
+          return _c("tr", { key: i }, [
+            _c("td", [_vm._v(_vm._s(tool.brand))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(tool.model))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(tool.serial_number))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(tool.price))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.days))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(tool.price * _vm.days))])
+          ])
+        }),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td"),
+          _vm._v(" "),
+          _c("td"),
+          _vm._v(" "),
+          _c("td"),
+          _vm._v(" "),
+          _c("td"),
+          _vm._v(" "),
+          _c("td"),
+          _vm._v(" "),
+          _c("td", [_vm._v("TOTAL TO PAY: " + _vm._s(_vm.total))])
+        ])
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      { staticClass: "btn btn-warning", on: { click: _vm.createInvoice } },
+      [_vm._v("Create invoice")]
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Brand")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Model")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Serial number")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Price/day")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Days")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Total price")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -44583,9 +44754,7 @@ var render = function() {
         })
       ],
       1
-    ),
-    _vm._v(" "),
-    _c("hr")
+    )
   ])
 }
 var staticRenderFns = []

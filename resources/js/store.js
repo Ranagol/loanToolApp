@@ -19,7 +19,6 @@ getters: {
     invoices: state => state.invoices,
     invoiceitems: state => state.invoiceitems,
     errors: state => state.errors,
-    
 },
 
 //STATE

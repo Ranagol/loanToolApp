@@ -5,9 +5,6 @@
             <!-- TODO there are a lot of warnings here, would be good to check... -->
             <!-- <p>Selected tool: {{ selectedTool }}</p> -->
         </p>
-        
-
-        <hr>
     </div>
 </template>
 
