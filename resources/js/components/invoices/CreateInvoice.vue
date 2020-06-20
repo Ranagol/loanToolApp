@@ -55,6 +55,20 @@ export default {
                 invoiceitems: this.toolsToLoan,
             }
         },
+        invoiceitems(){//here we are manually creating temporary invoiceitems for vuex. This data will be replaced with permanent invoiceitem from db, as soon the data arrives from db.
+            let invoiceitemsx = [];
+            this.toolsToLoan.forEach(element => {
+                let invoiceitem = {
+                    tool_id: element.id,
+                    customer_name: this.selectedCustomer.name,
+                    model: element.model,
+                    price: element.price,
+                    taken: moment().format('YYYY-MM-DD HH:mm:ss'),
+                }
+                invoiceitemsx.push(invoiceitem);
+            });
+            return invoiceitemsx;
+        }
     },
     
     methods: {
@@ -64,6 +78,7 @@ export default {
             console.dir(this.invoice);
             //SET TOOL not on stock missing here
             this.$store.dispatch('createInvoice', this.invoice);//send invoice to vuex actions
+            this.$store.dispatch('addInvoiceItems', this.invoiceitems);//send invoiceitems to vuex actions
             this.eraseInvoice();//removes all invoice data after a successfull invoice creation
         },
 

@@ -57,6 +57,11 @@ mutations: {
         state.invoices.push(invoice);
         //alert('Your new invoice was created.');
     },
+    addInvoiceItems(state, invoiceitems){
+        invoiceitems.forEach(element => {
+            state.invoiceitems.push(element);
+        });
+    },
 
     
 
@@ -155,12 +160,17 @@ actions: {
             await invoiceService.createInvoice(invoice);//for db
             commit('createInvoice', invoice);//for vuex, temporary data
             dispatch('getInvoices');//immediatelly getting the new data with the new id from db
+            dispatch('getInvoiceitems');//immediatelly getting the new data with the new id from db
         } catch (error) {
             console.log('Error with createInvoice in actions');
             console.dir(error);
             alert(error);
             commit('errors', error);
         }
+    },
+
+    addInvoiceItems( {commit}, invoiceitems){
+        commit('addInvoiceItems', invoiceitems);
     }
 }
 

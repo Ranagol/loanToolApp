@@ -2655,6 +2655,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         closing_date: null,
         invoiceitems: this.toolsToLoan
       };
+    },
+    invoiceitems: function invoiceitems() {
+      var _this = this;
+
+      //here we are manually creating temporary invoiceitems for vuex. This data will be replaced with permanent invoiceitem from db, as soon the data arrives from db.
+      var invoiceitemsx = [];
+      this.toolsToLoan.forEach(function (element) {
+        var invoiceitem = {
+          tool_id: element.id,
+          customer_name: _this.selectedCustomer.name,
+          model: element.model,
+          price: element.price,
+          taken: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD HH:mm:ss')
+        };
+        invoiceitemsx.push(invoiceitem);
+      });
+      return invoiceitemsx;
     }
   }),
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapActions"])(['createInvoice'])), {}, {
@@ -2663,6 +2680,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.dir(this.invoice); //SET TOOL not on stock missing here
 
       this.$store.dispatch('createInvoice', this.invoice); //send invoice to vuex actions
+
+      this.$store.dispatch('addInvoiceItems', this.invoiceitems); //send invoiceitems to vuex actions
 
       this.eraseInvoice(); //removes all invoice data after a successfull invoice creation
     },
@@ -62731,6 +62750,11 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     createInvoice: function createInvoice(state, invoice) {
       state.invoices.push(invoice); //alert('Your new invoice was created.');
     },
+    addInvoiceItems: function addInvoiceItems(state, invoiceitems) {
+      invoiceitems.forEach(function (element) {
+        state.invoiceitems.push(element);
+      });
+    },
     errors: function errors(state, error) {
       state.errors = error;
     }
@@ -62973,24 +62997,30 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
 
                 dispatch('getInvoices'); //immediatelly getting the new data with the new id from db
 
-                _context7.next = 14;
+                dispatch('getInvoiceitems'); //immediatelly getting the new data with the new id from db
+
+                _context7.next = 15;
                 break;
 
-              case 8:
-                _context7.prev = 8;
+              case 9:
+                _context7.prev = 9;
                 _context7.t0 = _context7["catch"](1);
                 console.log('Error with createInvoice in actions');
                 console.dir(_context7.t0);
                 alert(_context7.t0);
                 commit('errors', _context7.t0);
 
-              case 14:
+              case 15:
               case "end":
                 return _context7.stop();
             }
           }
-        }, _callee7, null, [[1, 8]]);
+        }, _callee7, null, [[1, 9]]);
       }))();
+    },
+    addInvoiceItems: function addInvoiceItems(_ref8, invoiceitems) {
+      var commit = _ref8.commit;
+      commit('addInvoiceItems', invoiceitems);
     }
   }
 });
