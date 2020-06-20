@@ -53,12 +53,12 @@ mutations: {
         state.tools.push(tool);
         alert('Your tool ' + tool.model + ' was created.');
     },
+    createInvoice(state, invoice){
+        state.invoices.push(invoice);
+        alert('Your new invoice was created.');
+    },
 
-    // createInvoiceInStore(state, invoice){
-    //     state.invoices.push(invoice);
-    //     console.log('New invoice was added, see below:');
-    //     console.dir(state.invoices);
-    // },
+    
 
     errors(state, error){
         state.errors = error;
@@ -127,8 +127,8 @@ actions: {
     async createCustomer( {commit, dispatch}, customer ){
         try {
             await customerService.createCustomer(customer);//for db
-            commit('createCustomer', customer);//for vuex
-            dispatch('getCustomers');
+            commit('createCustomer', customer);//for vuex, temporary data
+            dispatch('getCustomers');//immediatelly getting the new data with the new id from db
         } catch (error) {
             console.log('Error with createCustomer in actions');
             console.dir(error);
@@ -140,10 +140,23 @@ actions: {
     async createTool( { commit, dispatch}, tool ){
         try {
             await toolService.createTool(tool);//for db
-            commit('createTool', tool);//for vuex
+            commit('createTool', tool);//for vuex, temporary data
             dispatch('getTools');//immediatelly getting the new data with the new id from db
         } catch (error) {
             console.log('Error with createTool in actions');
+            console.dir(error);
+            alert(error);
+            commit('errors', error);
+        }
+    },
+
+    createInvoice( {commit, dispatch}, invoice){
+        try {
+            //await invoiceService.createInvoice(invoice);//for db
+            commit('createInvoice', invoice);//for vuex, temporary data
+            //dispatch('getInvoices');//immediatelly getting the new data with the new id from db
+        } catch (error) {
+            console.log('Error with createInvoice in actions');
             console.dir(error);
             alert(error);
             commit('errors', error);

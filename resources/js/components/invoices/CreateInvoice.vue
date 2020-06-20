@@ -36,11 +36,17 @@ export default {
             toolsToLoan: [],//we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
             components: ['one'],//this is used to dynamically add more SelectTool components
             invoice: {//this will be the newly created inovice, that will be sent to vuex and db
-                customer:{},
-                tools:{},
-            },//this invoice object will be sent to the db
-            
-            
+                id: '',
+                customer_id: this.selectedCustomer.id,
+                customer_name: this.selectedCustomer.name,
+                sum_for_paying: null,
+                invoice_closed: false,
+                comments: null,
+                created_at: null,
+                updated_at: null,
+                closing_date: null,
+                invoiceitems: [],
+            },
         }
     },
     computed: {
@@ -48,37 +54,20 @@ export default {
     },
     
     methods: {
-        ...mapActions(['createInvoiceInStore']),
-        async createInvoice(){
-            this.invoice.customer = this.selectedCustomer;//adding customers
-            this.invoice.tools = this.toolsToLoan;//adding tools
+        ...mapActions(['createInvoice']),
+        createInvoice(){
+            console.log('This is the new invoice object, just created:')
             console.dir(this.invoice);
-            //ADD NEW INVOICE TO VUEX
-            // let invoiceForVuex = {
-            //     closing_date = null,
-            //     comments = null,
-            //     customer_id = this.customer.id,
-            //     customer_name = this.customer.name,
-            //     id: 17,
-            //     invoice_closed: 0,
-            //     invoiceitems: Array(1),//what happened here and who did this?
-            //     sum_for_paying: null,
-            // };
+            //SET TOOL not on stock missing here
+            this.$store.dispatch('createInvoice', this.invoice);//send to vuex actions
+            //this.eraseInvoice();
+        },
 
-            //this.$store.dispatch('createInvoiceInStore', invoiceForVuex);
-
-            //SET TOOL not on stock
-
-            try {
-                await invoiceService.createInvoice(this.invoice);
-                console.log('Invoice created in the db');
-                this.selectedCustomer = '';//remove the selected customer
-                this.toolsToLoan = [];//remove all selected tool from the parent
-                EventBus.$emit('invoiceCreated');//TODO remove individual selected tool from ToolSelect component
-            } catch (error) {
-                console.dir(error);
-                console.log('Something is wrong with invoice creating in the db.');
-            }
+        eraseInvoice(){
+            //removes all invoice data after a successfull invoice creation
+            this.selectedCustomer = '';
+            this.toolsToLoan = [];
+            EventBus.$emit('invoiceCreated');//removes selected tools from SelectTool component
         },
         
         AddToToolsToLoan(tool){//used for receiving tool objects from SelectTool components

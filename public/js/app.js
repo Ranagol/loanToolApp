@@ -2584,20 +2584,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
-/* harmony import */ var _tools_SelectTool__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/SelectTool */ "./resources/js/components/tools/SelectTool.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _eventbus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../eventbus */ "./resources/js/eventbus.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
+/* harmony import */ var _tools_SelectTool__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/SelectTool */ "./resources/js/components/tools/SelectTool.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _eventbus__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../eventbus */ "./resources/js/eventbus.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2632,8 +2624,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateInvoice',
   components: {
-    vSelect: vue_select__WEBPACK_IMPORTED_MODULE_1___default.a,
-    'select-tool': _tools_SelectTool__WEBPACK_IMPORTED_MODULE_3__["default"]
+    vSelect: vue_select__WEBPACK_IMPORTED_MODULE_0___default.a,
+    'select-tool': _tools_SelectTool__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -2645,68 +2637,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //this is used to dynamically add more SelectTool components
       invoice: {
         //this will be the newly created inovice, that will be sent to vuex and db
-        customer: {},
-        tools: {}
-      } //this invoice object will be sent to the db
-
+        id: '',
+        customer_id: this.selectedCustomer.id,
+        customer_name: this.selectedCustomer.name,
+        sum_for_paying: null,
+        invoice_closed: false,
+        comments: null,
+        created_at: null,
+        updated_at: null,
+        closing_date: null,
+        invoiceitems: []
+      }
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapGetters"])(['customers', 'tools'])),
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapActions"])(['createInvoiceInStore'])), {}, {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['customers', 'tools'])),
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(['createInvoice'])), {}, {
     createInvoice: function createInvoice() {
-      var _this = this;
+      console.log('This is the new invoice object, just created:');
+      console.dir(this.invoice); //SET TOOL not on stock missing here
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _this.invoice.customer = _this.selectedCustomer; //adding customers
-
-                _this.invoice.tools = _this.toolsToLoan; //adding tools
-
-                console.dir(_this.invoice); //ADD NEW INVOICE TO VUEX
-                // let invoiceForVuex = {
-                //     closing_date = null,
-                //     comments = null,
-                //     customer_id = this.customer.id,
-                //     customer_name = this.customer.name,
-                //     id: 17,
-                //     invoice_closed: 0,
-                //     invoiceitems: Array(1),//what happened here and who did this?
-                //     sum_for_paying: null,
-                // };
-                //this.$store.dispatch('createInvoiceInStore', invoiceForVuex);
-                //SET TOOL not on stock
-
-                _context.prev = 3;
-                _context.next = 6;
-                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__["default"].createInvoice(_this.invoice);
-
-              case 6:
-                console.log('Invoice created in the db');
-                _this.selectedCustomer = ''; //remove the selected customer
-
-                _this.toolsToLoan = []; //remove all selected tool from the parent
-
-                _eventbus__WEBPACK_IMPORTED_MODULE_5__["EventBus"].$emit('invoiceCreated'); //TODO remove individual selected tool from ToolSelect component
-
-                _context.next = 16;
-                break;
-
-              case 12:
-                _context.prev = 12;
-                _context.t0 = _context["catch"](3);
-                console.dir(_context.t0);
-                console.log('Something is wrong with invoice creating in the db.');
-
-              case 16:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[3, 12]]);
-      }))();
+      this.$store.dispatch('createInvoice', this.invoice); //send to vuex actions
+      //this.eraseInvoice();
+    },
+    eraseInvoice: function eraseInvoice() {
+      //removes all invoice data after a successfull invoice creation
+      this.selectedCustomer = '';
+      this.toolsToLoan = [];
+      _eventbus__WEBPACK_IMPORTED_MODULE_4__["EventBus"].$emit('invoiceCreated'); //removes selected tools from SelectTool component
     },
     AddToToolsToLoan: function AddToToolsToLoan(tool) {
       //used for receiving tool objects from SelectTool components
@@ -62768,11 +62725,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
       state.tools.push(tool);
       alert('Your tool ' + tool.model + ' was created.');
     },
-    // createInvoiceInStore(state, invoice){
-    //     state.invoices.push(invoice);
-    //     console.log('New invoice was added, see below:');
-    //     console.dir(state.invoices);
-    // },
+    createInvoice: function createInvoice(state, invoice) {
+      state.invoices.push(invoice);
+      alert('Your new invoice was created.');
+    },
     errors: function errors(state, error) {
       state.errors = error;
     }
@@ -62937,9 +62893,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
 
               case 4:
                 //for db
-                commit('createCustomer', customer); //for vuex
+                commit('createCustomer', customer); //for vuex, temporary data
 
-                dispatch('getCustomers');
+                dispatch('getCustomers'); //immediatelly getting the new data with the new id from db
+
                 _context5.next = 14;
                 break;
 
@@ -62973,7 +62930,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
 
               case 4:
                 //for db
-                commit('createTool', tool); //for vuex
+                commit('createTool', tool); //for vuex, temporary data
 
                 dispatch('getTools'); //immediatelly getting the new data with the new id from db
 
@@ -62995,6 +62952,21 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
           }
         }, _callee6, null, [[1, 8]]);
       }))();
+    },
+    createInvoice: function createInvoice(_ref7, invoice) {
+      var commit = _ref7.commit,
+          dispatch = _ref7.dispatch;
+
+      try {
+        //await invoiceService.createInvoice(invoice);//for db
+        commit('createInvoice', invoice); //for vuex, temporary data
+        //dispatch('getInvoices');//immediatelly getting the new data with the new id from db
+      } catch (error) {
+        console.log('Error with createInvoice in actions');
+        console.dir(error);
+        alert(error);
+        commit('errors', error);
+      }
     }
   }
 });
