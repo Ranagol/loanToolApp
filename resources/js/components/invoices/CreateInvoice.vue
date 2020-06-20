@@ -20,6 +20,7 @@
 
 <script>
 import vSelect from 'vue-select';
+import moment from 'moment';
 import invoiceService from '../../service/invoiceService';
 import SelectTool from '../tools/SelectTool';
 import { mapGetters, mapActions } from 'vuex';
@@ -35,28 +36,32 @@ export default {
             selectedCustomer: '',//this is the selected customer
             toolsToLoan: [],//we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
             components: ['one'],//this is used to dynamically add more SelectTool components
-            invoice: {//this will be the newly created inovice, that will be sent to vuex and db
+            //invoice: {//this will be the newly created inovice, that will be sent to vuex and db
+        }
+    },
+    computed: {
+        ...mapGetters(['customers', 'tools']),
+        invoice(){
+            return {
                 id: '',
                 customer_id: this.selectedCustomer.id,
                 customer_name: this.selectedCustomer.name,
                 sum_for_paying: null,
                 invoice_closed: false,
                 comments: null,
-                created_at: null,
+                created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
                 updated_at: null,
                 closing_date: null,
                 invoiceitems: [],
-            },
+            }
         }
-    },
-    computed: {
-        ...mapGetters(['customers', 'tools']),
     },
     
     methods: {
         ...mapActions(['createInvoice']),
         createInvoice(){
-            console.log('This is the new invoice object, just created:')
+            
+            console.log('This below is the new invoice object, just created:')
             console.dir(this.invoice);
             //SET TOOL not on stock missing here
             this.$store.dispatch('createInvoice', this.invoice);//send to vuex actions
@@ -75,15 +80,14 @@ export default {
             console.log('Selected tool succesfully added to parent');
             console.dir(this.toolsToLoan);
         },
+
         addComponent(){//for adding another loan tool
             this.components.push('another component');
         },
+        
         removeComponent(){//for removing a loan tool line
             this.components.pop();
         },
-        test(){
-            console.dir(this.selectedCustomer.id);
-        }
     },
     
 }

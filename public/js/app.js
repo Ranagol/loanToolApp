@@ -2586,10 +2586,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
-/* harmony import */ var _tools_SelectTool__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/SelectTool */ "./resources/js/components/tools/SelectTool.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _eventbus__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../eventbus */ "./resources/js/eventbus.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
+/* harmony import */ var _tools_SelectTool__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/SelectTool */ "./resources/js/components/tools/SelectTool.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _eventbus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../eventbus */ "./resources/js/eventbus.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2621,11 +2623,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateInvoice',
   components: {
     vSelect: vue_select__WEBPACK_IMPORTED_MODULE_0___default.a,
-    'select-tool': _tools_SelectTool__WEBPACK_IMPORTED_MODULE_2__["default"]
+    'select-tool': _tools_SelectTool__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
@@ -2633,27 +2636,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //this is the selected customer
       toolsToLoan: [],
       //we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
-      components: ['one'],
-      //this is used to dynamically add more SelectTool components
-      invoice: {
-        //this will be the newly created inovice, that will be sent to vuex and db
+      components: ['one'] //this is used to dynamically add more SelectTool components
+      //invoice: {//this will be the newly created inovice, that will be sent to vuex and db
+
+    };
+  },
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapGetters"])(['customers', 'tools'])), {}, {
+    invoice: function invoice() {
+      return {
         id: '',
         customer_id: this.selectedCustomer.id,
         customer_name: this.selectedCustomer.name,
         sum_for_paying: null,
         invoice_closed: false,
         comments: null,
-        created_at: null,
+        created_at: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD HH:mm:ss'),
         updated_at: null,
         closing_date: null,
         invoiceitems: []
-      }
-    };
-  },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['customers', 'tools'])),
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(['createInvoice'])), {}, {
+      };
+    }
+  }),
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapActions"])(['createInvoice'])), {}, {
     createInvoice: function createInvoice() {
-      console.log('This is the new invoice object, just created:');
+      console.log('This below is the new invoice object, just created:');
       console.dir(this.invoice); //SET TOOL not on stock missing here
 
       this.$store.dispatch('createInvoice', this.invoice); //send to vuex actions
@@ -2663,7 +2669,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //removes all invoice data after a successfull invoice creation
       this.selectedCustomer = '';
       this.toolsToLoan = [];
-      _eventbus__WEBPACK_IMPORTED_MODULE_4__["EventBus"].$emit('invoiceCreated'); //removes selected tools from SelectTool component
+      _eventbus__WEBPACK_IMPORTED_MODULE_5__["EventBus"].$emit('invoiceCreated'); //removes selected tools from SelectTool component
     },
     AddToToolsToLoan: function AddToToolsToLoan(tool) {
       //used for receiving tool objects from SelectTool components
@@ -2678,9 +2684,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     removeComponent: function removeComponent() {
       //for removing a loan tool line
       this.components.pop();
-    },
-    test: function test() {
-      console.dir(this.selectedCustomer.id);
     }
   })
 });
