@@ -54,7 +54,7 @@ export default {
                 closing_date: null,
                 invoiceitems: this.toolsToLoan,
             }
-        }
+        },
     },
     
     methods: {
@@ -66,6 +66,8 @@ export default {
             this.$store.dispatch('createInvoice', this.invoice);//send invoice to vuex actions
             this.eraseInvoice();//removes all invoice data after a successfull invoice creation
         },
+
+        
 
         eraseInvoice(){
             this.selectedCustomer = '';
