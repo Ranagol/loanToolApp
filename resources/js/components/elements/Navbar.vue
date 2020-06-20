@@ -41,7 +41,7 @@
         </li>
 
         <li v-if="userHasToken" class="nav-item">
-          <router-link class="nav-link" to="/open-invoices" >Close invoice</router-link>
+          <router-link class="nav-link" to="/open-invoices" >Open invoices</router-link>
         </li>
 
         <li v-if="userHasToken" class="nav-item">

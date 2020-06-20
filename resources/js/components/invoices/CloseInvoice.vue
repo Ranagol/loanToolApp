@@ -22,27 +22,21 @@ import { mapGetters } from 'vuex';
 import invoiceService from '../../service/invoiceService';
 export default {
     name: 'CloseInvoice',
+    //this component is showing one selected invoice. Purpose: to check the invoice, before closing the invoice.
     computed: {
         ...mapGetters(['invoices']),
         invoice(){
             return this.invoices.find(invoice => invoice.id == this.invoiceId);
-        }
-    },
-    data() {
-        return {
-           invoiceId: this.$route.params.id,
-        }
-    },
-    methods: {
-        async closeInvoice(){
+        },
+        closedInvoice(){//here we are closing the invoice, and modifying the invoice object values.
             //Invoice level
-            let updatedInvoice = this.invoice;
+            let closedInvoice = this.invoice;
             let now = moment();
-            updatedInvoice.invoice_closed = true;
-            updatedInvoice.closing_date = now.format('YYYY-MM-DD');
+            closedInvoice.invoice_closed = true;
+            closedInvoice.closing_date = now.format('YYYY-MM-DD');
             let sumToPay = 0;
             //Invoiceitem level
-            updatedInvoice.invoiceitems.forEach(invoiceitem => {
+            closedInvoice.invoiceitems.forEach(invoiceitem => {
                 invoiceitem.returned = now.format('YYYY-MM-DD');
                 //counting the time period while the tool was on field
                 let loanDate = moment(invoiceitem.created_at);
@@ -55,17 +49,27 @@ export default {
                 sumToPay += invoiceitem.to_pay;
                 invoiceitem.invoice_line_closed = true;
             });
-            updatedInvoice.sum_for_paying = sumToPay;
+            closedInvoice.sum_for_paying = sumToPay;
+            return closedInvoice;
+        }
+    },
+    data() {
+        return {
+           invoiceId: this.$route.params.id,
+        }
+    },
+    methods: {
+        async closeInvoice(){
             console.log('This is the final closed invoice object below:');
-            console.dir(updatedInvoice);
+            console.dir(this.closedInvoice);
 
-            //update vuex - leave this for later
+            //send the closed invoice to vuex
 
-            //update db
+            //send the closed invoice to the db
             try {
-              await invoiceService.updateInvoice(this.invoiceId, updatedInvoice);  
+              await invoiceService.updateInvoice(this.invoiceId, this.closedInvoice);  
             } catch (error) {
-                console.log('Error during closeInvoice.');
+                console.log('Error during closeInvoice from CloseInvoice.vue.');
                 console.dir(error);
             }
         }

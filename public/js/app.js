@@ -2496,6 +2496,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CloseInvoice',
+  //this component is showing one selected invoice. Purpose: to check the invoice, before closing the invoice.
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['invoices'])), {}, {
     invoice: function invoice() {
       var _this = this;
@@ -2503,6 +2504,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.invoices.find(function (invoice) {
         return invoice.id == _this.invoiceId;
       });
+    },
+    closedInvoice: function closedInvoice() {
+      //here we are closing the invoice, and modifying the invoice object values.
+      //Invoice level
+      var closedInvoice = this.invoice;
+      var now = moment__WEBPACK_IMPORTED_MODULE_1___default()();
+      closedInvoice.invoice_closed = true;
+      closedInvoice.closing_date = now.format('YYYY-MM-DD');
+      var sumToPay = 0; //Invoiceitem level
+
+      closedInvoice.invoiceitems.forEach(function (invoiceitem) {
+        invoiceitem.returned = now.format('YYYY-MM-DD'); //counting the time period while the tool was on field
+
+        var loanDate = moment__WEBPACK_IMPORTED_MODULE_1___default()(invoiceitem.created_at);
+        var durationObject = moment__WEBPACK_IMPORTED_MODULE_1___default.a.duration(now.diff(loanDate)); //here we are creating a moment duration object which is a time period between two moments
+
+        var days = durationObject.asDays(); //show this time period in days
+
+        days = Math.ceil(days); //round up the time period
+        //-------------------
+
+        invoiceitem.time_on_field = days;
+        invoiceitem.to_pay = days * invoiceitem.price;
+        sumToPay += invoiceitem.to_pay;
+        invoiceitem.invoice_line_closed = true;
+      });
+      closedInvoice.sum_for_paying = sumToPay;
+      return closedInvoice;
     }
   }),
   data: function data() {
@@ -2515,59 +2544,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var updatedInvoice, now, sumToPay;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                //Invoice level
-                updatedInvoice = _this2.invoice;
-                now = moment__WEBPACK_IMPORTED_MODULE_1___default()();
-                updatedInvoice.invoice_closed = true;
-                updatedInvoice.closing_date = now.format('YYYY-MM-DD');
-                sumToPay = 0; //Invoiceitem level
-
-                updatedInvoice.invoiceitems.forEach(function (invoiceitem) {
-                  invoiceitem.returned = now.format('YYYY-MM-DD'); //counting the time period while the tool was on field
-
-                  var loanDate = moment__WEBPACK_IMPORTED_MODULE_1___default()(invoiceitem.created_at);
-                  var durationObject = moment__WEBPACK_IMPORTED_MODULE_1___default.a.duration(now.diff(loanDate)); //here we are creating a moment duration object which is a time period between two moments
-
-                  var days = durationObject.asDays(); //show this time period in days
-
-                  days = Math.ceil(days); //round up the time period
-                  //-------------------
-
-                  invoiceitem.time_on_field = days;
-                  invoiceitem.to_pay = days * invoiceitem.price;
-                  sumToPay += invoiceitem.to_pay;
-                  invoiceitem.invoice_line_closed = true;
-                });
-                updatedInvoice.sum_for_paying = sumToPay;
                 console.log('This is the final closed invoice object below:');
-                console.dir(updatedInvoice); //update vuex - leave this for later
-                //update db
+                console.dir(_this2.closedInvoice); //send the closed invoice to vuex
+                //send the closed invoice to the db
 
-                _context.prev = 9;
-                _context.next = 12;
-                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_3__["default"].updateInvoice(_this2.invoiceId, updatedInvoice);
+                _context.prev = 2;
+                _context.next = 5;
+                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_3__["default"].updateInvoice(_this2.invoiceId, _this2.closedInvoice);
 
-              case 12:
-                _context.next = 18;
+              case 5:
+                _context.next = 11;
                 break;
 
-              case 14:
-                _context.prev = 14;
-                _context.t0 = _context["catch"](9);
-                console.log('Error during closeInvoice.');
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](2);
+                console.log('Error during closeInvoice from CloseInvoice.vue.');
                 console.dir(_context.t0);
 
-              case 18:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[9, 14]]);
+        }, _callee, null, [[2, 7]]);
       }))();
     }
   }
@@ -43840,7 +43844,7 @@ var render = function() {
                         staticClass: "nav-link",
                         attrs: { to: "/open-invoices" }
                       },
-                      [_vm._v("Close invoice")]
+                      [_vm._v("Open invoices")]
                     )
                   ],
                   1
