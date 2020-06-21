@@ -2595,7 +2595,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
 /* harmony import */ var _tools_SelectTool__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/SelectTool */ "./resources/js/components/tools/SelectTool.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _eventbus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../eventbus */ "./resources/js/eventbus.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2666,13 +2665,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-
 
 
 
@@ -2688,26 +2680,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       selectedCustomer: '',
       //this is the selected customer
-      toolsToLoan: [],
-      //we will collect here all selected tools from the SelectTool componentS. This will be sent to the db.
-      components: ['one'],
-      //this is used to dynamically add more SelectTool components
+      selectedTools: '',
+      //contains the selected tools
       //invoice: {//this will be the newly created inovice, that will be sent to vuex and db
       loanDocumentNumber: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYYMMDD-HHmm'),
       date: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD HH:mm'),
-      days: 1
+      daysToLoan: 1
     };
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapGetters"])(['customers', 'tools'])), {}, {
-    total: function total() {
-      var _this = this;
-
-      var totalx = 0;
-      this.toolsToLoan.forEach(function (element) {
-        totalx += element.price * _this.days;
-      });
-      return totalx;
-    },
+    // total(){
+    //     let totalx = 0;
+    //     this.selectedTools.forEach(element => {
+    //        totalx += element.price * this.daysToLoan; 
+    //     });
+    //     return totalx;
+    // },
     invoice: function invoice() {
       return {
         id: '',
@@ -2719,26 +2707,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         created_at: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD HH:mm:ss'),
         updated_at: null,
         closing_date: null,
-        invoiceitems: this.toolsToLoan
+        invoiceitems: this.selectedTools
       };
-    },
-    invoiceitems: function invoiceitems() {
-      var _this2 = this;
+    } // invoiceitems(){//here we are manually creating temporary invoiceitems for vuex. This data will be replaced with permanent invoiceitem from db, as soon the data arrives from db.
+    //     let invoiceitemsx = [];
+    //     this.selectedTools.forEach(element => {
+    //         let invoiceitem = {
+    //             tool_id: element.id,
+    //             customer_name: this.selectedCustomer.name,
+    //             model: element.model,
+    //             price: element.price,
+    //             taken: moment().format('YYYY-MM-DD HH:mm:ss'),
+    //         }
+    //         invoiceitemsx.push(invoiceitem);
+    //     });
+    //     return invoiceitemsx;
+    // }
 
-      //here we are manually creating temporary invoiceitems for vuex. This data will be replaced with permanent invoiceitem from db, as soon the data arrives from db.
-      var invoiceitemsx = [];
-      this.toolsToLoan.forEach(function (element) {
-        var invoiceitem = {
-          tool_id: element.id,
-          customer_name: _this2.selectedCustomer.name,
-          model: element.model,
-          price: element.price,
-          taken: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD HH:mm:ss')
-        };
-        invoiceitemsx.push(invoiceitem);
-      });
-      return invoiceitemsx;
-    }
   }),
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapActions"])(['createInvoice'])), {}, {
     createInvoice: function createInvoice() {
@@ -2753,22 +2738,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     eraseInvoice: function eraseInvoice() {
       this.selectedCustomer = '';
-      this.toolsToLoan = [];
-      _eventbus__WEBPACK_IMPORTED_MODULE_5__["EventBus"].$emit('invoiceCreated'); //removes selected tools from SelectTool child component
-    },
-    AddToToolsToLoan: function AddToToolsToLoan(tool) {
-      //used for receiving tool objects from SelectTool components
-      this.toolsToLoan.push(tool);
-      console.log('Selected tool succesfully added to parent');
-      console.dir(this.toolsToLoan);
-    },
-    addComponent: function addComponent() {
-      //for adding another loan tool
-      this.components.push('another component');
-    },
-    removeComponent: function removeComponent() {
-      //for removing a loan tool line
-      this.components.pop();
+      this.selectedTools = [];
     }
   })
 });
@@ -44134,37 +44104,22 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "d-flew row justify-content-around" }, [
       _c(
-        "div",
-        { staticClass: "col-3" },
-        _vm._l(_vm.components, function(component, i) {
-          return _c("select-tool", {
-            key: i,
-            attrs: { tools: _vm.tools },
-            on: { toolSelected: _vm.AddToToolsToLoan }
+        "p",
+        [
+          _vm._v("Select a tool:\n            "),
+          _c("v-select", {
+            attrs: { multiple: "", label: "model", options: _vm.tools },
+            model: {
+              value: _vm.selectedTools,
+              callback: function($$v) {
+                _vm.selectedTools = $$v
+              },
+              expression: "selectedTools"
+            }
           })
-        }),
+        ],
         1
       ),
-      _vm._v(" "),
-      _c("div", { staticClass: "d-flex flex-column col-1 align-items-end" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-success  btn-sm",
-            on: { click: _vm.addComponent }
-          },
-          [_vm._v("Add tool")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-warning btn-sm",
-            on: { click: _vm.removeComponent }
-          },
-          [_vm._v("Remove tool")]
-        )
-      ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-5" }, [
         _c("h2", [_vm._v("Loan document")]),
@@ -44182,19 +44137,19 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.days,
-                expression: "days"
+                value: _vm.daysToLoan,
+                expression: "daysToLoan"
               }
             ],
             staticClass: "form-control",
             attrs: { type: "text" },
-            domProps: { value: _vm.days },
+            domProps: { value: _vm.daysToLoan },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.days = $event.target.value
+                _vm.daysToLoan = $event.target.value
               }
             }
           })
@@ -44238,7 +44193,7 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._l(_vm.toolsToLoan, function(tool, i) {
+        _vm._l(_vm.selectedTools, function(tool, i) {
           return _c("tr", { key: i }, [
             _c("td", [_vm._v(_vm._s(tool.brand))]),
             _vm._v(" "),
@@ -44248,25 +44203,13 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(tool.price))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.days))]),
+            _c("td", [_vm._v(_vm._s(_vm.daysToLoan))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(tool.price * _vm.days))])
+            _c("td", [_vm._v(_vm._s(tool.price * _vm.daysToLoan))])
           ])
         }),
         _vm._v(" "),
-        _c("tr", [
-          _c("td"),
-          _vm._v(" "),
-          _c("td"),
-          _vm._v(" "),
-          _c("td"),
-          _vm._v(" "),
-          _c("td"),
-          _vm._v(" "),
-          _c("td"),
-          _vm._v(" "),
-          _c("td", [_vm._v("TOTAL TO PAY: " + _vm._s(_vm.total))])
-        ])
+        _vm._m(1)
       ],
       2
     ),
@@ -44295,6 +44238,22 @@ var staticRenderFns = [
       _c("th", [_vm._v("Days")]),
       _vm._v(" "),
       _c("th", [_vm._v("Total price")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td"),
+      _vm._v(" "),
+      _c("td"),
+      _vm._v(" "),
+      _c("td"),
+      _vm._v(" "),
+      _c("td"),
+      _vm._v(" "),
+      _c("td")
     ])
   }
 ]
@@ -44743,7 +44702,7 @@ var render = function() {
       [
         _vm._v("Select a tool:\n        "),
         _c("v-select", {
-          attrs: { label: "model", options: _vm.tools },
+          attrs: { multiple: "", label: "model", options: _vm.tools },
           model: {
             value: _vm.selectedTool,
             callback: function($$v) {
