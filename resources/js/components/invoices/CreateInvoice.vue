@@ -3,23 +3,18 @@
         <!-- CREATE INVOICE -->
         
         <div class="d-flew row justify-content-around">
-            <!-- SELECT TOOL -->
-            <p>Select a tool:
-                <v-select multiple v-model="selectedTools" label="model" :options="tools"></v-select>
-            </p>
             
             <div class="col-5">
                 <!-- Loan document data -->
                 <h2>Loan document</h2>
                 <p>Loan document number: {{ loanDocumentNumber }}</p>
                 <p>Date and time: {{ date }}</p>
-                <p>Number of days for tool loaning: <input v-model="daysToLoan" class="form-control" type="text"></p>
-                
+                <p>Number of days for tool loaning: <input v-model="daysToLoan" class="form-control input-style" type="text" required></p>
             </div>
 
             <div class="col-3">
                 <!-- customer data display -->
-                <p>Select a customer:
+                <p ><span class="d-print-none">Select a customer:</span> 
                     <v-select  v-model="selectedCustomer" label="name" :options="customers"></v-select>
                 </p>
                 <p>{{ selectedCustomer.city }}</p>
@@ -29,7 +24,14 @@
         </div>
         <hr>
         
-        <p>Tools to loan:</p>
+        <div class="d-print-none">Tools to loan:
+            <!-- SELECT TOOL -->
+            <p>
+                <v-select multiple v-model="selectedToolsx" label="model" :options="tools"></v-select>
+            </p>
+        </div>
+
+        <!-- Table for showing the selected tools -->
         <table class="table">
             <tr>
                 <th>Brand</th>
@@ -53,32 +55,27 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <!-- <td>TOTAL TO PAY: {{ total }}</td> -->
+                <td>TOTAL TO PAY: {{ total }}</td>
             </tr>
         </table>
         
-
-        <button @click="createInvoice" class="btn btn-warning">Create invoice</button>
+        <button @click="createInvoice" class="btn btn-warning d-print-none">Create invoice</button>
     </div>
 </template>
 
 <script>
 import vSelect from 'vue-select';
 import moment from 'moment';
-import invoiceService from '../../service/invoiceService';
-import SelectTool from '../tools/SelectTool';
 import { mapGetters, mapActions } from 'vuex';
-
 export default {
     name: 'CreateInvoice',
     components: {
         vSelect,
-        'select-tool': SelectTool,
     },
     data(){
         return {
             selectedCustomer: '',//this is the selected customer
-            selectedTools: '',//contains the selected tools
+            selectedToolsx: '',//contains the selected tools
             //invoice: {//this will be the newly created inovice, that will be sent to vuex and db
             loanDocumentNumber: moment().format('YYYYMMDD-HHmm'),
             date: moment().format('YYYY-MM-DD HH:mm'),
@@ -87,13 +84,16 @@ export default {
     },
     computed: {
         ...mapGetters(['customers', 'tools']),
-        // total(){
-        //     let totalx = 0;
-        //     this.selectedTools.forEach(element => {
-        //        totalx += element.price * this.daysToLoan; 
-        //     });
-        //     return totalx;
-        // },
+        selectedTools(){
+            return this.selectedToolsx || [];
+        },
+        total(){
+            let totalx = 0;
+            this.selectedTools.forEach(element => {
+               totalx += element.price * this.daysToLoan; 
+            });
+            return totalx;
+        },
         invoice(){
             return {
                 id: '',
@@ -108,20 +108,20 @@ export default {
                 invoiceitems: this.selectedTools,
             }
         },
-        // invoiceitems(){//here we are manually creating temporary invoiceitems for vuex. This data will be replaced with permanent invoiceitem from db, as soon the data arrives from db.
-        //     let invoiceitemsx = [];
-        //     this.selectedTools.forEach(element => {
-        //         let invoiceitem = {
-        //             tool_id: element.id,
-        //             customer_name: this.selectedCustomer.name,
-        //             model: element.model,
-        //             price: element.price,
-        //             taken: moment().format('YYYY-MM-DD HH:mm:ss'),
-        //         }
-        //         invoiceitemsx.push(invoiceitem);
-        //     });
-        //     return invoiceitemsx;
-        // }
+        invoiceitems(){//here we are manually creating temporary invoiceitems for vuex. This data will be replaced with permanent invoiceitem from db, as soon the data arrives from db.
+            let invoiceitemsx = [];
+            this.selectedTools.forEach(element => {
+                let invoiceitem = {
+                    tool_id: element.id,
+                    customer_name: this.selectedCustomer.name,
+                    model: element.model,
+                    price: element.price,
+                    taken: moment().format('YYYY-MM-DD HH:mm:ss'),
+                }
+                invoiceitemsx.push(invoiceitem);
+            });
+            return invoiceitemsx;
+        }
     },
     
     methods: {
@@ -137,10 +137,16 @@ export default {
 
         eraseInvoice(){
             this.selectedCustomer = '';
-            this.selectedTools = [];
+            this.selectedToolsx = [];
         },
         
     },
     
 }
 </script>
+
+<style>
+    .input-style {
+        width: auto;
+    }
+</style>
