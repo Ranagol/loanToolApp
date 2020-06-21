@@ -2287,6 +2287,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Home',
@@ -43760,6 +43761,18 @@ var render = function() {
     _vm._v(" "),
     _c("p", [_vm._v("Tools on stock: - under progress -")]),
     _vm._v(" "),
+    _c(
+      "p",
+      [
+        _vm._v("Number of all "),
+        _c("router-link", { attrs: { to: "/invoiceitems" } }, [
+          _vm._v("loans")
+        ]),
+        _vm._v(": " + _vm._s(_vm.invoiceitems.length))
+      ],
+      1
+    ),
+    _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
     _c("h5", [_vm._v("Invoices")]),
@@ -44544,7 +44557,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Close")]
+                [_vm._v("Check")]
               )
             ])
           ])

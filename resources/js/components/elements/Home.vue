@@ -8,6 +8,7 @@
         <p>All loan <router-link to="/tools" >tools</router-link>: {{ tools.length }}</p>
         <p>Tools on field: - under progress -</p>
         <p>Tools on stock: - under progress -</p>
+        <p>Number of all <router-link  to="/invoiceitems" >loans</router-link>: {{ invoiceitems.length }}</p>
         <hr>
         <h5>Invoices</h5>
         <p>Number of all <router-link to="/invoices" >invoices</router-link>: {{ invoices.length }}</p>

@@ -23,7 +23,7 @@
                 <td>{{ invoice.customer_name }}</td>
                 <td>{{ invoice.created_at }}</td>
                 <td>{{ invoice.comments }}</td>
-                <td><button @click="goToCloseInvoice(invoice.id)" class="btn btn-success btn-sm" >Close</button></td>
+                <td><button @click="goToCloseInvoice(invoice.id)" class="btn btn-success btn-sm" >Check</button></td>
             </tr>
         </table>
 
