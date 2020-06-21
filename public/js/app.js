@@ -2680,7 +2680,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //contains the selected tools
       //invoice: {//this will be the newly created inovice, that will be sent to vuex and db
       loanDocumentNumber: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYYMMDD-HHmm'),
-      date: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD HH:mm'),
+      date: moment__WEBPACK_IMPORTED_MODULE_1___default()().format('YYYY-MM-DD HH:mm:ss'),
       daysToLoan: 1
     };
   },
@@ -2842,8 +2842,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
 //
 //
 //
@@ -44305,6 +44303,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "table",
+      { staticClass: "table" },
       [
         _vm._m(0),
         _vm._v(" "),
@@ -44316,11 +44315,11 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoice.sum_for_paying))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(invoice.comments))]),
-            _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoice.created_at))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoice.closing_date))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoice.comments))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoice.invoice_closed || "not closed"))])
           ])
@@ -44342,11 +44341,11 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("To pay")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Comments")]),
-      _vm._v(" "),
       _c("th", [_vm._v("Created")]),
       _vm._v(" "),
       _c("th", [_vm._v("Closing date")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Comments")]),
       _vm._v(" "),
       _c("th", [_vm._v("Invoce closed?")])
     ])
@@ -44374,7 +44373,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h4", [_vm._v("Invoices")]),
+    _c("h4", [_vm._v("Open invoices")]),
     _vm._v(" "),
     _c("input", {
       directives: [
@@ -44406,6 +44405,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "table",
+      { staticClass: "table" },
       [
         _vm._m(0),
         _vm._v(" "),
@@ -44415,11 +44415,9 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoice.customer_name))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(invoice.comments))]),
-            _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoice.created_at))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(invoice.invoice_closed || "not closed"))]),
+            _c("td", [_vm._v(_vm._s(invoice.comments))]),
             _vm._v(" "),
             _c("td", [
               _c(
@@ -44452,11 +44450,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Customer")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Comments")]),
-      _vm._v(" "),
       _c("th", [_vm._v("Created")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Invoice closed?")]),
+      _c("th", [_vm._v("Comments")]),
       _vm._v(" "),
       _c("th", [_vm._v("Close invoice")])
     ])

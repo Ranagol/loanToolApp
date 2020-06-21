@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h4>Invoices</h4>
+        <h4>Open invoices</h4>
 
         <!-- SEARCH FIELD -->
         <input v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search">
@@ -10,21 +10,19 @@
             <h5>Loading</h5>
         </div>
 
-        <table>
+        <table class="table">
             <tr>
                 <th>Nr#</th>
                 <th>Customer</th>
-                <th>Comments</th>
                 <th>Created</th>
-                <th>Invoice closed?</th>
+                <th>Comments</th>
                 <th>Close invoice</th>
             </tr>
             <tr v-for="(invoice, i) in filteredInvoices" :key="i">
                 <td>{{ invoice.id }}</td>
                 <td>{{ invoice.customer_name }}</td>
-                <td>{{ invoice.comments }}</td>
                 <td>{{ invoice.created_at }}</td>
-                <td>{{ invoice.invoice_closed || 'not closed' }}</td>
+                <td>{{ invoice.comments }}</td>
                 <td><button @click="goToCloseInvoice(invoice.id)" class="btn btn-success btn-sm" >Close</button></td>
             </tr>
         </table>

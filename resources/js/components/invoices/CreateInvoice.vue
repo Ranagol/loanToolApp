@@ -78,7 +78,7 @@ export default {
             selectedToolsx: '',//contains the selected tools
             //invoice: {//this will be the newly created inovice, that will be sent to vuex and db
             loanDocumentNumber: moment().format('YYYYMMDD-HHmm'),
-            date: moment().format('YYYY-MM-DD HH:mm'),
+            date: moment().format('YYYY-MM-DD HH:mm:ss'),
             daysToLoan: 1,
         }
     },
