@@ -2257,14 +2257,66 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Home'
+  name: 'Home',
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['customers', 'tools', 'invoices', 'invoiceitems'])), {}, {
+    openInvoices: function openInvoices() {
+      var openInvoices = 0;
+      this.invoices.forEach(function (element) {
+        if (element.invoice_closed == false) {
+          openInvoices++;
+        }
+      });
+      return openInvoices;
+    },
+    closedInvoice: function closedInvoice() {
+      return this.invoices.length - this.openInvoices;
+    },
+    money: function money() {
+      var money = 0;
+      this.invoices.forEach(function (element) {
+        if (element.invoice_closed == true) {
+          money += element.sum_for_paying;
+        }
+      });
+      return money;
+    }
+  }),
+  data: function data() {
+    return {};
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -43673,16 +43725,78 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h3", [_vm._v("Home")]),
+    _vm._v(" "),
+    _c("h5", [_vm._v("Customers")]),
+    _vm._v(" "),
+    _c(
+      "p",
+      [
+        _vm._v("Number of "),
+        _c("router-link", { attrs: { to: "/customers" } }, [
+          _vm._v("customers")
+        ]),
+        _vm._v(": " + _vm._s(_vm.customers.length))
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("h5", [_vm._v("Tools")]),
+    _vm._v(" "),
+    _c(
+      "p",
+      [
+        _vm._v("All loan "),
+        _c("router-link", { attrs: { to: "/tools" } }, [_vm._v("tools")]),
+        _vm._v(": " + _vm._s(_vm.tools.length))
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("p", [_vm._v("Tools on field: - under progress -")]),
+    _vm._v(" "),
+    _c("p", [_vm._v("Tools on stock: - under progress -")]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("h5", [_vm._v("Invoices")]),
+    _vm._v(" "),
+    _c(
+      "p",
+      [
+        _vm._v("Number of all "),
+        _c("router-link", { attrs: { to: "/invoices" } }, [_vm._v("invoices")]),
+        _vm._v(": " + _vm._s(_vm.invoices.length))
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "p",
+      [
+        _c("router-link", { attrs: { to: "/open-invoices" } }, [
+          _vm._v("Open invoices")
+        ]),
+        _vm._v(": " + _vm._s(_vm.openInvoices) + " ")
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("p", [_vm._v("Closed invoices: " + _vm._s(_vm.closedInvoice))]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("h5", [_vm._v("Money")]),
+    _vm._v(" "),
+    _c("p", [_vm._v("Money from closed invoices: " + _vm._s(_vm.money) + " ")]),
+    _vm._v(" "),
+    _c("hr")
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h3", [_vm._v("Home")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
