@@ -1,7 +1,15 @@
 <template>
-    <div>
+    <div class="alert alert-dark">
+    
+        <p class="alert alert-warning">Welcome! On this page you can see some statistics about your loan tool shop. How many tools you have, 
+            how many loans were made, how much money was earned, etc. This page will serve also as a starting point.
+            So, if you have a customer in your imaginary shop who wants to loan a tool, the first thing to do is to 
+            check if the customer is already in your database. That is happening in the <a href="/customers">Customers</a> 
+            section. If you know for sure that this customer of yours is already in the database, then proceed to the
+            <a href="/create-invoice">Create invoice</a>.
+        </p>
         <h3>Home/owerview</h3>
-        
+
         <h5>Customers</h5>
         <p>Number of <router-link to="/customers" >customers</router-link>: {{ customers.length }}</p>
         <hr>

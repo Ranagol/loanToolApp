@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div class="alert alert-dark">
+        <p class="alert alert-warning mt-2 mb-2">
+            On this page you can see the list of all your loan tools. Use the search field if you are looking for a specific tool.
+        </p>
         <h3>Tools</h3>
 
         <!-- SEARCH FIELD -->

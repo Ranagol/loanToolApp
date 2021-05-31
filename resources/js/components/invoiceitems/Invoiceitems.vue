@@ -1,6 +1,11 @@
 <template>
-    <div>
-        <h4>History/InvoiceItems</h4>
+    <div class="alert alert-dark">
+        <p class="alert alert-warning mt-2 mb-2">
+            This page is focused on the "history" of the individual loan tools. This is needed, because on one invoice there could be two, three,
+            etc., tools. And on the invoice related pages we can't see the exact details. Here we can see which tools were the longest time on the
+            field, which tool has 'created' the biggest amount of money, if the tool is still on the field maybe, and so on.
+        </p>
+        <h4>History of the individual loan tools</h4>
 
         <!-- If there is no data in the db... -->
         <div v-if="!invoiceitems.length" class="alert alert-info">

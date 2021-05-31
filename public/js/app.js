@@ -2114,6 +2114,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateCustomer',
@@ -2150,6 +2158,16 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2264,6 +2282,14 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2456,6 +2482,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2721,6 +2752,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2861,6 +2903,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Invoices',
@@ -2899,6 +2963,29 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2996,6 +3083,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateTool',
@@ -3030,6 +3123,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
 //
 //
 //
@@ -43435,7 +43531,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "alert alert-dark" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _c("h3", [_vm._v("Create customer")]),
     _vm._v(" "),
     _c("p", [
@@ -43570,7 +43668,26 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "alert alert-warning" }, [
+      _vm._v(
+        "\n        On this page you can write your new customers data into the database. The first step is to check if this\n        customer is already in the database. Use the search field for this in the "
+      ),
+      _c("a", { attrs: { href: "/customers" } }, [_vm._v("Customers")]),
+      _vm._v(
+        ".\n        If you already did this, and your customer has selected the tool that he wants to loan, you can go to to the\n        "
+      ),
+      _c("a", { attrs: { href: "/create-invoice" } }, [
+        _vm._v("Create invoice")
+      ]),
+      _vm._v(".\n    ")
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -43592,7 +43709,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "alert alert-dark" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _c("h3", [_vm._v("Customers")]),
     _vm._v(" "),
     _c("input", {
@@ -43627,7 +43746,7 @@ var render = function() {
       "table",
       { staticClass: "table" },
       [
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _vm._l(_vm.filteredCustomers, function(customer, i) {
           return _c("tr", { key: i }, [
@@ -43648,6 +43767,32 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "alert alert-warning" }, [
+      _vm._v(
+        "\n        Here you can see the list of all your customers, who are in your database. This is the place where you can check if a current\n        customer (who wants to loan a tool from your shop) is already in your database. Use the search field below to check this.\n        "
+      ),
+      _c("br"),
+      _vm._v(
+        "\n        If the customer is already in the db, then proceed to the "
+      ),
+      _c("a", { attrs: { href: "/create-invoice" } }, [
+        _vm._v("Create invoice")
+      ]),
+      _vm._v(". \n        "),
+      _c("br"),
+      _vm._v(
+        "\n        IF the customer is not in your db, then you will have to  collect the customers data, and create a new customer in the db. \n        This is happening in the "
+      ),
+      _c("a", { attrs: { href: "/create-customer" } }, [
+        _vm._v("Create customer")
+      ]),
+      _vm._v(".\n    ")
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -43710,7 +43855,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "alert alert-dark" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _c("h3", [_vm._v("Home/owerview")]),
     _vm._v(" "),
     _c("h5", [_vm._v("Customers")]),
@@ -43797,7 +43944,26 @@ var render = function() {
     _c("hr")
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "alert alert-warning" }, [
+      _vm._v(
+        "Welcome! On this page you can see some statistics about your loan tool shop. How many tools you have, \n        how many loans were made, how much money was earned, etc. This page will serve also as a starting point.\n        So, if you have a customer in your imaginary shop who wants to loan a tool, the first thing to do is to \n        check if the customer is already in your database. That is happening in the "
+      ),
+      _c("a", { attrs: { href: "/customers" } }, [_vm._v("Customers")]),
+      _vm._v(
+        " \n        section. If you know for sure that this customer of yours is already in the database, then proceed to the\n        "
+      ),
+      _c("a", { attrs: { href: "/create-invoice" } }, [
+        _vm._v("Create invoice")
+      ]),
+      _vm._v(".\n    ")
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -44079,8 +44245,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h4", [_vm._v("History/InvoiceItems")]),
+  return _c("div", { staticClass: "alert alert-dark" }, [
+    _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
+      _vm._v(
+        "\n        This page is focused on the \"history\" of the individual loan tools. This is needed, because on one invoice there could be two, three,\n        etc., tools. And on the invoice related pages we can't see the exact details. Here we can see which tools were the longest time on the\n        field, which tool has 'created' the biggest amount of money, if the tool is still on the field maybe, and so on.\n    "
+      )
+    ]),
+    _vm._v(" "),
+    _c("h4", [_vm._v("History of the individual loan tools")]),
     _vm._v(" "),
     !_vm.invoiceitems.length
       ? _c("div", { staticClass: "alert alert-info" }, [
@@ -44205,7 +44377,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "alert alert-dark" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
     _c("div", { staticClass: "d-flew row justify-content-around" }, [
       _c("div", { staticClass: "col-5" }, [
         _c("h2", [_vm._v("Loan document")]),
@@ -44227,7 +44403,7 @@ var render = function() {
                 expression: "daysToLoan"
               }
             ],
-            staticClass: "form-control input-style",
+            staticClass: "form-control input-style rounded danger",
             attrs: { type: "text", required: "" },
             domProps: { value: _vm.daysToLoan },
             on: {
@@ -44251,6 +44427,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("v-select", {
+              staticClass: "rounded danger",
               attrs: { label: "name", options: _vm.customers },
               model: {
                 value: _vm.selectedCustomer,
@@ -44281,6 +44458,7 @@ var render = function() {
         "p",
         [
           _c("v-select", {
+            staticClass: "rounded danger",
             attrs: { multiple: "", label: "model", options: _vm.tools },
             model: {
               value: _vm.selectedToolsx,
@@ -44299,7 +44477,7 @@ var render = function() {
       "table",
       { staticClass: "table" },
       [
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _vm._l(_vm.selectedTools, function(tool, i) {
           return _c("tr", { key: i }, [
@@ -44349,6 +44527,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
+      _vm._v(
+        "\n        On this page you can record the loan tool into the database.  You need to do the next. \n        1.) Enter for how long, how many days would like\n        the customer to use to loan tool. Example, for two days, enter 2 into the 'Number of days for tool loaning:' field. 2.) \n        Select a customer from the db. 3.) Select the tool or maybe tools from the 'Tools to loan:' field. You can add more than one \n        tools by repeating this process. 4.) The page has an A4 format, so you can easily print out two \n        copies of this document, once it is fully filled. 5.) Click on the 'Create invoice' button. This is it, the loaning \n        procedure is done, you can now double check your newly created invoice in the "
+      ),
+      _c("a", { attrs: { href: "/open-invoices" } }, [_vm._v("Open invoices")]),
+      _vm._v("\n        or in the "),
+      _c("a", { attrs: { href: "/invoices" } }, [_vm._v("All invoices")]),
+      _vm._v(".\n    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("tr", [
       _c("th", [_vm._v("Brand")]),
       _vm._v(" "),
@@ -44385,7 +44577,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "alert alert-dark" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
+      _vm._v(
+        "\n        Here, on this page, as said before, you can see the list of all  invoices, regardless if they are open or closed.\n    "
+      )
+    ]),
+    _vm._v(" "),
     _c("h4", [_vm._v("Invoices")]),
     _vm._v(" "),
     _c("input", {
@@ -44420,7 +44620,7 @@ var render = function() {
       "table",
       { staticClass: "table" },
       [
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _vm._l(_vm.filteredInvoices, function(invoice, i) {
           return _c("tr", { key: i }, [
@@ -44445,6 +44645,40 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
+      _vm._v(
+        "\n        THE INVOICE SYSTEM EXPLANATION: when a customer loans out a tool from the shop, an open invoice is created. The created invoice is open, because\n        the data of the open invoice can be changed by you. This is needed, because quite often happens that a customer returns a tool sooner \n        - or maybe much later - than he thought he will, and this will change the final amount to pay that was preliminary defined on the invoice, when the customer \n        loaned the tool.This is why we have open invoices. While the tool is on the field, with the customer, the invoice stays open.\n        Once the customer returned the tool, and payed, then you need to close the invoice. The open invoices are editable, the closed\n        invoice are not editable. So we have three pages regarding invoices:\n        "
+      ),
+      _c("ol", [
+        _c("li", [
+          _c("a", { attrs: { href: "/create-invoice" } }, [
+            _vm._v("Create invoice")
+          ]),
+          _vm._v(
+            ", where the invoices are created when a tool is loaned out.\n            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "/open-invoices" } }, [
+            _vm._v("Open invoices")
+          ]),
+          _vm._v(", where you can see all the open invoices\n            ")
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "/invoices" } }, [_vm._v("All invoices")]),
+          _vm._v(
+            ", where you can see all created invoices, regardless if it is open or closed.\n            "
+          )
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -44487,7 +44721,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "alert alert-dark" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
+      _vm._v(
+        "\n        Here, on this page, as said before, you can see the list of all open invoices. Once the customer returns the tool that he loaned, and payes\n        for it, you need to close his open invoice. This can be simply done, by clicking on the 'Close invoice' button.\n    "
+      )
+    ]),
+    _vm._v(" "),
     _c("h4", [_vm._v("Open invoices")]),
     _vm._v(" "),
     _c("input", {
@@ -44522,7 +44764,7 @@ var render = function() {
       "table",
       { staticClass: "table" },
       [
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _vm._l(_vm.filteredInvoices, function(invoice, i) {
           return _c("tr", { key: i }, [
@@ -44533,6 +44775,8 @@ var render = function() {
             _c("td", [_vm._v(_vm._s(invoice.created_at))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoice.comments))]),
+            _vm._v(" "),
+            _c("td", [_vm._v("Edit(under development)")]),
             _vm._v(" "),
             _c("td", [
               _c(
@@ -44545,7 +44789,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Check")]
+                [_vm._v("Close invoice(under development)")]
               )
             ])
           ])
@@ -44560,6 +44804,40 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
+      _vm._v(
+        "\n        THE INVOICE SYSTEM EXPLANATION: when a customer loans out a tool from the shop, an open invoice is created. The created invoice is open, because\n        the data of the open invoice can be changed by you. This is needed, because quite often happens that a customer returns a tool sooner \n        - or maybe much later - than he thought he will, and this will change the final amount to pay that was preliminary defined on the invoice, when the customer \n        loaned the tool.This is why we have open invoices. While the tool is on the field, with the customer, the invoice stays open.\n        Once the customer returned the tool, and payed, then you need to close the invoice. The open invoices are editable, the closed\n        invoice are not editable. So we have three pages regarding invoices:\n        "
+      ),
+      _c("ol", [
+        _c("li", [
+          _c("a", { attrs: { href: "/create-invoice" } }, [
+            _vm._v("Create invoice")
+          ]),
+          _vm._v(
+            ", where the invoices are created when a tool is loaned out.\n            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "/open-invoices" } }, [
+            _vm._v("Open invoices")
+          ]),
+          _vm._v(", where you can see all the open invoices\n            ")
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { attrs: { href: "/invoices" } }, [_vm._v("All invoices")]),
+          _vm._v(
+            ", where you can see all created invoices, regardless if it is open or closed.\n            "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("tr", [
       _c("th", [_vm._v("Nr#")]),
       _vm._v(" "),
@@ -44568,6 +44846,8 @@ var staticRenderFns = [
       _c("th", [_vm._v("Created")]),
       _vm._v(" "),
       _c("th", [_vm._v("Comments")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Edit open invoice")]),
       _vm._v(" "),
       _c("th", [_vm._v("Close invoice")])
     ])
@@ -44594,7 +44874,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "alert alert-dark" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _c("h3", [_vm._v("Create tool")]),
     _vm._v(" "),
     _c("p", [
@@ -44779,7 +45061,20 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
+      _vm._v(
+        "\n        If you add a new loan tool to your already existing fleet of loan tools, this is the place where you can write the new loan\n        tools data into the database. Once you created your new tool with the click on the 'Create tool' button, you can check\n        if this newly created tool has appeared on the "
+      ),
+      _c("a", { attrs: { href: "/tools" } }, [_vm._v("Tools")]),
+      _vm._v(" page, which contains all the loan tools in your shop.\n    ")
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -44801,7 +45096,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "alert alert-dark" }, [
+    _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
+      _vm._v(
+        "\n        On this page you can see the list of all your loan tools. Use the search field if you are looking for a specific tool.\n    "
+      )
+    ]),
+    _vm._v(" "),
     _c("h3", [_vm._v("Tools")]),
     _vm._v(" "),
     _c("input", {

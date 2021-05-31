@@ -1,6 +1,14 @@
 <template>
-    <div>
+    <div class="alert alert-dark">
+        
+        <p class="alert alert-warning">
+            On this page you can write your new customers data into the database. The first step is to check if this
+            customer is already in the database. Use the search field for this in the <a href="/customers">Customers</a>.
+            If you already did this, and your customer has selected the tool that he wants to loan, you can go to to the
+            <a href="/create-invoice">Create invoice</a>.
+        </p>
         <h3>Create customer</h3>
+        
         <p>Name: <input v-model="customer.name" name="name" class="form-control" type="text"></p>
         <p>City: <input v-model="customer.city" name="city" class="form-control" type="text"></p>
         <p>Address: <input v-model="customer.address" name="address" class="form-control" type="text"></p>

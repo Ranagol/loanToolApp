@@ -1,5 +1,15 @@
 <template>
-    <div>
+    <div class="alert alert-dark">
+        
+        <p class="alert alert-warning">
+            Here you can see the list of all your customers, who are in your database. This is the place where you can check if a current
+            customer (who wants to loan a tool from your shop) is already in your database. Use the search field below to check this.
+            <br>
+            If the customer is already in the db, then proceed to the <a href="/create-invoice">Create invoice</a>. 
+            <br>
+            IF the customer is not in your db, then you will have to  collect the customers data, and create a new customer in the db. 
+            This is happening in the <a href="/create-customer">Create customer</a>.
+        </p>
         <h3>Customers</h3>
 
         <!-- SEARCH FIELD -->
