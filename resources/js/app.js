@@ -1,9 +1,6 @@
 require('./bootstrap');
 import Vue from 'vue';
 
-
-
-
 //vuex
 import { store } from './store';
 
@@ -11,7 +8,6 @@ import { store } from './store';
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 Vue.component("v-select", vSelect);
-
 
 //VueRouter code
 import VueRouter from 'vue-router';
@@ -28,7 +24,6 @@ Postaviti da ulogovan korisnik može da pristupi svim stranicama osim login i re
 */
 router.beforeEach((to, from, next) => {
     const isThereToken = localStorage.getItem('loginToken');	//check if the user has a login token
-    console.log(`Guard activated. From: ${from.path} to: ${to.path}`)	//awesome consol.log trick to see if this is working
   
     if ((to.name !== 'login' && to.name !== 'register') && !isThereToken) {	//if the user is not logged in, he can only visit the login and the register pag	e. ATTENTION: these here are route NAMES, NOT ROUTE PATHS!
   
@@ -41,7 +36,6 @@ router.beforeEach((to, from, next) => {
     } else next();
     
 });
-
 
 //Global registration for the App.vue
 Vue.component('App', require('./components/elements/App.vue').default);

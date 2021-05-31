@@ -46,11 +46,12 @@ class CustomerController extends Controller
             'city' => 'string|required|min:3|max:100',
             'address' => 'string|required|min:3|max:100',
             'phone' => 'string|required|min:3|max:100',
-            'scan_doc' => 'string|required|min:3|max:100',
-            'comments' => 'string|required|min:3|max:100',
+            // 'scan_doc' => 'string|required|min:3|max:100',
+            'comments' => 'string|min:3|max:100',
         ]);
 
         $customer = Customer::create($request->all());
+
         return $customer;
     }
 

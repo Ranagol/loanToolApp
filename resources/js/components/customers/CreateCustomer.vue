@@ -6,12 +6,12 @@
         <p>Address: <input v-model="customer.address" name="address" class="form-control" type="text"></p>
         <p>Phone: <input v-model="customer.phone" name="phone" class="form-control" type="text"></p>
         <p>Comment: <input v-model="customer.comments" name="comments" class="form-control" type="text"></p>
-        <form>
+        <!-- <form>
             <div class="form-group">
-                <label for="exampleFormControlFile1">Upload ID data:</label>
+                <label for="exampleFormControlFile1">Upload customers scanned ID data:</label>
                 <input type="file" class="form-control-file" id="exampleFormControlFile1">
             </div>
-        </form>
+        </form> -->
         <button @click="addCustomer" class="btn btn-success">Create customer</button>
     </div>
 </template>

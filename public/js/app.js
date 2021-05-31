@@ -2288,12 +2288,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Home',
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['customers', 'tools', 'invoices', 'invoiceitems'])), {}, {
     openInvoices: function openInvoices() {
-      var openInvoices = 0;
+      var openInvoices = 0; // console.log('Home/invoices', this.invoices);
+
       this.invoices.forEach(function (element) {
         if (element.invoice_closed == false) {
           openInvoices++;
@@ -43559,8 +43563,6 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
     _c(
       "button",
       { staticClass: "btn btn-success", on: { click: _vm.addCustomer } },
@@ -43568,25 +43570,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "exampleFormControlFile1" } }, [
-          _vm._v("Upload ID data:")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control-file",
-          attrs: { type: "file", id: "exampleFormControlFile1" }
-        })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -43727,7 +43711,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h3", [_vm._v("Home")]),
+    _c("h3", [_vm._v("Home/owerview")]),
     _vm._v(" "),
     _c("h5", [_vm._v("Customers")]),
     _vm._v(" "),
@@ -43757,9 +43741,9 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("p", [_vm._v("Tools on field: - under progress -")]),
+    _c("p", [_vm._v("Tools on field: - development in progress -")]),
     _vm._v(" "),
-    _c("p", [_vm._v("Tools on stock: - under progress -")]),
+    _c("p", [_vm._v("Tools on stock: - development in progress -")]),
     _vm._v(" "),
     _c(
       "p",
@@ -43791,20 +43775,24 @@ var render = function() {
       "p",
       [
         _c("router-link", { attrs: { to: "/open-invoices" } }, [
-          _vm._v("Open invoices")
+          _vm._v("Number of open invoices")
         ]),
         _vm._v(": " + _vm._s(_vm.openInvoices) + " ")
       ],
       1
     ),
     _vm._v(" "),
-    _c("p", [_vm._v("Closed invoices: " + _vm._s(_vm.closedInvoice))]),
+    _c("p", [
+      _vm._v("Number of closed invoices: " + _vm._s(_vm.closedInvoice))
+    ]),
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
-    _c("h5", [_vm._v("Money")]),
+    _c("h5", [_vm._v("Money/profit from loan tools")]),
     _vm._v(" "),
-    _c("p", [_vm._v("Money from closed invoices: " + _vm._s(_vm.money) + " ")]),
+    _c("p", [
+      _vm._v("Money earned from closed invoices: " + _vm._s(_vm.money) + " ")
+    ]),
     _vm._v(" "),
     _c("hr")
   ])
@@ -61287,8 +61275,6 @@ Postaviti da ulogovan korisnik može da pristupi svim stranicama osim login i re
 router.beforeEach(function (to, from, next) {
   var isThereToken = localStorage.getItem('loginToken'); //check if the user has a login token
 
-  console.log("Guard activated. From: ".concat(from.path, " to: ").concat(to.path)); //awesome consol.log trick to see if this is working
-
   if (to.name !== 'login' && to.name !== 'register' && !isThereToken) {
     //if the user is not logged in, he can only visit the login and the register pag	e. ATTENTION: these here are route NAMES, NOT ROUTE PATHS!
     next('/login');
@@ -62357,7 +62343,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_customers_Customers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/customers/Customers */ "./resources/js/components/customers/Customers.vue");
 /* harmony import */ var _components_customers_CreateCustomer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/customers/CreateCustomer */ "./resources/js/components/customers/CreateCustomer.vue");
 /* harmony import */ var _components_tools_Tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/tools/Tools */ "./resources/js/components/tools/Tools.vue");
-/* harmony import */ var _components_tools_CreateTool__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/tools/CreateTool */ "./resources/js/components/tools/CreateTool.vue");
+/* harmony import */ var _components_tools_CreateTool__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/tools/CreateTool */ "./resources/js/components/tools/CreateTool.vue");
 /* harmony import */ var _components_invoices_CreateInvoice__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/invoices/CreateInvoice */ "./resources/js/components/invoices/CreateInvoice.vue");
 /* harmony import */ var _components_invoices_CloseInvoice__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/invoices/CloseInvoice */ "./resources/js/components/invoices/CloseInvoice.vue");
 /* harmony import */ var _components_invoices_Invoices__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/invoices/Invoices */ "./resources/js/components/invoices/Invoices.vue");
@@ -62412,7 +62398,7 @@ var routes = [//AUTH
 }, {
   path: '/create-tool',
   name: 'create-tool',
-  component: _components_tools_CreateTool__WEBPACK_IMPORTED_MODULE_12__["default"]
+  component: _components_tools_CreateTool__WEBPACK_IMPORTED_MODULE_6__["default"]
 }, //INVOICES
 {
   path: '/create-invoice',
@@ -63201,8 +63187,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\API\loanToolApp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\API\loanToolApp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\_CODE\loanToolApp\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\_CODE\loanToolApp\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

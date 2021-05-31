@@ -37,6 +37,7 @@ class InvoiceitemController extends Controller
     public function store(Request $request)
     {
         $invoiceitem = Invoiceitem::create($request->all());
+        
         return $invoiceitem;
     }
 
