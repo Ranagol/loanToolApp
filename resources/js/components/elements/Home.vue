@@ -1,6 +1,5 @@
 <template>
     <div class="alert alert-dark">
-    
         <p class="alert alert-warning">Welcome! On this page you can see some statistics about your loan tool shop. How many tools you have, 
             how many loans were made, how much money was earned, etc. This page will serve also as a starting point.
             So, if you have a customer in your imaginary shop who wants to loan a tool, the first thing to do is to 
@@ -41,7 +40,7 @@ export default {
         ...mapGetters(['customers', 'tools', 'invoices', 'invoiceitems']),
         openInvoices(){
             let openInvoices = 0;
-            // console.log('Home/invoices', this.invoices);
+            console.log('Home/invoices', this.invoices);
             this.invoices.forEach(element => {
                 if (element.invoice_closed == false) {
                     openInvoices++;
@@ -64,11 +63,16 @@ export default {
             return money;
         }
     },
-    data(){
-        return {
-
-        }
+    methods: {
+        ...mapActions(['getCustomers', 'getTools', 'getInvoices', 'getInvoiceitems']),
     },
-    methods: {},
+    mounted() {
+        console.log('called from mounted'),
+        this.getCustomers();
+        this.getTools();
+        this.getInvoices();
+        this.getInvoiceitems();
+    }
+
 }
 </script>

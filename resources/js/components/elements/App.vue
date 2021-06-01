@@ -17,6 +17,7 @@ export default {
         ...mapActions(['getCustomers', 'getTools', 'getInvoices', 'getInvoiceitems']),
     },
     
+    //This code below gets all the relevant data from db, whenever a page is loaded
     created(){
         this.getCustomers();
         this.getTools();

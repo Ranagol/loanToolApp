@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
     name: 'Invoices',
     data(){
@@ -78,8 +78,11 @@ export default {
         }
     },
     methods: {
-        
+        ...mapActions(['getInvoices']),
+    },
+    mounted() {
+        console.log('called from All invoices'),
+        this.getInvoices();
     }
-    
 }
 </script>

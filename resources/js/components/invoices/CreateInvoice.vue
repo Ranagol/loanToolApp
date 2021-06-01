@@ -1,7 +1,7 @@
 <template>
     <div class="alert alert-dark">
         <!-- CREATE INVOICE -->
-        <p class="alert alert-warning mt-2 mb-2">
+        <p class="alert alert-warning mt-2 mb-2 d-print-none">
             On this page you can record the loan tool into the database.  You need to do the next. 
             1.) Enter for how long, how many days would like
             the customer to use to loan tool. Example, for two days, enter 2 into the 'Number of days for tool loaning:' field. 2.) 
@@ -96,6 +96,7 @@ export default {
     computed: {
         ...mapGetters(['customers', 'tools']),
         selectedTools(){
+
             return this.selectedToolsx || [];
         },
         total(){
@@ -103,6 +104,7 @@ export default {
             this.selectedTools.forEach(element => {
                totalx += element.price * this.daysToLoan; 
             });
+
             return totalx;
         },
         invoice(){
@@ -131,6 +133,7 @@ export default {
                 }
                 invoiceitemsx.push(invoiceitem);
             });
+
             return invoiceitemsx;
         }
     },
@@ -144,6 +147,7 @@ export default {
             this.$store.dispatch('createInvoice', this.invoice);//send invoice to vuex actions
             this.$store.dispatch('addInvoiceItems', this.invoiceitems);//send invoiceitems to vuex actions
             this.eraseInvoice();//removes all invoice data after a successfull invoice creation
+            this.$router.push('/open-invoices');//redirect the user to the Open invoices page
         },
 
         eraseInvoice(){

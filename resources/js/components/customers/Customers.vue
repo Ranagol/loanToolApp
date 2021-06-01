@@ -41,7 +41,7 @@
 
 <script>
 import _ from 'lodash';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
     name: 'Customers',
     data(){
@@ -57,12 +57,13 @@ export default {
             });
         }
     },
+    methods: {
+        ...mapActions(['getCustomers']),
+    },
+    mounted() {
+        console.log('called from Customers'),
+        this.getCustomers();
+    }
 
-    
-    
-
-    //_.debounce(func, [wait=0], [options={}])
-        //TODO how to use lodash debounce with the search? I don't want the axios to be activated for every letter immediatelly. Lodash is installed.
-        //https://lodash.com/docs/4.17.15#debounce
 }
 </script>

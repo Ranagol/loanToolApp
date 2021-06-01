@@ -18,10 +18,7 @@ const router = new VueRouter({
     mode: 'history',
 });
 
-/*
-Postaviti da neulogovan korisnik može da pristupi samo login i register stranicama.
-Postaviti da ulogovan korisnik može da pristupi svim stranicama osim login i register
-*/
+
 router.beforeEach((to, from, next) => {
     const isThereToken = localStorage.getItem('loginToken');	//check if the user has a login token
   

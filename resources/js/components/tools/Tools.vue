@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
     name: 'Tools',
     data(){
@@ -51,8 +51,12 @@ export default {
             });
         }
     },
-    
-    
-    
+    methods: {
+        ...mapActions(['getTools']),
+    },
+    mounted() {
+        console.log('called from Tools'),
+        this.getTools();
+    }
 }
 </script>

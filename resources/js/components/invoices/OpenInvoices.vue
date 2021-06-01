@@ -57,13 +57,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
     name: 'OpenInvoices',
     data(){
         return {
             searchTerm:'',
-
         }
     },
     computed: {
@@ -80,9 +79,14 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['getInvoices']),
         goToCloseInvoice(invoiceId){
             this.$router.push(`/close-invoice/${invoiceId}`);
         }
+    },
+    mounted() {
+        console.log('called from Open invoices'),
+        this.getInvoices();
     }
     
 }

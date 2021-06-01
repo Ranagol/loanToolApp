@@ -2216,10 +2216,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return element.name.toLowerCase().match(_this.searchTerm.toLowerCase());
       });
     }
-  }) //_.debounce(func, [wait=0], [options={}])
-  //TODO how to use lodash debounce with the search? I don't want the axios to be activated for every letter immediatelly. Lodash is installed.
-  //https://lodash.com/docs/4.17.15#debounce
-
+  }),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['getCustomers'])),
+  mounted: function mounted() {
+    console.log('called from Customers'), this.getCustomers();
+  }
 });
 
 /***/ }),
@@ -2256,6 +2257,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     'navbar': _Navbar__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['getCustomers', 'getTools', 'getInvoices', 'getInvoiceitems'])),
+  //This code below gets all the relevant data from db, whenever a page is loaded
   created: function created() {
     this.getCustomers();
     this.getTools();
@@ -2316,14 +2318,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Home',
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['customers', 'tools', 'invoices', 'invoiceitems'])), {}, {
     openInvoices: function openInvoices() {
-      var openInvoices = 0; // console.log('Home/invoices', this.invoices);
-
+      var openInvoices = 0;
+      console.log('Home/invoices', this.invoices);
       this.invoices.forEach(function (element) {
         if (element.invoice_closed == false) {
           openInvoices++;
@@ -2344,10 +2345,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return money;
     }
   }),
-  data: function data() {
-    return {};
-  },
-  methods: {}
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getCustomers', 'getTools', 'getInvoices', 'getInvoiceitems'])),
+  mounted: function mounted() {
+    console.log('called from mounted'), this.getCustomers();
+    this.getTools();
+    this.getInvoices();
+    this.getInvoiceitems();
+  }
 });
 
 /***/ }),
@@ -2523,14 +2527,53 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'InvoiceItems',
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['invoiceitems'])),
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['invoiceitems'])), {}, {
+    filteredInvoiceitems: function filteredInvoiceitems() {
+      var _this = this;
+
+      return this.invoiceitems.filter(function (element) {
+        return element.customer_name.toLowerCase().match(_this.searchTerm.toLowerCase()) || element.model.toLowerCase().match(_this.searchTerm.toLowerCase()) || element.taken.toLowerCase().match(_this.searchTerm.toLowerCase());
+      });
+    }
+  }),
   data: function data() {
-    return {};
+    return {
+      searchTerm: ''
+    };
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getInvoiceitems'])),
+  mounted: function mounted() {
+    console.log('called from History/Invoiceitems'), this.getInvoiceitems();
   }
 });
+/*
+comments: null
+created_at: "2021-05-31T14:12:32.000000Z"
+customer_name: "Andor Horvat"
+id: 2
+invoice_id: 3
+invoice_line_closed: 0
+model: "FFFFFFF"
+price: 10000
+returned: null
+taken: "2021-05-31"
+time_on_field: null
+to_pay: null
+tool_id: 6
+updated_at: "2021-05-31T14:12:
+*/
 
 /***/ }),
 
@@ -2838,6 +2881,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.dispatch('addInvoiceItems', this.invoiceitems); //send invoiceitems to vuex actions
 
       this.eraseInvoice(); //removes all invoice data after a successfull invoice creation
+
+      this.$router.push('/open-invoices'); //redirect the user to the Open invoices page
     },
     eraseInvoice: function eraseInvoice() {
       this.selectedCustomer = '';
@@ -2942,7 +2987,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   }),
-  methods: {}
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getInvoices'])),
+  mounted: function mounted() {
+    console.log('called from All invoices'), this.getInvoices();
+  }
 });
 
 /***/ }),
@@ -3043,10 +3091,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   }),
-  methods: {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getInvoices'])), {}, {
     goToCloseInvoice: function goToCloseInvoice(invoiceId) {
       this.$router.push("/close-invoice/".concat(invoiceId));
     }
+  }),
+  mounted: function mounted() {
+    console.log('called from Open invoices'), this.getInvoices();
   }
 });
 
@@ -3175,7 +3226,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return element.model.toLowerCase().match(_this.searchTerm.toLowerCase());
       });
     }
-  })
+  }),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getTools'])),
+  mounted: function mounted() {
+    console.log('called from Tools'), this.getTools();
+  }
 });
 
 /***/ }),
@@ -43985,222 +44040,212 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    { staticClass: "navbar navbar-expand navbar-light bg-light" },
-    [
-      _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-        _vm._v("LoanToolApp")
-      ]),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "collapse navbar-collapse",
-          attrs: { id: "navbarSupportedContent" }
-        },
-        [
-          _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-            !_vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { staticClass: "nav-link", attrs: { to: "/login" } },
-                      [_vm._v("Login")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { staticClass: "nav-link", attrs: { to: "/register" } },
-                      [_vm._v("Register")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { staticClass: "nav-link", attrs: { to: "/home" } },
-                      [_vm._v("Home")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link",
-                        attrs: { to: "/create-customer" }
-                      },
-                      [_vm._v("Create customer")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { staticClass: "nav-link", attrs: { to: "/customers" } },
-                      [_vm._v("Customers")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link",
-                        attrs: { to: "/create-tool" }
-                      },
-                      [_vm._v("Create tool")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { staticClass: "nav-link", attrs: { to: "/tools" } },
-                      [_vm._v("Tools")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link",
-                        attrs: { to: "/create-invoice" }
-                      },
-                      [_vm._v("Create invoice")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link",
-                        attrs: { to: "/open-invoices" }
-                      },
-                      [_vm._v("Open invoices")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { staticClass: "nav-link", attrs: { to: "/invoices" } },
-                      [_vm._v("All invoices")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link",
-                        attrs: { to: "/invoiceitems" }
-                      },
-                      [_vm._v("History")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userHasToken
-              ? _c("li", { staticClass: "nav-item" }, [
+  return _c("nav", { staticClass: "navbar navbar-expand alert alert-dark" }, [
+    _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
+      _vm._v("LoanToolApp")
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "collapse navbar-collapse",
+        attrs: { id: "navbarSupportedContent" }
+      },
+      [
+        _c("ul", { staticClass: "navbar-nav mr-auto" }, [
+          !_vm.userHasToken
+            ? _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
                   _c(
-                    "a",
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/login" } },
+                    [_vm._v("Login")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.userHasToken
+            ? _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/register" } },
+                    [_vm._v("Register")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userHasToken
+            ? _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/home" } },
+                    [_vm._v("Home")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userHasToken
+            ? _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
                     {
                       staticClass: "nav-link",
-                      attrs: { href: "#" },
-                      on: { click: _vm.logout }
+                      attrs: { to: "/create-customer" }
                     },
-                    [_vm._v("Logout")]
+                    [_vm._v("Create customer")]
                   )
-                ])
-              : _vm._e()
-          ])
-        ]
-      )
-    ]
-  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userHasToken
+            ? _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/customers" } },
+                    [_vm._v("Customers")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userHasToken
+            ? _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/create-tool" } },
+                    [_vm._v("Create tool")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userHasToken
+            ? _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/tools" } },
+                    [_vm._v("Tools")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userHasToken
+            ? _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { to: "/create-invoice" }
+                    },
+                    [_vm._v("Create invoice")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userHasToken
+            ? _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { to: "/open-invoices" }
+                    },
+                    [_vm._v("Open invoices")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userHasToken
+            ? _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/invoices" } },
+                    [_vm._v("All invoices")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userHasToken
+            ? _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "nav-link", attrs: { to: "/invoiceitems" } },
+                    [_vm._v("History")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userHasToken
+            ? _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { href: "#" },
+                    on: { click: _vm.logout }
+                  },
+                  [_vm._v("Logout")]
+                )
+              ])
+            : _vm._e()
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -44254,6 +44299,32 @@ var render = function() {
     _vm._v(" "),
     _c("h4", [_vm._v("History of the individual loan tools")]),
     _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.searchTerm,
+          expression: "searchTerm"
+        }
+      ],
+      staticClass: "form-control",
+      attrs: {
+        name: "searchTerm",
+        type: "search",
+        placeholder: "Search by customers, tools, return date..."
+      },
+      domProps: { value: _vm.searchTerm },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.searchTerm = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
     !_vm.invoiceitems.length
       ? _c("div", { staticClass: "alert alert-info" }, [
           _c("h5", [_vm._v("Loading")])
@@ -44266,7 +44337,7 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._l(_vm.invoiceitems, function(invoiceitem, i) {
+        _vm._l(_vm.filteredInvoiceitems, function(invoiceitem, i) {
           return _c("tr", { key: i }, [
             _c("td", [_vm._v(_vm._s(invoiceitem.invoice_id))]),
             _vm._v(" "),
@@ -44527,15 +44598,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
-      _vm._v(
-        "\n        On this page you can record the loan tool into the database.  You need to do the next. \n        1.) Enter for how long, how many days would like\n        the customer to use to loan tool. Example, for two days, enter 2 into the 'Number of days for tool loaning:' field. 2.) \n        Select a customer from the db. 3.) Select the tool or maybe tools from the 'Tools to loan:' field. You can add more than one \n        tools by repeating this process. 4.) The page has an A4 format, so you can easily print out two \n        copies of this document, once it is fully filled. 5.) Click on the 'Create invoice' button. This is it, the loaning \n        procedure is done, you can now double check your newly created invoice in the "
-      ),
-      _c("a", { attrs: { href: "/open-invoices" } }, [_vm._v("Open invoices")]),
-      _vm._v("\n        or in the "),
-      _c("a", { attrs: { href: "/invoices" } }, [_vm._v("All invoices")]),
-      _vm._v(".\n    ")
-    ])
+    return _c(
+      "p",
+      { staticClass: "alert alert-warning mt-2 mb-2 d-print-none" },
+      [
+        _vm._v(
+          "\n        On this page you can record the loan tool into the database.  You need to do the next. \n        1.) Enter for how long, how many days would like\n        the customer to use to loan tool. Example, for two days, enter 2 into the 'Number of days for tool loaning:' field. 2.) \n        Select a customer from the db. 3.) Select the tool or maybe tools from the 'Tools to loan:' field. You can add more than one \n        tools by repeating this process. 4.) The page has an A4 format, so you can easily print out two \n        copies of this document, once it is fully filled. 5.) Click on the 'Create invoice' button. This is it, the loaning \n        procedure is done, you can now double check your newly created invoice in the "
+        ),
+        _c("a", { attrs: { href: "/open-invoices" } }, [
+          _vm._v("Open invoices")
+        ]),
+        _vm._v("\n        or in the "),
+        _c("a", { attrs: { href: "/invoices" } }, [_vm._v("All invoices")]),
+        _vm._v(".\n    ")
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -61568,11 +61645,6 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   routes: _routes__WEBPACK_IMPORTED_MODULE_5__["routes"],
   mode: 'history'
 });
-/*
-Postaviti da neulogovan korisnik može da pristupi samo login i register stranicama.
-Postaviti da ulogovan korisnik može da pristupi svim stranicama osim login i register
-*/
-
 router.beforeEach(function (to, from, next) {
   var isThereToken = localStorage.getItem('loginToken'); //check if the user has a login token
 

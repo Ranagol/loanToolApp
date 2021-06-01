@@ -7,6 +7,15 @@
         </p>
         <h4>History of the individual loan tools</h4>
 
+        <!-- SEARCH FIELD -->
+        <input 
+            v-model="searchTerm" 
+            name="searchTerm" 
+            class="form-control" 
+            type="search" 
+            placeholder="Search by customers, tools, return date..."
+        >
+
         <!-- If there is no data in the db... -->
         <div v-if="!invoiceitems.length" class="alert alert-info">
             <h5>Loading</h5>
@@ -23,7 +32,7 @@
                 <th>To pay</th>
                 <th>Closed?</th>
             </tr>
-            <tr v-for="(invoiceitem, i) in invoiceitems" :key="i">
+            <tr v-for="(invoiceitem, i) in filteredInvoiceitems" :key="i">
                 <td>{{ invoiceitem.invoice_id }}</td>
                 <td>{{ invoiceitem.customer_name }}</td>
                 <td>{{ invoiceitem.model }}</td>
@@ -40,19 +49,48 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
     name: 'InvoiceItems',
     computed: {
         ...mapGetters(['invoiceitems']),
-    },
-    
-    data(){
-        return {
-            
-
+        filteredInvoiceitems(){
+            return this.invoiceitems.filter((element) => {
+                return element.customer_name.toLowerCase().match(this.searchTerm.toLowerCase()) 
+                    || element.model.toLowerCase().match(this.searchTerm.toLowerCase()) 
+                    || element.taken.toLowerCase().match(this.searchTerm.toLowerCase())  
+                ;
+            });
         }
     },
+    data(){
+        return {
+            searchTerm: '',
+        }
+    },
+    methods: {
+        ...mapActions(['getInvoiceitems']),
+    },
+    mounted() {
+        console.log('called from History/Invoiceitems'),
+        this.getInvoiceitems();
+    }
     
 }
+/*
+comments: null
+created_at: "2021-05-31T14:12:32.000000Z"
+customer_name: "Andor Horvat"
+id: 2
+invoice_id: 3
+invoice_line_closed: 0
+model: "FFFFFFF"
+price: 10000
+returned: null
+taken: "2021-05-31"
+time_on_field: null
+to_pay: null
+tool_id: 6
+updated_at: "2021-05-31T14:12:
+*/
 </script>
