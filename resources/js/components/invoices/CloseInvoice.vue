@@ -22,19 +22,20 @@ import { mapGetters } from 'vuex';
 import invoiceService from '../../service/invoiceService';
 export default {
     name: 'CloseInvoice',
-    //this component is showing one selected invoice. Purpose: to check the invoice, before closing the invoice.
     computed: {
         ...mapGetters(['invoices']),
         invoice(){
             return this.invoices.find(invoice => invoice.id == this.invoiceId);
         },
         closedInvoice(){//here we are closing the invoice, and modifying the invoice object values.
+            
             //Invoice level
             let closedInvoice = this.invoice;
             let now = moment();
             closedInvoice.invoice_closed = true;
             closedInvoice.closing_date = now.format('YYYY-MM-DD');
             let sumToPay = 0;
+
             //Invoiceitem level
             closedInvoice.invoiceitems.forEach(invoiceitem => {
                 invoiceitem.returned = now.format('YYYY-MM-DD');
@@ -50,6 +51,7 @@ export default {
                 invoiceitem.invoice_line_closed = true;
             });
             closedInvoice.sum_for_paying = sumToPay;
+
             return closedInvoice;
         }
     },
@@ -67,7 +69,8 @@ export default {
 
             //send the closed invoice to the db
             try {
-              await invoiceService.updateInvoice(this.invoiceId, this.closedInvoice);  
+              await invoiceService.updateInvoice(this.invoiceId, this.closedInvoice);
+              console.log('Invoice successfully closed.');
             } catch (error) {
                 console.log('Error during closeInvoice from CloseInvoice.vue.');
                 console.dir(error);
