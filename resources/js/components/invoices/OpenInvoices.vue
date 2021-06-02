@@ -1,7 +1,7 @@
 <template>
-    <div class="alert alert-dark">
+    <div class="alert alert-dark my-content-page">
 
-        <p class="alert alert-warning mt-2 mb-2">
+        <p class="alert alert-warning mt-2 mb-2 my-instructions">
             THE INVOICE SYSTEM EXPLANATION: when a customer loans out a tool from the shop, an open invoice is created. The created invoice is open, because
             the data of the open invoice can be changed by you. This is needed, because quite often happens that a customer returns a tool sooner 
             - or maybe much later - than he thought he will, and this will change the final amount to pay that was preliminary defined on the invoice, when the customer 
@@ -21,7 +21,7 @@
             </ol>
         </p>
 
-        <p class="alert alert-warning mt-2 mb-2">
+        <p class="alert alert-warning mt-2 mb-2 my-instructions">
             Here, on this page, as said before, you can see the list of all open invoices. Once the customer returns the tool that he loaned, and payes
             for it, you need to close his open invoice. This can be simply done, by clicking on the 'Close invoice' button.
         </p>
@@ -29,14 +29,20 @@
         <h4>Open invoices</h4>
 
         <!-- SEARCH FIELD -->
-        <input v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search">
+        <input 
+            v-model="searchTerm" 
+            name="searchTerm" 
+            class="form-control input-background" 
+            type="search" 
+            placeholder="Search"
+        >
 
         <!-- If there is no data in the db... -->
         <div v-if="!invoices.length" class="alert alert-info">
             <h5>Loading</h5>
         </div>
 
-        <table class="table">
+        <table class="table table-text">
             <tr>
                 <th>Nr#</th>
                 <th>Customer</th>

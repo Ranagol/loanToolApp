@@ -47,7 +47,6 @@ class InvoiceController extends Controller
         $invoice->save();
 
         //invoice items (tool handling)
-        print_r($request); die;
         $invoiceitems = $request->input(['invoiceitems']);
         $itemsToReturn = [];//this will be used simply to return all items to the frontend, as part of the OK response
         foreach ($invoiceitems as $tool) {

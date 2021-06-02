@@ -1,0 +1,59 @@
+body {
+    background-color: rgb(24, 26, 27);
+    color: rgb(209, 205, 199);
+}
+
+.my-navbar {
+    color: rgb(213, 209, 204);
+    background-color: rgb(46, 50, 52);
+    border-color: rgb(64, 69, 71);
+}
+
+.my-content-page {
+    color: rgb(213, 209, 204);
+    background-color: rgb(46, 50, 52);
+    border-color: rgb(64, 69, 71);
+}
+
+.my-instructions {
+    color: rgb(251, 215, 112);
+    background-color: rgb(81, 62, 0);
+    border-color: rgb(123, 92, 0);
+}
+
+.input-background {
+    background-color: rgb(46, 50, 52);
+}
+
+.input-text-color {
+    color: rgb(213, 209, 204);
+}
+
+.select-border {
+    color: rgb(213, 209, 204);
+    border: 1px solid;
+    border-color: rgb(213, 209, 204);
+}
+
+.table-text {
+    color: rgb(213, 209, 204); 
+}
+
+.vs__selected-options .vs__selected {
+    color: rgb(213, 209, 204); 
+}
+
+/* .vs__actions .vs__clear {
+    background-color: rgb(213, 209, 204);
+} */
+
+.vs__actions .vs__open-indicator { 
+    background-color: rgb(213, 209, 204);
+    border: 1px solid;
+}
+
+#vs2__combobox .vs__selected-options .vs__selected {
+    color: rgb(213, 209, 204); 
+    background-color: red;
+}
+

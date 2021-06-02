@@ -2806,6 +2806,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2970,6 +2980,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Invoices',
@@ -3013,6 +3029,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3300,6 +3322,25 @@ exports.push([module.i, ".v-select{position:relative;font-family:inherit}.v-sele
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/elements/App.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/elements/App.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+exports.i(__webpack_require__(/*! -!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../css/app.css */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./resources/css/app.css"), "");
+
+// module
+exports.push([module.i, "\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/invoices/CreateInvoice.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/invoices/CreateInvoice.vue?vue&type=style&index=0&lang=css& ***!
@@ -3313,6 +3354,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n.input-style {\n    width: auto;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./resources/css/app.css":
+/*!****************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./resources/css/app.css ***!
+  \****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "body {\r\n    background-color: rgb(24, 26, 27);\r\n    color: rgb(209, 205, 199);\n}\n.my-navbar {\r\n    color: rgb(213, 209, 204);\r\n    background-color: rgb(46, 50, 52);\r\n    border-color: rgb(64, 69, 71);\n}\n.my-content-page {\r\n    color: rgb(213, 209, 204);\r\n    background-color: rgb(46, 50, 52);\r\n    border-color: rgb(64, 69, 71);\n}\n.my-instructions {\r\n    color: rgb(251, 215, 112);\r\n    background-color: rgb(81, 62, 0);\r\n    border-color: rgb(123, 92, 0);\n}\n.input-background {\r\n    background-color: rgb(46, 50, 52);\n}\n.input-text-color {\r\n    color: rgb(213, 209, 204);\n}\n.select-border {\r\n    color: rgb(213, 209, 204);\r\n    border: 1px solid;\r\n    border-color: rgb(213, 209, 204);\n}\n.table-text {\r\n    color: rgb(213, 209, 204);\n}\n.vs__selected-options .vs__selected {\r\n    color: rgb(213, 209, 204);\n}\r\n\r\n/* .vs__actions .vs__clear {\r\n    background-color: rgb(213, 209, 204);\r\n} */\n.vs__actions .vs__open-indicator { \r\n    background-color: rgb(213, 209, 204);\r\n    border: 1px solid;\n}\n#vs2__combobox .vs__selected-options .vs__selected {\r\n    color: rgb(213, 209, 204); \r\n    background-color: red;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -42702,6 +42762,36 @@ try {
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/elements/App.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/elements/App.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/elements/App.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/invoices/CreateInvoice.vue?vue&type=style&index=0&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/invoices/CreateInvoice.vue?vue&type=style&index=0&lang=css& ***!
@@ -43632,7 +43722,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "alert alert-dark" }, [
+  return _c("div", { staticClass: "alert alert-dark my-content-page" }, [
     _vm._m(0),
     _vm._v(" "),
     _c("h3", [_vm._v("Create customer")]),
@@ -43648,7 +43738,7 @@ var render = function() {
             expression: "customer.name"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control input-background",
         attrs: { name: "name", type: "text" },
         domProps: { value: _vm.customer.name },
         on: {
@@ -43673,7 +43763,7 @@ var render = function() {
             expression: "customer.city"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control input-background",
         attrs: { name: "city", type: "text" },
         domProps: { value: _vm.customer.city },
         on: {
@@ -43698,7 +43788,7 @@ var render = function() {
             expression: "customer.address"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control input-background",
         attrs: { name: "address", type: "text" },
         domProps: { value: _vm.customer.address },
         on: {
@@ -43723,7 +43813,7 @@ var render = function() {
             expression: "customer.phone"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control input-background",
         attrs: { name: "phone", type: "text" },
         domProps: { value: _vm.customer.phone },
         on: {
@@ -43748,7 +43838,7 @@ var render = function() {
             expression: "customer.comments"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control input-background",
         attrs: { name: "comments", type: "text" },
         domProps: { value: _vm.customer.comments },
         on: {
@@ -43774,7 +43864,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "alert alert-warning" }, [
+    return _c("p", { staticClass: "alert alert-warning my-instructions" }, [
       _vm._v(
         "\n        On this page you can write your new customers data into the database. The first step is to check if this\n        customer is already in the database. Use the search field for this in the "
       ),
@@ -43810,7 +43900,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "alert alert-dark" }, [
+  return _c("div", { staticClass: "alert alert-dark my-content-page" }, [
     _vm._m(0),
     _vm._v(" "),
     _c("h3", [_vm._v("Customers")]),
@@ -43824,7 +43914,7 @@ var render = function() {
           expression: "searchTerm"
         }
       ],
-      staticClass: "form-control",
+      staticClass: "form-control input-background",
       attrs: { name: "searchTerm", type: "search", placeholder: "Search" },
       domProps: { value: _vm.searchTerm },
       on: {
@@ -43845,7 +43935,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "table",
-      { staticClass: "table" },
+      { staticClass: "table table-text" },
       [
         _vm._m(1),
         _vm._v(" "),
@@ -43872,7 +43962,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "alert alert-warning" }, [
+    return _c("p", { staticClass: "alert alert-warning my-instructions" }, [
       _vm._v(
         "\n        Here you can see the list of all your customers, who are in your database. This is the place where you can check if a current\n        customer (who wants to loan a tool from your shop) is already in your database. Use the search field below to check this.\n        "
       ),
@@ -43917,10 +44007,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/elements/App.vue?vue&type=template&id=77e73f98&":
-/*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/elements/App.vue?vue&type=template&id=77e73f98& ***!
-  \***************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/elements/App.vue?vue&type=template&id=77e73f98&class=body-background&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/elements/App.vue?vue&type=template&id=77e73f98&class=body-background& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -43932,7 +44022,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("navbar"), _vm._v(" "), _c("router-view")], 1)
+  return _c(
+    "div",
+    { staticClass: "body-background" },
+    [_c("navbar"), _vm._v(" "), _c("router-view")],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43956,7 +44051,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "alert alert-dark" }, [
+  return _c("div", { staticClass: "alert alert-dark my-content-page" }, [
     _vm._m(0),
     _vm._v(" "),
     _c("h3", [_vm._v("Home/owerview")]),
@@ -43988,10 +44083,6 @@ var render = function() {
       ],
       1
     ),
-    _vm._v(" "),
-    _c("p", [_vm._v("Tools on field: - development in progress -")]),
-    _vm._v(" "),
-    _c("p", [_vm._v("Tools on stock: - development in progress -")]),
     _vm._v(" "),
     _c(
       "p",
@@ -44025,13 +44116,18 @@ var render = function() {
         _c("router-link", { attrs: { to: "/open-invoices" } }, [
           _vm._v("Number of open invoices")
         ]),
-        _vm._v(": " + _vm._s(_vm.openInvoices) + " ")
+        _vm._v(
+          " (loan tools currently on field): " + _vm._s(_vm.openInvoices) + " "
+        )
       ],
       1
     ),
     _vm._v(" "),
     _c("p", [
-      _vm._v("Number of closed invoices: " + _vm._s(_vm.closedInvoice))
+      _vm._v(
+        "Number of closed invoices (loan tools returned and payed): " +
+          _vm._s(_vm.closedInvoice)
+      )
     ]),
     _vm._v(" "),
     _c("hr"),
@@ -44039,7 +44135,8 @@ var render = function() {
     _c("h5", [_vm._v("Money/profit from loan tools")]),
     _vm._v(" "),
     _c("p", [
-      _vm._v("Money earned from closed invoices: " + _vm._s(_vm.money) + " ")
+      _vm._v("Money earned from closed invoices: "),
+      _c("strong", { staticClass: "h4" }, [_vm._v(_vm._s(_vm.money))])
     ]),
     _vm._v(" "),
     _c("hr")
@@ -44050,7 +44147,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "alert alert-warning" }, [
+    return _c("p", { staticClass: "alert alert-warning my-instructions" }, [
       _vm._v(
         "Welcome! On this page you can see some statistics about your loan tool shop. How many tools you have, \n        how many loans were made, how much money was earned, etc. This page will serve also as a starting point.\n        So, if you have a customer in your imaginary shop who wants to loan a tool, the first thing to do is to \n        check if the customer is already in your database. That is happening in the "
       ),
@@ -44086,212 +44183,222 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("nav", { staticClass: "navbar navbar-expand alert alert-dark" }, [
-    _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-      _vm._v("LoanToolApp")
-    ]),
-    _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "collapse navbar-collapse",
-        attrs: { id: "navbarSupportedContent" }
-      },
-      [
-        _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-          !_vm.userHasToken
-            ? _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    { staticClass: "nav-link", attrs: { to: "/login" } },
-                    [_vm._v("Login")]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          !_vm.userHasToken
-            ? _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    { staticClass: "nav-link", attrs: { to: "/register" } },
-                    [_vm._v("Register")]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.userHasToken
-            ? _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    { staticClass: "nav-link", attrs: { to: "/home" } },
-                    [_vm._v("Home")]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.userHasToken
-            ? _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { to: "/create-customer" }
-                    },
-                    [_vm._v("Create customer")]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.userHasToken
-            ? _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    { staticClass: "nav-link", attrs: { to: "/customers" } },
-                    [_vm._v("Customers")]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.userHasToken
-            ? _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    { staticClass: "nav-link", attrs: { to: "/create-tool" } },
-                    [_vm._v("Create tool")]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.userHasToken
-            ? _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    { staticClass: "nav-link", attrs: { to: "/tools" } },
-                    [_vm._v("Tools")]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.userHasToken
-            ? _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { to: "/create-invoice" }
-                    },
-                    [_vm._v("Create invoice")]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.userHasToken
-            ? _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { to: "/open-invoices" }
-                    },
-                    [_vm._v("Open invoices")]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.userHasToken
-            ? _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    { staticClass: "nav-link", attrs: { to: "/invoices" } },
-                    [_vm._v("All invoices")]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.userHasToken
-            ? _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    { staticClass: "nav-link", attrs: { to: "/invoiceitems" } },
-                    [_vm._v("History")]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.userHasToken
-            ? _c("li", { staticClass: "nav-item" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link",
-                    attrs: { href: "#" },
-                    on: { click: _vm.logout }
-                  },
-                  [_vm._v("Logout")]
+  return _c(
+    "nav",
+    { staticClass: "navbar navbar-expand alert alert-dark my-navbar" },
+    [
+      _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
+        _vm._v("LoanToolApp")
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "collapse navbar-collapse",
+          attrs: { id: "navbarSupportedContent" }
+        },
+        [
+          _c("ul", { staticClass: "navbar-nav mr-auto" }, [
+            !_vm.userHasToken
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      { staticClass: "nav-link", attrs: { to: "/login" } },
+                      [_vm._v("Login")]
+                    )
+                  ],
+                  1
                 )
-              ])
-            : _vm._e()
-        ])
-      ]
-    )
-  ])
+              : _vm._e(),
+            _vm._v(" "),
+            !_vm.userHasToken
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      { staticClass: "nav-link", attrs: { to: "/register" } },
+                      [_vm._v("Register")]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.userHasToken
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      { staticClass: "nav-link", attrs: { to: "/home" } },
+                      [_vm._v("Home")]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.userHasToken
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link",
+                        attrs: { to: "/create-customer" }
+                      },
+                      [_vm._v("Create customer")]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.userHasToken
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      { staticClass: "nav-link", attrs: { to: "/customers" } },
+                      [_vm._v("Customers")]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.userHasToken
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link",
+                        attrs: { to: "/create-tool" }
+                      },
+                      [_vm._v("Create tool")]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.userHasToken
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      { staticClass: "nav-link", attrs: { to: "/tools" } },
+                      [_vm._v("Tools")]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.userHasToken
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link",
+                        attrs: { to: "/create-invoice" }
+                      },
+                      [_vm._v("Create invoice")]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.userHasToken
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link",
+                        attrs: { to: "/open-invoices" }
+                      },
+                      [_vm._v("Open invoices")]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.userHasToken
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      { staticClass: "nav-link", attrs: { to: "/invoices" } },
+                      [_vm._v("All invoices")]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.userHasToken
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link",
+                        attrs: { to: "/invoiceitems" }
+                      },
+                      [_vm._v("History")]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.userHasToken
+              ? _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: "#" },
+                      on: { click: _vm.logout }
+                    },
+                    [_vm._v("Logout")]
+                  )
+                ])
+              : _vm._e()
+          ])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -44336,8 +44443,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "alert alert-dark" }, [
-    _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
+  return _c("div", { staticClass: "alert alert-dark my-content-page" }, [
+    _c("p", { staticClass: "alert alert-warning mt-2 mb-2 my-instructions" }, [
       _vm._v(
         "\n        This page is focused on the \"history\" of the individual loan tools. This is needed, because on one invoice there could be two, three,\n        etc., tools. And on the invoice related pages we can't see the exact details. Here we can see which tools were the longest time on the\n        field, which tool has 'created' the biggest amount of money, if the tool is still on the field maybe, and so on.\n    "
       )
@@ -44354,7 +44461,7 @@ var render = function() {
           expression: "searchTerm"
         }
       ],
-      staticClass: "form-control",
+      staticClass: "form-control input-background",
       attrs: {
         name: "searchTerm",
         type: "search",
@@ -44379,7 +44486,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "table",
-      { staticClass: "table" },
+      { staticClass: "table table-text" },
       [
         _vm._m(0),
         _vm._v(" "),
@@ -44387,9 +44494,9 @@ var render = function() {
           return _c("tr", { key: i }, [
             _c("td", [_vm._v(_vm._s(invoiceitem.invoice_id))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(invoiceitem.customer_name))]),
-            _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoiceitem.model))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(invoiceitem.customer_name))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoiceitem.taken))]),
             _vm._v(" "),
@@ -44415,9 +44522,9 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", [_vm._v("Invoice nr")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Customer")]),
-      _vm._v(" "),
       _c("th", [_vm._v("Tool")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Customer")]),
       _vm._v(" "),
       _c("th", [_vm._v("Loan date")]),
       _vm._v(" "),
@@ -44494,7 +44601,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "alert alert-dark" }, [
+  return _c("div", { staticClass: "alert alert-dark my-content-page" }, [
     _vm._m(0),
     _vm._v(" "),
     _c("hr"),
@@ -44520,7 +44627,8 @@ var render = function() {
                 expression: "daysToLoan"
               }
             ],
-            staticClass: "form-control input-style rounded danger",
+            staticClass:
+              "form-control input-text-color mt-4 input-background input-style rounded danger",
             attrs: { type: "text", required: "" },
             domProps: { value: _vm.daysToLoan },
             on: {
@@ -44544,7 +44652,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("v-select", {
-              staticClass: "rounded danger",
+              staticClass: "rounded danger select-border",
               attrs: { label: "name", options: _vm.customers },
               model: {
                 value: _vm.selectedCustomer,
@@ -44575,7 +44683,7 @@ var render = function() {
         "p",
         [
           _c("v-select", {
-            staticClass: "rounded danger",
+            staticClass: "rounded danger select-border",
             attrs: { multiple: "", label: "model", options: _vm.tools },
             model: {
               value: _vm.selectedToolsx,
@@ -44592,7 +44700,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "table",
-      { staticClass: "table" },
+      { staticClass: "table table-text" },
       [
         _vm._m(1),
         _vm._v(" "),
@@ -44621,9 +44729,9 @@ var render = function() {
           _vm._v(" "),
           _c("td"),
           _vm._v(" "),
-          _c("td"),
+          _c("td", [_vm._v("TOTAL TO PAY:")]),
           _vm._v(" "),
-          _c("td", [_vm._v("TOTAL TO PAY: " + _vm._s(_vm.total))])
+          _c("td", [_vm._v(_vm._s(_vm.total))])
         ])
       ],
       2
@@ -44646,10 +44754,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "p",
-      { staticClass: "alert alert-warning mt-2 mb-2 d-print-none" },
+      {
+        staticClass:
+          "alert alert-warning mt-2 mb-2 d-print-none my-instructions"
+      },
       [
         _vm._v(
-          "\n        On this page you can record the loan tool into the database.  You need to do the next. \n        1.) Enter for how long, how many days would like\n        the customer to use to loan tool. Example, for two days, enter 2 into the 'Number of days for tool loaning:' field. 2.) \n        Select a customer from the db. 3.) Select the tool or maybe tools from the 'Tools to loan:' field. You can add more than one \n        tools by repeating this process. 4.) The page has an A4 format, so you can easily print out two \n        copies of this document, once it is fully filled. 5.) Click on the 'Create invoice' button. This is it, the loaning \n        procedure is done, you can now double check your newly created invoice in the "
+          "\n        On this page you can record the tool loaning into the database, and create an invoice.  You need to do the next. \n        1.) Enter for how long, how many days would like\n        the customer to use to loan tool. Example, for two days, enter 2 into the 'Number of days for tool loaning:' field. 2.) \n        Select a customer from the db. 3.) Select the tool or maybe tools from the 'Tools to loan:' field. You can add more than one \n        tools by repeating this process. 4.) The page has an A4 format, so you can easily print out two \n        copies of this document, once it is fully filled. 5.) Click on the 'Create invoice' button. This is it, the loaning \n        procedure is done, you can now double check your newly created invoice in the "
         ),
         _c("a", { attrs: { href: "/open-invoices" } }, [
           _vm._v("Open invoices")
@@ -44700,10 +44811,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "alert alert-dark" }, [
+  return _c("div", { staticClass: "alert alert-dark my-content-page" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
+    _c("p", { staticClass: "alert alert-warning mt-2 mb-2 my-instructions" }, [
       _vm._v(
         "\n        Here, on this page, as said before, you can see the list of all  invoices, regardless if they are open or closed.\n    "
       )
@@ -44720,7 +44831,7 @@ var render = function() {
           expression: "searchTerm"
         }
       ],
-      staticClass: "form-control",
+      staticClass: "form-control input-background",
       attrs: { name: "searchTerm", type: "search", placeholder: "Search" },
       domProps: { value: _vm.searchTerm },
       on: {
@@ -44741,7 +44852,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "table",
-      { staticClass: "table" },
+      { staticClass: "table table-text" },
       [
         _vm._m(1),
         _vm._v(" "),
@@ -44772,35 +44883,39 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
-      _vm._v(
-        "\n        THE INVOICE SYSTEM EXPLANATION: when a customer loans out a tool from the shop, an open invoice is created. The created invoice is open, because\n        the data of the open invoice can be changed by you. This is needed, because quite often happens that a customer returns a tool sooner \n        - or maybe much later - than he thought he will, and this will change the final amount to pay that was preliminary defined on the invoice, when the customer \n        loaned the tool.This is why we have open invoices. While the tool is on the field, with the customer, the invoice stays open.\n        Once the customer returned the tool, and payed, then you need to close the invoice. The open invoices are editable, the closed\n        invoice are not editable. So we have three pages regarding invoices:\n        "
-      ),
-      _c("ol", [
-        _c("li", [
-          _c("a", { attrs: { href: "/create-invoice" } }, [
-            _vm._v("Create invoice")
+    return _c(
+      "p",
+      { staticClass: "alert alert-warning mt-2 mb-2 my-instructions" },
+      [
+        _vm._v(
+          "\n        THE INVOICE SYSTEM EXPLANATION: when a customer loans out a tool from the shop, an open invoice is created. The created invoice is open, because\n        the data of the open invoice can be changed by you. This is needed, because quite often happens that a customer returns a tool sooner \n        - or maybe much later - than he thought he will, and this will change the final amount to pay that was preliminary defined on the invoice, when the customer \n        loaned the tool.This is why we have open invoices. While the tool is on the field, with the customer, the invoice stays open.\n        Once the customer returned the tool, and payed, then you need to close the invoice. The open invoices are editable, the closed\n        invoice are not editable. So we have three pages regarding invoices:\n        "
+        ),
+        _c("ol", [
+          _c("li", [
+            _c("a", { attrs: { href: "/create-invoice" } }, [
+              _vm._v("Create invoice")
+            ]),
+            _vm._v(
+              ", where the invoices are created when a tool is loaned out.\n            "
+            )
           ]),
-          _vm._v(
-            ", where the invoices are created when a tool is loaned out.\n            "
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "/open-invoices" } }, [
-            _vm._v("Open invoices")
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "/open-invoices" } }, [
+              _vm._v("Open invoices")
+            ]),
+            _vm._v(", where you can see all the open invoices\n            ")
           ]),
-          _vm._v(", where you can see all the open invoices\n            ")
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "/invoices" } }, [_vm._v("All invoices")]),
-          _vm._v(
-            ", where you can see all created invoices, regardless if it is open or closed.\n            "
-          )
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "/invoices" } }, [_vm._v("All invoices")]),
+            _vm._v(
+              ", where you can see all created invoices, regardless if it is open or closed.\n            "
+            )
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -44844,10 +44959,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "alert alert-dark" }, [
+  return _c("div", { staticClass: "alert alert-dark my-content-page" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
+    _c("p", { staticClass: "alert alert-warning mt-2 mb-2 my-instructions" }, [
       _vm._v(
         "\n        Here, on this page, as said before, you can see the list of all open invoices. Once the customer returns the tool that he loaned, and payes\n        for it, you need to close his open invoice. This can be simply done, by clicking on the 'Close invoice' button.\n    "
       )
@@ -44864,7 +44979,7 @@ var render = function() {
           expression: "searchTerm"
         }
       ],
-      staticClass: "form-control",
+      staticClass: "form-control input-background",
       attrs: { name: "searchTerm", type: "search", placeholder: "Search" },
       domProps: { value: _vm.searchTerm },
       on: {
@@ -44885,7 +45000,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "table",
-      { staticClass: "table" },
+      { staticClass: "table table-text" },
       [
         _vm._m(1),
         _vm._v(" "),
@@ -44925,35 +45040,39 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
-      _vm._v(
-        "\n        THE INVOICE SYSTEM EXPLANATION: when a customer loans out a tool from the shop, an open invoice is created. The created invoice is open, because\n        the data of the open invoice can be changed by you. This is needed, because quite often happens that a customer returns a tool sooner \n        - or maybe much later - than he thought he will, and this will change the final amount to pay that was preliminary defined on the invoice, when the customer \n        loaned the tool.This is why we have open invoices. While the tool is on the field, with the customer, the invoice stays open.\n        Once the customer returned the tool, and payed, then you need to close the invoice. The open invoices are editable, the closed\n        invoice are not editable. So we have three pages regarding invoices:\n        "
-      ),
-      _c("ol", [
-        _c("li", [
-          _c("a", { attrs: { href: "/create-invoice" } }, [
-            _vm._v("Create invoice")
+    return _c(
+      "p",
+      { staticClass: "alert alert-warning mt-2 mb-2 my-instructions" },
+      [
+        _vm._v(
+          "\n        THE INVOICE SYSTEM EXPLANATION: when a customer loans out a tool from the shop, an open invoice is created. The created invoice is open, because\n        the data of the open invoice can be changed by you. This is needed, because quite often happens that a customer returns a tool sooner \n        - or maybe much later - than he thought he will, and this will change the final amount to pay that was preliminary defined on the invoice, when the customer \n        loaned the tool.This is why we have open invoices. While the tool is on the field, with the customer, the invoice stays open.\n        Once the customer returned the tool, and payed, then you need to close the invoice. The open invoices are editable, the closed\n        invoice are not editable. So we have three pages regarding invoices:\n        "
+        ),
+        _c("ol", [
+          _c("li", [
+            _c("a", { attrs: { href: "/create-invoice" } }, [
+              _vm._v("Create invoice")
+            ]),
+            _vm._v(
+              ", where the invoices are created when a tool is loaned out.\n            "
+            )
           ]),
-          _vm._v(
-            ", where the invoices are created when a tool is loaned out.\n            "
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "/open-invoices" } }, [
-            _vm._v("Open invoices")
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "/open-invoices" } }, [
+              _vm._v("Open invoices")
+            ]),
+            _vm._v(", where you can see all the open invoices\n            ")
           ]),
-          _vm._v(", where you can see all the open invoices\n            ")
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", { attrs: { href: "/invoices" } }, [_vm._v("All invoices")]),
-          _vm._v(
-            ", where you can see all created invoices, regardless if it is open or closed.\n            "
-          )
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "/invoices" } }, [_vm._v("All invoices")]),
+            _vm._v(
+              ", where you can see all created invoices, regardless if it is open or closed.\n            "
+            )
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -44993,7 +45112,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "alert alert-dark" }, [
+  return _c("div", { staticClass: "alert alert-dark my-content-page" }, [
     _vm._m(0),
     _vm._v(" "),
     _c("h3", [_vm._v("Create tool")]),
@@ -45009,7 +45128,7 @@ var render = function() {
             expression: "tool.brand"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control input-background",
         attrs: { name: "brand", type: "text" },
         domProps: { value: _vm.tool.brand },
         on: {
@@ -45034,7 +45153,7 @@ var render = function() {
             expression: "tool.model"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control input-background",
         attrs: { name: "model", type: "text" },
         domProps: { value: _vm.tool.model },
         on: {
@@ -45059,7 +45178,7 @@ var render = function() {
             expression: "tool.description"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control input-background",
         attrs: { name: "description", type: "text" },
         domProps: { value: _vm.tool.description },
         on: {
@@ -45084,7 +45203,7 @@ var render = function() {
             expression: "tool.serial_number"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control input-background",
         attrs: { name: "serial_number", type: "text" },
         domProps: { value: _vm.tool.serial_number },
         on: {
@@ -45109,7 +45228,7 @@ var render = function() {
             expression: "tool.price"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control input-background",
         attrs: { name: "price", type: "text" },
         domProps: { value: _vm.tool.price },
         on: {
@@ -45134,7 +45253,7 @@ var render = function() {
             expression: "tool.tool_picture_url"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control input-background",
         attrs: { name: "tool_picture_url", type: "text" },
         domProps: { value: _vm.tool.tool_picture_url },
         on: {
@@ -45159,7 +45278,7 @@ var render = function() {
             expression: "tool.comments"
           }
         ],
-        staticClass: "form-control",
+        staticClass: "form-control input-background",
         attrs: { name: "comments", type: "text" },
         domProps: { value: _vm.tool.comments },
         on: {
@@ -45185,13 +45304,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
-      _vm._v(
-        "\n        If you add a new loan tool to your already existing fleet of loan tools, this is the place where you can write the new loan\n        tools data into the database. Once you created your new tool with the click on the 'Create tool' button, you can check\n        if this newly created tool has appeared on the "
-      ),
-      _c("a", { attrs: { href: "/tools" } }, [_vm._v("Tools")]),
-      _vm._v(" page, which contains all the loan tools in your shop.\n    ")
-    ])
+    return _c(
+      "p",
+      { staticClass: "alert alert-warning mt-2 mb-2 my-instructions" },
+      [
+        _vm._v(
+          "\n        If you add a new loan tool to your already existing fleet of loan tools, this is the place where you can write the new loan\n        tools data into the database. Once you created your new tool with the click on the 'Create tool' button, you can check\n        if this newly created tool has appeared on the "
+        ),
+        _c("a", { attrs: { href: "/tools" } }, [_vm._v("Tools")]),
+        _vm._v(" page, which contains all the loan tools in your shop.\n    ")
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -45215,8 +45338,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "alert alert-dark" }, [
-    _c("p", { staticClass: "alert alert-warning mt-2 mb-2" }, [
+  return _c("div", { staticClass: "alert alert-dark my-content-page" }, [
+    _c("p", { staticClass: "alert alert-warning mt-2 mb-2 my-instructions" }, [
       _vm._v(
         "\n        On this page you can see the list of all your loan tools. Use the search field if you are looking for a specific tool.\n    "
       )
@@ -45233,7 +45356,7 @@ var render = function() {
           expression: "searchTerm"
         }
       ],
-      staticClass: "form-control",
+      staticClass: "form-control input-background",
       attrs: { name: "searchTerm", type: "search", placeholder: "Search" },
       domProps: { value: _vm.searchTerm },
       on: {
@@ -45254,7 +45377,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "table",
-      { staticClass: "table" },
+      { staticClass: "table table-text" },
       [
         _vm._m(0),
         _vm._v(" "),
@@ -62026,9 +62149,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _App_vue_vue_type_template_id_77e73f98___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=77e73f98& */ "./resources/js/components/elements/App.vue?vue&type=template&id=77e73f98&");
+/* harmony import */ var _App_vue_vue_type_template_id_77e73f98_class_body_background___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=77e73f98&class=body-background& */ "./resources/js/components/elements/App.vue?vue&type=template&id=77e73f98&class=body-background&");
 /* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ "./resources/js/components/elements/App.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/elements/App.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -62036,10 +62161,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _App_vue_vue_type_template_id_77e73f98___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _App_vue_vue_type_template_id_77e73f98___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _App_vue_vue_type_template_id_77e73f98_class_body_background___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _App_vue_vue_type_template_id_77e73f98_class_body_background___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -62068,19 +62193,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/elements/App.vue?vue&type=template&id=77e73f98&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/elements/App.vue?vue&type=template&id=77e73f98& ***!
-  \*********************************************************************************/
+/***/ "./resources/js/components/elements/App.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/elements/App.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/elements/App.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/elements/App.vue?vue&type=template&id=77e73f98&class=body-background&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/elements/App.vue?vue&type=template&id=77e73f98&class=body-background& ***!
+  \*******************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_77e73f98___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=template&id=77e73f98& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/elements/App.vue?vue&type=template&id=77e73f98&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_77e73f98___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_77e73f98_class_body_background___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=template&id=77e73f98&class=body-background& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/elements/App.vue?vue&type=template&id=77e73f98&class=body-background&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_77e73f98_class_body_background___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_77e73f98___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_77e73f98_class_body_background___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

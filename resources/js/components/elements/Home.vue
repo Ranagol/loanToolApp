@@ -1,6 +1,6 @@
 <template>
-    <div class="alert alert-dark">
-        <p class="alert alert-warning">Welcome! On this page you can see some statistics about your loan tool shop. How many tools you have, 
+    <div class="alert alert-dark my-content-page">
+        <p class="alert alert-warning my-instructions">Welcome! On this page you can see some statistics about your loan tool shop. How many tools you have, 
             how many loans were made, how much money was earned, etc. This page will serve also as a starting point.
             So, if you have a customer in your imaginary shop who wants to loan a tool, the first thing to do is to 
             check if the customer is already in your database. That is happening in the <a href="/customers">Customers</a> 
@@ -15,19 +15,19 @@
 
         <h5>Tools</h5>
         <p>All loan <router-link to="/tools" >tools</router-link>: {{ tools.length }}</p>
-        <p>Tools on field: - development in progress -</p>
-        <p>Tools on stock: - development in progress -</p>
+        <!-- <p>Tools on field: - development in progress -</p>
+        <p>Tools on stock: - development in progress -</p> -->
         <p>Number of all <router-link  to="/invoiceitems" >loans</router-link>: {{ invoiceitems.length }}</p>
         <hr>
 
         <h5>Invoices</h5>
         <p>Number of all <router-link to="/invoices" >invoices</router-link>: {{ invoices.length }}</p>
-        <p><router-link to="/open-invoices" >Number of open invoices</router-link>: {{ openInvoices }} </p>
-        <p>Number of closed invoices: {{ closedInvoice }}</p>
+        <p><router-link to="/open-invoices" >Number of open invoices</router-link> (loan tools currently on field): {{ openInvoices }} </p>
+        <p>Number of closed invoices (loan tools returned and payed): {{ closedInvoice }}</p>
         <hr>
 
         <h5>Money/profit from loan tools</h5>
-        <p>Money earned from closed invoices: {{ money }} </p>
+        <p>Money earned from closed invoices: <strong class="h4">{{ money }}</strong>  </p>
         <hr>
     </div>
 </template>

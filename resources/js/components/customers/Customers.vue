@@ -1,7 +1,7 @@
 <template>
-    <div class="alert alert-dark">
+    <div class="alert alert-dark my-content-page">
         
-        <p class="alert alert-warning">
+        <p class="alert alert-warning my-instructions">
             Here you can see the list of all your customers, who are in your database. This is the place where you can check if a current
             customer (who wants to loan a tool from your shop) is already in your database. Use the search field below to check this.
             <br>
@@ -13,14 +13,14 @@
         <h3>Customers</h3>
 
         <!-- SEARCH FIELD -->
-        <input v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search">
+        <input v-model="searchTerm" name="searchTerm" class="form-control input-background" type="search" placeholder="Search">
 
         <!-- If there is no data in the db... -->
         <div v-if="!customers.length" class="alert alert-info">
             <h5>Loading</h5>
         </div>
 
-        <table class="table">
+        <table class="table table-text">
             <tr>
                 <th>Name</th>
                 <th>City</th>

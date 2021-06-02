@@ -1,6 +1,6 @@
 <template>
-    <div class="alert alert-dark">
-        <p class="alert alert-warning mt-2 mb-2">
+    <div class="alert alert-dark my-content-page">
+        <p class="alert alert-warning mt-2 mb-2 my-instructions">
             This page is focused on the "history" of the individual loan tools. This is needed, because on one invoice there could be two, three,
             etc., tools. And on the invoice related pages we can't see the exact details. Here we can see which tools were the longest time on the
             field, which tool has 'created' the biggest amount of money, if the tool is still on the field maybe, and so on.
@@ -11,7 +11,7 @@
         <input 
             v-model="searchTerm" 
             name="searchTerm" 
-            class="form-control" 
+            class="form-control input-background" 
             type="search" 
             placeholder="Search by customers, tools, return date..."
         >
@@ -21,11 +21,11 @@
             <h5>Loading</h5>
         </div>
 
-        <table class="table">
+        <table class="table table-text">
             <tr>
                 <th>Invoice nr</th>
-                <th>Customer</th>
                 <th>Tool</th>
+                <th>Customer</th>
                 <th>Loan date</th>
                 <th>Return date</th>
                 <th>Days on field</th>
@@ -34,8 +34,8 @@
             </tr>
             <tr v-for="(invoiceitem, i) in filteredInvoiceitems" :key="i">
                 <td>{{ invoiceitem.invoice_id }}</td>
-                <td>{{ invoiceitem.customer_name }}</td>
                 <td>{{ invoiceitem.model }}</td>
+                <td>{{ invoiceitem.customer_name }}</td>
                 <td>{{ invoiceitem.taken }}</td>
                 <td>{{ invoiceitem.returned }}</td>
                 <td>{{ invoiceitem.time_on_field }}</td>

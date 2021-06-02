@@ -1,5 +1,5 @@
-<template>
-    <div>
+<template class='body-background'>
+    <div class='body-background'>
         <navbar></navbar>
         <router-view></router-view>
     </div>
@@ -26,3 +26,8 @@ export default {
     }
 }
 </script>
+
+<style>
+  @import '../../../css/app.css';
+</style>
+

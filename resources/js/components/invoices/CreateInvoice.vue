@@ -1,8 +1,8 @@
 <template>
-    <div class="alert alert-dark">
+    <div class="alert alert-dark my-content-page">
         <!-- CREATE INVOICE -->
-        <p class="alert alert-warning mt-2 mb-2 d-print-none">
-            On this page you can record the loan tool into the database.  You need to do the next. 
+        <p class="alert alert-warning mt-2 mb-2 d-print-none my-instructions">
+            On this page you can record the tool loaning into the database, and create an invoice.  You need to do the next. 
             1.) Enter for how long, how many days would like
             the customer to use to loan tool. Example, for two days, enter 2 into the 'Number of days for tool loaning:' field. 2.) 
             Select a customer from the db. 3.) Select the tool or maybe tools from the 'Tools to loan:' field. You can add more than one 
@@ -20,13 +20,18 @@
                 <h2>Loan document</h2>
                 <p>Loan document number: {{ loanDocumentNumber }}</p>
                 <p>Date and time: {{ date }}</p>
-                <p>Number of days for tool loaning: <input v-model="daysToLoan" class="form-control input-style rounded danger" type="text" required></p>
+                <p>Number of days for tool loaning: <input v-model="daysToLoan" class="form-control input-text-color mt-4 input-background input-style rounded danger" type="text" required></p>
             </div>
 
             <div class="col-3">
                 <!-- customer data display -->
                 <p ><span class="d-print-none">Select a customer:</span> 
-                    <v-select class="rounded danger"  v-model="selectedCustomer" label="name" :options="customers"></v-select>
+                    <v-select 
+                        class="rounded danger select-border"  
+                        v-model="selectedCustomer" 
+                        label="name" 
+                        :options="customers"
+                    ></v-select>
                 </p>
                 <p>{{ selectedCustomer.city }}</p>
                 <p>{{ selectedCustomer.address }}</p>
@@ -38,12 +43,17 @@
         <div class="d-print-none">Tools to loan:
             <!-- SELECT TOOL -->
             <p>
-                <v-select class="rounded danger" multiple v-model="selectedToolsx" label="model" :options="tools"></v-select>
+                <v-select 
+                    class="rounded danger select-border"
+                    multiple v-model="selectedToolsx" 
+                    label="model" 
+                    :options="tools"
+                ></v-select>
             </p>
         </div>
 
         <!-- Table for showing the selected tools -->
-        <table class="table">
+        <table class="table table-text">
             <tr>
                 <th>Brand</th>
                 <th>Model</th>
@@ -65,8 +75,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td>TOTAL TO PAY: {{ total }}</td>
+                <td>TOTAL TO PAY:</td>
+                <td>{{ total }}</td>
             </tr>
         </table>
         

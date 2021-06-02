@@ -1,19 +1,19 @@
 <template>
-    <div class="alert alert-dark">
-        <p class="alert alert-warning mt-2 mb-2">
+    <div class="alert alert-dark my-content-page">
+        <p class="alert alert-warning mt-2 mb-2 my-instructions">
             On this page you can see the list of all your loan tools. Use the search field if you are looking for a specific tool.
         </p>
         <h3>Tools</h3>
 
         <!-- SEARCH FIELD -->
-        <input v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search">
+        <input v-model="searchTerm" name="searchTerm" class="form-control input-background" type="search" placeholder="Search">
 
         <!-- If there is no data in the db... -->
         <div v-if="!tools.length" class="alert alert-info">
             <h5>Loading</h5>
         </div>
 
-        <table class="table">
+        <table class="table table-text">
             <tr>
                 <th>Brand</th>
                 <th>Model</th>
