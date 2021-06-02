@@ -38,7 +38,6 @@ class InvoiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //TODO when something is not OK, Laravel will usually show us what is wrong, what line, we will receive an error message. But this not works with L+Vue. How to solve this?
     public function store(Request $request)
     {
         //invoice handling
@@ -48,6 +47,7 @@ class InvoiceController extends Controller
         $invoice->save();
 
         //invoice items (tool handling)
+        print_r($request); die;
         $invoiceitems = $request->input(['invoiceitems']);
         $itemsToReturn = [];//this will be used simply to return all items to the frontend, as part of the OK response
         foreach ($invoiceitems as $tool) {
@@ -104,8 +104,10 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         //INVOICE
         $invoice = Invoice::find($id);
+        $invoice->customer_name = $request->customer_name;
         $invoice->sum_for_paying = $request->sum_for_paying;
         $invoice->invoice_closed = true;
         $invoice->closing_date = $request->closing_date;
@@ -113,6 +115,7 @@ class InvoiceController extends Controller
 
         //INVOICE ITEM(s)
         $invoiceitems = $request->input(['invoiceitems']);
+        $invoiceitems = $request->invoiceitems;
         foreach ($invoiceitems as $invoiceitemx) {
             $invoiceitem = Invoiceitem::find($invoiceitemx['id']);//this gives the id, it works
             $invoiceitem->returned = $invoiceitemx['returned'];

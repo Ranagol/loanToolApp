@@ -3004,18 +3004,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _service_invoiceService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/invoiceService */ "./resources/js/service/invoiceService.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3086,7 +3077,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
-
+ // import invoiceService from '../../service/invoiceService';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'OpenInvoices',
@@ -3095,7 +3086,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       searchTerm: ''
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['invoices', 'errors'])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['invoices', 'errors'])), {}, {
     openInvoices: function openInvoices() {
       return this.invoices.filter(function (element) {
         return element.invoice_closed == false;
@@ -3109,60 +3100,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   }),
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['getInvoices'])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['getInvoices', 'updateInvoice'])), {}, {
     closeInvoice: function closeInvoice(invoiceId) {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                console.log('This is the final closed invoice object below:');
-                console.dir(_this2.prepareInvoiceDataForClosing(invoiceId));
-                _context.prev = 2;
-                console.log('Try activated...');
-                _context.next = 6;
-                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_3__["default"].updateInvoice(invoiceId, _this2.prepareInvoiceDataForClosing());
-
-              case 6:
-                console.log('Invoice successfully closed.');
-                _context.next = 13;
-                break;
-
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](2);
-                console.log('Error during closeInvoice from CloseInvoice.vue.');
-                console.dir(_context.t0);
-
-              case 13:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[2, 9]]);
-      }))();
+      try {
+        var invoiceForClosing = this.prepareInvoiceDataForClosing(invoiceId);
+        this.updateInvoice(invoiceForClosing);
+        this.$router.push('/invoices'); //redirects the user to the invoices page
+      } catch (error) {
+        console.log('OpenInvoices.vue: Error during closing the invoice.');
+        console.dir(error);
+      }
     },
     prepareInvoiceDataForClosing: function prepareInvoiceDataForClosing(invoiceId) {
       //here we are closing the invoice, and modifying the invoice object values.
       //Get the selected invoice for closing
-      // console.log('prepareInvoiceDataForClosing(invoiceId) was activated');
       var closedInvoice = this.invoices.find(function (invoice) {
         return invoice.id == invoiceId;
-      }); // console.log('Here is the selected invoice object for closing: ', closedInvoice);
-      //Invoice level data preparation
+      }); //Invoice level data preparation
 
-      var now = moment__WEBPACK_IMPORTED_MODULE_1___default()();
-      closedInvoice.invoice_closed = true;
+      var now = moment__WEBPACK_IMPORTED_MODULE_0___default()();
       closedInvoice.closing_date = now.format('YYYY-MM-DD');
       var sumToPay = 0; //Invoiceitem level data preparation
 
       closedInvoice.invoiceitems.forEach(function (invoiceitem) {
         invoiceitem.returned = now.format('YYYY-MM-DD'); //counting the time period while the tool was on field
 
-        var loanDate = moment__WEBPACK_IMPORTED_MODULE_1___default()(invoiceitem.created_at);
-        var durationObject = moment__WEBPACK_IMPORTED_MODULE_1___default.a.duration(now.diff(loanDate)); //here we are creating a moment duration object which is a time period between two moments
+        var loanDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(invoiceitem.created_at);
+        var durationObject = moment__WEBPACK_IMPORTED_MODULE_0___default.a.duration(now.diff(loanDate)); //here we are creating a moment duration object which is a time period between two moments
 
         var days = durationObject.asDays(); //show this time period in days
 
@@ -3182,22 +3146,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     console.log('called from Open invoices'), this.getInvoices();
   }
 });
-/*
-TypeError: Cannot set property 'invoice_closed' of undefined
-    at VueComponent.prepareInvoiceDataForClosing (http://127.0.0.1:8000/js/app.js:3157:36)
-    at _callee$ (http://127.0.0.1:8000/js/app.js:3126:120)
-    at tryCatch (http://127.0.0.1:8000/js/app.js:41854:40)
-    at Generator.invoke [as _invoke] (http://127.0.0.1:8000/js/app.js:42083:22)
-    at Generator.prototype.<computed> [as next] (http://127.0.0.1:8000/js/app.js:41906:21)
-    at asyncGeneratorStep (http://127.0.0.1:8000/js/app.js:3015:103)
-    at _next (http://127.0.0.1:8000/js/app.js:3017:194)
-    at http://127.0.0.1:8000/js/app.js:3017:364
-    at new Promise (<anonymous>)
-    at http://127.0.0.1:8000/js/app.js:3017:97
-message: "Cannot set property 'invoice_closed' of undefined"
-stack: "TypeError: Cannot set property 'invoice_closed' of undefined\n    at VueComponent.prepareInvoiceDataForClosing (http://127.0.0.1:8000/js/app.js:3157:36)\n    at _callee$ (http://127.0.0.1:8000/js/app.js:3126:120)\n    at tryCatch (http://127.0.0.1:8000/js/app.js:41854:40)\n    at Generator.invoke [as _invoke] (http://127.0.0.1:8000/js/app.js:42083:22)\n    at Generator.prototype.<computed> [as next] (http://127.0.0.1:8000/js/app.js:41906:21)\n    at asyncGeneratorStep (http://127.0.0.1:8000/js/app.js:3015:103)\n    at _next (http://127.0.0.1:8000/js/app.js:3017:194)\n    at http://127.0.0.1:8000/js/app.js:3017:364\n    at new Promise (<anonymous>)\n    at http://127.0.0.1:8000/js/app.js:3017:97"
-__proto__: Error
-*/
 
 /***/ }),
 
@@ -44761,7 +44709,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("h4", [_vm._v("Invoices")]),
+    _c("h4", [_vm._v("All invoices(open and closed invoices)")]),
     _vm._v(" "),
     _c("input", {
       directives: [
@@ -63334,7 +63282,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     invoiceitems: [],
     errors: []
   },
-  //MUTATIONS
+  //MUTATIONS (putting data into the Vuex store)
   mutations: {
     getCustomers: function getCustomers(state, customers) {
       state.customers = customers;
@@ -63360,15 +63308,18 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
       state.invoices.push(invoice); //alert('Your new invoice was created.');
     },
     addInvoiceItems: function addInvoiceItems(state, invoiceitems) {
+      console.log('This below is from the store.js...');
       invoiceitems.forEach(function (element) {
         state.invoiceitems.push(element);
       });
+    },
+    updateInvoice: function updateInvoice(invoice) {//TODO for now, leave this empty...
     },
     errors: function errors(state, error) {
       state.errors = error;
     }
   },
-  //ACTIONS
+  //ACTIONS (putting data into the db, and activating the mutations after that)
   actions: {
     getCustomers: function getCustomers(_ref) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -63630,6 +63581,45 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     addInvoiceItems: function addInvoiceItems(_ref8, invoiceitems) {
       var commit = _ref8.commit;
       commit('addInvoiceItems', invoiceitems);
+    },
+    updateInvoice: function updateInvoice(_ref9, invoice) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+        var commit, dispatch;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                commit = _ref9.commit, dispatch = _ref9.dispatch;
+                _context8.prev = 1;
+                _context8.next = 4;
+                return _service_invoiceService__WEBPACK_IMPORTED_MODULE_6__["default"].updateInvoice(invoice.id, invoice);
+
+              case 4:
+                //for db
+                commit('updateInvoice', invoice); //for vuex, temporary data
+
+                dispatch('getInvoices'); //immediatelly getting the new data with the new id from db
+
+                dispatch('getInvoiceitems'); //immediatelly getting the new data with the new id from db
+
+                _context8.next = 15;
+                break;
+
+              case 9:
+                _context8.prev = 9;
+                _context8.t0 = _context8["catch"](1);
+                console.log('Error with updateInvoice in actions, this message is from store.js.');
+                console.dir(_context8.t0);
+                alert(_context8.t0);
+                commit('errors', _context8.t0);
+
+              case 15:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, null, [[1, 9]]);
+      }))();
     }
   }
 });

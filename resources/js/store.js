@@ -30,7 +30,7 @@ state: {
     errors: [],
 },
 
-//MUTATIONS
+//MUTATIONS (putting data into the Vuex store)
 mutations: {
     getCustomers(state, customers){
         state.customers = customers;
@@ -57,12 +57,14 @@ mutations: {
         //alert('Your new invoice was created.');
     },
     addInvoiceItems(state, invoiceitems){
+        console.log('This below is from the store.js...');
         invoiceitems.forEach(element => {
             state.invoiceitems.push(element);
         });
     },
-
-    
+    updateInvoice(invoice){
+        //TODO for now, leave this empty...
+    },
 
     errors(state, error){
         state.errors = error;
@@ -70,7 +72,7 @@ mutations: {
     
 },
 
-//ACTIONS
+//ACTIONS (putting data into the db, and activating the mutations after that)
 actions: {
     async getCustomers( {commit} ){
         try {
@@ -170,11 +172,22 @@ actions: {
 
     addInvoiceItems( {commit}, invoiceitems){
         commit('addInvoiceItems', invoiceitems);
-    }
+    },
+
+    async updateInvoice( {commit, dispatch}, invoice){
+        try {
+            await invoiceService.updateInvoice(invoice.id, invoice);//for db
+            commit('updateInvoice', invoice);//for vuex, temporary data
+            dispatch('getInvoices');//immediatelly getting the new data with the new id from db
+            dispatch('getInvoiceitems');//immediatelly getting the new data with the new id from db
+        } catch (error) {
+            console.log('Error with updateInvoice in actions, this message is from store.js.');
+            console.dir(error);
+            alert(error);
+            commit('errors', error);
+        }
+    },
 }
-
-
-
 
 });
   

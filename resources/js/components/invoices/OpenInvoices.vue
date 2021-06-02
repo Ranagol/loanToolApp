@@ -64,7 +64,7 @@
 <script>
 import moment from 'moment';
 import { mapGetters, mapActions } from 'vuex';
-import invoiceService from '../../service/invoiceService';
+// import invoiceService from '../../service/invoiceService';
 export default {
     name: 'OpenInvoices',
     data(){
@@ -88,30 +88,25 @@ export default {
         },
     },
     methods: {
-        ...mapActions(['getInvoices']),
+        ...mapActions(['getInvoices', 'updateInvoice']),
 
-        async closeInvoice(invoiceId){
-            console.log('This is the final closed invoice object below:');
-            console.dir(this.prepareInvoiceDataForClosing(invoiceId));
+        closeInvoice(invoiceId){
             try {
-              console.log('Try activated...');    
-              await invoiceService.updateInvoice(invoiceId, this.prepareInvoiceDataForClosing());
-              console.log('Invoice successfully closed.');
+                const invoiceForClosing = this.prepareInvoiceDataForClosing(invoiceId)
+                this.updateInvoice(invoiceForClosing);
+                this.$router.push('/invoices');//redirects the user to the invoices page
             } catch (error) {
-                console.log('Error during closeInvoice from CloseInvoice.vue.');
+                console.log('OpenInvoices.vue: Error during closing the invoice.');
                 console.dir(error);
             }
         },
 
         prepareInvoiceDataForClosing(invoiceId){//here we are closing the invoice, and modifying the invoice object values.
             //Get the selected invoice for closing
-            // console.log('prepareInvoiceDataForClosing(invoiceId) was activated');
             let closedInvoice = this.invoices.find(invoice => invoice.id == invoiceId);
-            // console.log('Here is the selected invoice object for closing: ', closedInvoice);
 
             //Invoice level data preparation
             let now = moment();
-            closedInvoice.invoice_closed = true;
             closedInvoice.closing_date = now.format('YYYY-MM-DD');
             let sumToPay = 0;
 
@@ -139,23 +134,5 @@ export default {
         console.log('called from Open invoices'),
         this.getInvoices();
     }
-    
 }
-
-/*
-TypeError: Cannot set property 'invoice_closed' of undefined
-    at VueComponent.prepareInvoiceDataForClosing (http://127.0.0.1:8000/js/app.js:3157:36)
-    at _callee$ (http://127.0.0.1:8000/js/app.js:3126:120)
-    at tryCatch (http://127.0.0.1:8000/js/app.js:41854:40)
-    at Generator.invoke [as _invoke] (http://127.0.0.1:8000/js/app.js:42083:22)
-    at Generator.prototype.<computed> [as next] (http://127.0.0.1:8000/js/app.js:41906:21)
-    at asyncGeneratorStep (http://127.0.0.1:8000/js/app.js:3015:103)
-    at _next (http://127.0.0.1:8000/js/app.js:3017:194)
-    at http://127.0.0.1:8000/js/app.js:3017:364
-    at new Promise (<anonymous>)
-    at http://127.0.0.1:8000/js/app.js:3017:97
-message: "Cannot set property 'invoice_closed' of undefined"
-stack: "TypeError: Cannot set property 'invoice_closed' of undefined\n    at VueComponent.prepareInvoiceDataForClosing (http://127.0.0.1:8000/js/app.js:3157:36)\n    at _callee$ (http://127.0.0.1:8000/js/app.js:3126:120)\n    at tryCatch (http://127.0.0.1:8000/js/app.js:41854:40)\n    at Generator.invoke [as _invoke] (http://127.0.0.1:8000/js/app.js:42083:22)\n    at Generator.prototype.<computed> [as next] (http://127.0.0.1:8000/js/app.js:41906:21)\n    at asyncGeneratorStep (http://127.0.0.1:8000/js/app.js:3015:103)\n    at _next (http://127.0.0.1:8000/js/app.js:3017:194)\n    at http://127.0.0.1:8000/js/app.js:3017:364\n    at new Promise (<anonymous>)\n    at http://127.0.0.1:8000/js/app.js:3017:97"
-__proto__: Error
-*/
 </script>

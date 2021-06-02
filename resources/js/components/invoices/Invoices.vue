@@ -22,7 +22,7 @@
         <p class="alert alert-warning mt-2 mb-2">
             Here, on this page, as said before, you can see the list of all  invoices, regardless if they are open or closed.
         </p>
-        <h4>Invoices</h4>
+        <h4>All invoices(open and closed invoices)</h4>
 
         <!-- SEARCH FIELD -->
         <input v-model="searchTerm" name="searchTerm" class="form-control" type="search" placeholder="Search">
