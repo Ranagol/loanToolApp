@@ -149,10 +149,10 @@ actions: {
             commit('createTool', tool);//for vuex, temporary data
             dispatch('getTools');//immediatelly getting the new data with the new id from db
         } catch (error) {
-            console.log('Error with createTool in actions');
-            console.dir(error);
-            alert(error);
-            commit('errors', error);
+            // console.log('Error with createTool in actions, from store.js');
+            // console.dir(error.response.data.errors);
+            // alert(error);
+            // commit('errors', error.response.data.errors);
         }
     },
 

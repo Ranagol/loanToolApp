@@ -55,7 +55,7 @@
                 <td>{{ invoice.created_at }}</td>
                 <td>{{ invoice.closing_date }}</td>
                 <td>{{ invoice.comments }}</td>
-                <td>{{ invoice.invoice_closed || 'not closed' }}</td>
+                <td>{{ invoice.invoice_closed | invoiceStatus }}</td>
             </tr>
         </table>
 
@@ -85,6 +85,14 @@ export default {
     },
     methods: {
         ...mapActions(['getInvoices']),
+    },
+    filters: {
+        invoiceStatus(value) {
+            if (value == 0 ) {
+                return 'Open invoice';
+            }
+            return 'Closed invoice';
+        }
     },
     mounted() {
         console.log('called from All invoices'),

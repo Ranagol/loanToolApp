@@ -2122,18 +2122,71 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateCustomer',
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['customers'])),
   data: function data() {
     return {
-      customer: {}
+      customer: {},
+      errors: [] //here we collect all the errors
+
     };
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['createCustomer'])), {}, {
     addCustomer: function addCustomer() {
-      this.$store.dispatch('createCustomer', this.customer);
+      this.checkForEmptyInputFields();
+
+      if (this.errors.length === 0) {
+        //the user can't submit data, if it is not valid
+        this.$store.dispatch('createCustomer', this.customer);
+        this.customer = {};
+      }
+    },
+    validateInputText: function validateInputText(event) {
+      //this is doing the validation work
+      this.errors = []; //before validation, we empty the previous errors
+
+      if (event.target.value.length < 3) {
+        //the variable must be a number + must be bigger than zero
+        this.errors.push('The customers name, city, address, etc. ... all of them must be more than 3 characters.'); //
+      }
+    },
+    checkForEmptyInputFields: function checkForEmptyInputFields() {
+      if (_.isEmpty(this.customer)) {
+        this.errors.push('You need to fill the input fields with customer data...');
+      }
+
+      if (_.isEmpty(this.customer.name)) {
+        this.errors.push('Name must be filled.');
+      }
+
+      if (_.isEmpty(this.customer.city)) {
+        this.errors.push('City must be filled.');
+      }
+
+      if (_.isEmpty(this.customer.address)) {
+        this.errors.push('Address must be filled.');
+      }
+
+      if (_.isEmpty(this.customer.phone)) {
+        this.errors.push('Phone number must be filled.');
+      }
+
+      this.errors = _.uniq(this.errors); //removes potential error mesage duplicates.
     }
   })
 });
@@ -2199,6 +2252,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2213,7 +2282,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       return this.customers.filter(function (element) {
-        return element.name.toLowerCase().match(_this.searchTerm.toLowerCase());
+        return element.name.toLowerCase().match(_this.searchTerm.toLowerCase()) || element.city.toLowerCase().match(_this.searchTerm.toLowerCase()) || element.address.toLowerCase().match(_this.searchTerm.toLowerCase()) || element.phone.toLowerCase().match(_this.searchTerm.toLowerCase());
       });
     }
   }),
@@ -2554,6 +2623,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getInvoiceitems'])),
+  filters: {
+    invoiceItemStatus: function invoiceItemStatus(value) {
+      if (value == 0) {
+        return 'In active loan';
+      }
+
+      return 'Loan closed';
+    }
+  },
   mounted: function mounted() {
     console.log('called from History/Invoiceitems'), this.getInvoiceitems();
   }
@@ -3004,6 +3082,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getInvoices'])),
+  filters: {
+    invoiceStatus: function invoiceStatus(value) {
+      if (value == 0) {
+        return 'Open invoice';
+      }
+
+      return 'Closed invoice';
+    }
+  },
   mounted: function mounted() {
     console.log('called from All invoices'), this.getInvoices();
   }
@@ -3181,6 +3268,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3208,18 +3297,86 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateTool',
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['tools'])),
   data: function data() {
     return {
-      tool: {}
+      tool: {},
+      errorsFrontend: [] //here we collect all the input field validation errors
+
     };
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['createTool'])), {}, {
     addTool: function addTool() {
-      this.$store.dispatch('createTool', this.tool);
+      this.checkForEmptyInputFields();
+
+      if (this.errorsFrontend.length === 0) {
+        //the user can't submit data, if it is not valid
+        this.$store.dispatch('createTool', this.tool); //here we submit data, if there are no errors
+
+        this.tool = {}; //after a tool is created, empty the input fields...
+      }
+    },
+    validateInputText: function validateInputText(event) {
+      //this is doing the validation work
+      this.errorsFrontend = []; //before validation, we empty the previous errors
+
+      if (event.target.value.length < 3) {
+        //there must be at least 3 letters
+        this.errorsFrontend.push('Brand, model, description nad serial number of the tool must be more than 3 characters.'); //
+      }
+    },
+    validateForPositiveNumbers: function validateForPositiveNumbers(event) {
+      //this is doing the validation work
+      this.errorsFrontend = []; //before validation, we empty the previous errors
+
+      if (isNaN(event.target.value) || event.target.value < 0) {
+        //the variable must be a number + must be bigger than zero
+        this.errorsFrontend.push('The entered value must be a positive number'); //
+      }
+    },
+    checkForEmptyInputFields: function checkForEmptyInputFields() {
+      if (lodash__WEBPACK_IMPORTED_MODULE_1___default.a.isEmpty(this.tool)) {
+        this.errorsFrontend.push('You need to fill the input fields with tool description...');
+      }
+
+      if (lodash__WEBPACK_IMPORTED_MODULE_1___default.a.isEmpty(this.tool.brand)) {
+        this.errorsFrontend.push('Brand must be filled.');
+      }
+
+      if (lodash__WEBPACK_IMPORTED_MODULE_1___default.a.isEmpty(this.tool.model)) {
+        this.errorsFrontend.push('Model must be filled.');
+      }
+
+      if (lodash__WEBPACK_IMPORTED_MODULE_1___default.a.isEmpty(this.tool.description)) {
+        this.errorsFrontend.push('Description must be filled.');
+      }
+
+      if (lodash__WEBPACK_IMPORTED_MODULE_1___default.a.isEmpty(this.tool.serial_number)) {
+        this.errorsFrontend.push('Serial number must be filled.');
+      }
+
+      if (lodash__WEBPACK_IMPORTED_MODULE_1___default.a.isEmpty(this.tool.price)) {
+        this.errorsFrontend.push('Price must be filled.');
+      }
+
+      this.errorsFrontend = lodash__WEBPACK_IMPORTED_MODULE_1___default.a.uniq(this.errorsFrontend); //removes potential error mesage duplicates.
     }
   })
 });
@@ -3278,6 +3435,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Tools',
@@ -3291,7 +3464,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       return this.tools.filter(function (element) {
-        return element.model.toLowerCase().match(_this.searchTerm.toLowerCase());
+        return element.model.toLowerCase().match(_this.searchTerm.toLowerCase()) || element.brand.toLowerCase().match(_this.searchTerm.toLowerCase()) || element.description.toLowerCase().match(_this.searchTerm.toLowerCase()) || element.serial_number.toLowerCase().match(_this.searchTerm.toLowerCase());
       });
     }
   }),
@@ -43742,12 +43915,15 @@ var render = function() {
         attrs: { name: "name", type: "text" },
         domProps: { value: _vm.customer.name },
         on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.customer, "name", $event.target.value)
-          }
+          input: [
+            function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.customer, "name", $event.target.value)
+            },
+            _vm.validateInputText
+          ]
         }
       })
     ]),
@@ -43767,12 +43943,15 @@ var render = function() {
         attrs: { name: "city", type: "text" },
         domProps: { value: _vm.customer.city },
         on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.customer, "city", $event.target.value)
-          }
+          input: [
+            function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.customer, "city", $event.target.value)
+            },
+            _vm.validateInputText
+          ]
         }
       })
     ]),
@@ -43792,12 +43971,15 @@ var render = function() {
         attrs: { name: "address", type: "text" },
         domProps: { value: _vm.customer.address },
         on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.customer, "address", $event.target.value)
-          }
+          input: [
+            function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.customer, "address", $event.target.value)
+            },
+            _vm.validateInputText
+          ]
         }
       })
     ]),
@@ -43817,12 +43999,15 @@ var render = function() {
         attrs: { name: "phone", type: "text" },
         domProps: { value: _vm.customer.phone },
         on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.customer, "phone", $event.target.value)
-          }
+          input: [
+            function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.customer, "phone", $event.target.value)
+            },
+            _vm.validateInputText
+          ]
         }
       })
     ]),
@@ -43852,6 +44037,20 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
+    _vm.errors.length > 0
+      ? _c("div", { staticClass: "alert alert-danger" }, [
+          _c("div", [_vm._v("Please correct the following error(s):")]),
+          _vm._v(" "),
+          _c(
+            "ul",
+            _vm._l(_vm.errors, function(error) {
+              return _c("li", [_vm._v(_vm._s(error))])
+            }),
+            0
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c(
       "button",
       { staticClass: "btn btn-success", on: { click: _vm.addCustomer } },
@@ -43866,16 +44065,16 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "alert alert-warning my-instructions" }, [
       _vm._v(
-        "\n        On this page you can write your new customers data into the database. The first step is to check if this\n        customer is already in the database. Use the search field for this in the "
+        "\n            On this page you can write your new customers data into the database. The first step is to check if this\n            customer is already in the database. Use the search field for this in the "
       ),
       _c("a", { attrs: { href: "/customers" } }, [_vm._v("Customers")]),
       _vm._v(
-        ".\n        If you already did this, and your customer has selected the tool that he wants to loan, you can go to to the\n        "
+        ".\n            If you already did this, and your customer has selected the tool that he wants to loan, you can go to to the\n            "
       ),
       _c("a", { attrs: { href: "/create-invoice" } }, [
         _vm._v("Create invoice")
       ]),
-      _vm._v(".\n    ")
+      _vm._v(".\n        ")
     ])
   }
 ]
@@ -43903,7 +44102,27 @@ var render = function() {
   return _c("div", { staticClass: "alert alert-dark my-content-page" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("h3", [_vm._v("Customers")]),
+    _c("hr"),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "d-flex flex-row justify-content-between" },
+      [
+        _c("h3", [_vm._v("Customers")]),
+        _vm._v(" "),
+        _c(
+          "router-link",
+          {
+            staticClass: "nav-link btn btn-success",
+            attrs: { to: "/create-customer" }
+          },
+          [_vm._v("Create new customer")]
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("br"),
     _vm._v(" "),
     _c("input", {
       directives: [
@@ -43915,7 +44134,11 @@ var render = function() {
         }
       ],
       staticClass: "form-control input-background",
-      attrs: { name: "searchTerm", type: "search", placeholder: "Search" },
+      attrs: {
+        name: "searchTerm",
+        type: "search",
+        placeholder: "Search by name, city, address or phone..."
+      },
       domProps: { value: _vm.searchTerm },
       on: {
         input: function($event) {
@@ -43926,6 +44149,8 @@ var render = function() {
         }
       }
     }),
+    _vm._v(" "),
+    _c("br"),
     _vm._v(" "),
     !_vm.customers.length
       ? _c("div", { staticClass: "alert alert-info" }, [
@@ -43947,9 +44172,7 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(customer.address))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(customer.phone))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(customer.blacklist))])
+            _c("td", [_vm._v(_vm._s(customer.phone))])
           ])
         })
       ],
@@ -43995,9 +44218,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Address")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Phone")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Blacklist")])
+      _c("th", [_vm._v("Phone")])
     ])
   }
 ]
@@ -44253,44 +44474,8 @@ var render = function() {
                   [
                     _c(
                       "router-link",
-                      {
-                        staticClass: "nav-link",
-                        attrs: { to: "/create-customer" }
-                      },
-                      [_vm._v("Create customer")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
                       { staticClass: "nav-link", attrs: { to: "/customers" } },
                       [_vm._v("Customers")]
-                    )
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userHasToken
-              ? _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link",
-                        attrs: { to: "/create-tool" }
-                      },
-                      [_vm._v("Create tool")]
                     )
                   ],
                   1
@@ -44374,7 +44559,7 @@ var render = function() {
                         staticClass: "nav-link",
                         attrs: { to: "/invoiceitems" }
                       },
-                      [_vm._v("History")]
+                      [_vm._v("Tool history")]
                     )
                   ],
                   1
@@ -44506,7 +44691,13 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoiceitem.to_pay))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(invoiceitem.invoice_line_closed))])
+            _c("td", [
+              _vm._v(
+                _vm._s(
+                  _vm._f("invoiceItemStatus")(invoiceitem.invoice_line_closed)
+                )
+              )
+            ])
           ])
         })
       ],
@@ -44870,7 +45061,9 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(invoice.comments))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(invoice.invoice_closed || "not closed"))])
+            _c("td", [
+              _vm._v(_vm._s(_vm._f("invoiceStatus")(invoice.invoice_closed)))
+            ])
           ])
         })
       ],
@@ -45132,12 +45325,15 @@ var render = function() {
         attrs: { name: "brand", type: "text" },
         domProps: { value: _vm.tool.brand },
         on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.tool, "brand", $event.target.value)
-          }
+          input: [
+            function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.tool, "brand", $event.target.value)
+            },
+            _vm.validateInputText
+          ]
         }
       })
     ]),
@@ -45157,12 +45353,15 @@ var render = function() {
         attrs: { name: "model", type: "text" },
         domProps: { value: _vm.tool.model },
         on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.tool, "model", $event.target.value)
-          }
+          input: [
+            function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.tool, "model", $event.target.value)
+            },
+            _vm.validateInputText
+          ]
         }
       })
     ]),
@@ -45182,12 +45381,15 @@ var render = function() {
         attrs: { name: "description", type: "text" },
         domProps: { value: _vm.tool.description },
         on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.tool, "description", $event.target.value)
-          }
+          input: [
+            function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.tool, "description", $event.target.value)
+            },
+            _vm.validateInputText
+          ]
         }
       })
     ]),
@@ -45207,12 +45409,15 @@ var render = function() {
         attrs: { name: "serial_number", type: "text" },
         domProps: { value: _vm.tool.serial_number },
         on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.tool, "serial_number", $event.target.value)
-          }
+          input: [
+            function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.tool, "serial_number", $event.target.value)
+            },
+            _vm.validateInputText
+          ]
         }
       })
     ]),
@@ -45232,12 +45437,15 @@ var render = function() {
         attrs: { name: "price", type: "text" },
         domProps: { value: _vm.tool.price },
         on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.tool, "price", $event.target.value)
-          }
+          input: [
+            function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.tool, "price", $event.target.value)
+            },
+            _vm.validateForPositiveNumbers
+          ]
         }
       })
     ]),
@@ -45292,6 +45500,20 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
+    _vm.errorsFrontend.length > 0
+      ? _c("div", { staticClass: "alert alert-danger" }, [
+          _c("div", [_vm._v("Please correct the following error(s):")]),
+          _vm._v(" "),
+          _c(
+            "ul",
+            _vm._l(_vm.errorsFrontend, function(error, i) {
+              return _c("li", { key: i }, [_vm._v(_vm._s(error))])
+            }),
+            0
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c(
       "button",
       { staticClass: "btn btn-success", on: { click: _vm.addTool } },
@@ -45309,10 +45531,12 @@ var staticRenderFns = [
       { staticClass: "alert alert-warning mt-2 mb-2 my-instructions" },
       [
         _vm._v(
-          "\n        If you add a new loan tool to your already existing fleet of loan tools, this is the place where you can write the new loan\n        tools data into the database. Once you created your new tool with the click on the 'Create tool' button, you can check\n        if this newly created tool has appeared on the "
+          "\n            If you add a new loan tool to your already existing fleet of loan tools, this is the place where you can write the new loan\n            tools data into the database. Once you created your new tool with the click on the 'Create tool' button, you can check\n            if this newly created tool has appeared on the "
         ),
         _c("a", { attrs: { href: "/tools" } }, [_vm._v("Tools")]),
-        _vm._v(" page, which contains all the loan tools in your shop.\n    ")
+        _vm._v(
+          " page, which contains all the loan tools in your shop.\n        "
+        )
       ]
     )
   }
@@ -45345,7 +45569,27 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("h3", [_vm._v("Tools")]),
+    _c("hr"),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "d-flex flex-row justify-content-between" },
+      [
+        _c("h3", [_vm._v("Tools")]),
+        _vm._v(" "),
+        _c(
+          "router-link",
+          {
+            staticClass: "nav-link btn btn-success",
+            attrs: { to: "/create-tool" }
+          },
+          [_vm._v("Create new tool")]
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("br"),
     _vm._v(" "),
     _c("input", {
       directives: [
@@ -45357,7 +45601,11 @@ var render = function() {
         }
       ],
       staticClass: "form-control input-background",
-      attrs: { name: "searchTerm", type: "search", placeholder: "Search" },
+      attrs: {
+        name: "searchTerm",
+        type: "search",
+        placeholder: "Search by brand, model, description, serial number..."
+      },
       domProps: { value: _vm.searchTerm },
       on: {
         input: function($event) {
@@ -45368,6 +45616,8 @@ var render = function() {
         }
       }
     }),
+    _vm._v(" "),
+    _c("br"),
     _vm._v(" "),
     !_vm.tools.length
       ? _c("div", { staticClass: "alert alert-info" }, [
@@ -45391,9 +45641,7 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(tool.serial_number))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(tool.price))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(tool.onStock))])
+            _c("td", [_vm._v(_vm._s(tool.price))])
           ])
         })
       ],
@@ -45413,11 +45661,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Description")]),
       _vm._v(" "),
-      _c("th", [_vm._v("SNR")]),
+      _c("th", [_vm._v("Serial number")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Price")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("onStock")])
+      _c("th", [_vm._v("Loan price/day")])
     ])
   }
 ]
@@ -63661,18 +63907,14 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
 
                 dispatch('getTools'); //immediatelly getting the new data with the new id from db
 
-                _context6.next = 14;
+                _context6.next = 10;
                 break;
 
               case 8:
                 _context6.prev = 8;
                 _context6.t0 = _context6["catch"](1);
-                console.log('Error with createTool in actions');
-                console.dir(_context6.t0);
-                alert(_context6.t0);
-                commit('errors', _context6.t0);
 
-              case 14:
+              case 10:
               case "end":
                 return _context6.stop();
             }

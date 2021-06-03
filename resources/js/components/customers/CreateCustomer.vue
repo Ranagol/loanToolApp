@@ -9,17 +9,30 @@
         </p>
         <h3>Create customer</h3>
         
-        <p>Name: <input v-model="customer.name" name="name" class="form-control input-background" type="text"></p>
-        <p>City: <input v-model="customer.city" name="city" class="form-control input-background" type="text"></p>
-        <p>Address: <input v-model="customer.address" name="address" class="form-control input-background" type="text"></p>
-        <p>Phone: <input v-model="customer.phone" name="phone" class="form-control input-background" type="text"></p>
+        <p>Name: <input v-model="customer.name" name="name" class="form-control input-background" type="text" @input="validateInputText"></p>
+        <p>City: <input v-model="customer.city" name="city" class="form-control input-background" type="text" @input="validateInputText"></p>
+        <p>Address: <input v-model="customer.address" name="address" class="form-control input-background" type="text" @input="validateInputText"></p>
+        <p>Phone: <input v-model="customer.phone" name="phone" class="form-control input-background" type="text" @input="validateInputText"></p>
         <p>Comment: <input v-model="customer.comments" name="comments" class="form-control input-background" type="text"></p>
+
         <!-- <form>
             <div class="form-group">
                 <label for="exampleFormControlFile1">Upload customers scanned ID data:</label>
                 <input type="file" class="form-control-file" id="exampleFormControlFile1">
             </div>
         </form> -->
+
+<!--         VALIDATION ERROR DISPLAYING PART -->
+        <div
+            v-if="errors.length > 0"
+            class="alert alert-danger"
+        >
+            <div>Please correct the following error(s):</div>
+            <ul>
+                <li v-for="error in errors">{{ error }}</li>
+            </ul>
+        </div>
+
         <button @click="addCustomer" class="btn btn-success">Create customer</button>
     </div>
 </template>
@@ -34,13 +47,45 @@ export default {
     data(){
         return {
             customer: {},
+            errors: [],//here we collect all the errors
         }
     },
     methods: {
         ...mapActions(['createCustomer']),
         addCustomer(){
-            this.$store.dispatch('createCustomer', this.customer);
+            this.checkForEmptyInputFields();
+            if (this.errors.length === 0) {//the user can't submit data, if it is not valid
+                this.$store.dispatch('createCustomer', this.customer);
+                this.customer = {};
+            }
+        },
+
+        validateInputText(event){//this is doing the validation work
+            this.errors = [];//before validation, we empty the previous errors
+            if  (event.target.value.length < 3) {//the variable must be a number + must be bigger than zero
+                this.errors.push('The customers name, city, address, etc. ... all of them must be more than 3 characters.');//
+            }
+        },
+
+        checkForEmptyInputFields(){
+            if(_.isEmpty(this.customer)) {
+                this.errors.push('You need to fill the input fields with customer data...');
+            }
+            if(_.isEmpty(this.customer.name)) {
+                this.errors.push('Name must be filled.');
+            }
+            if(_.isEmpty(this.customer.city)) {
+                this.errors.push('City must be filled.');
+            }
+            if(_.isEmpty(this.customer.address)) {
+                this.errors.push('Address must be filled.');
+            }
+            if(_.isEmpty(this.customer.phone)) {
+                this.errors.push('Phone number must be filled.');
+            }
+            this.errors = _.uniq(this.errors);//removes potential error mesage duplicates.
         }
+
     },
     
     

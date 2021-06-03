@@ -20,17 +20,17 @@
           <router-link class="nav-link" to="/home" >Home</router-link>
         </li>
 
-        <li v-if="userHasToken" class="nav-item">
+        <!-- <li v-if="userHasToken" class="nav-item">
           <router-link class="nav-link" to="/create-customer" >Create customer</router-link>
-        </li>
+        </li> -->
 
         <li v-if="userHasToken" class="nav-item">
           <router-link class="nav-link" to="/customers" >Customers</router-link>
         </li>
 
-        <li v-if="userHasToken" class="nav-item">
+        <!-- <li v-if="userHasToken" class="nav-item">
           <router-link class="nav-link" to="/create-tool" >Create tool</router-link>
-        </li>
+        </li> -->
 
         <li v-if="userHasToken" class="nav-item">
           <router-link class="nav-link" to="/tools" >Tools</router-link>
@@ -49,7 +49,7 @@
         </li>
 
         <li v-if="userHasToken" class="nav-item">
-          <router-link class="nav-link" to="/invoiceitems" >History</router-link>
+          <router-link class="nav-link" to="/invoiceitems" >Tool history</router-link>
         </li>
 
         <li v-if="userHasToken" class="nav-item">

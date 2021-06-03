@@ -40,7 +40,7 @@
                 <td>{{ invoiceitem.returned }}</td>
                 <td>{{ invoiceitem.time_on_field }}</td>
                 <td>{{ invoiceitem.to_pay }}</td>
-                <td>{{ invoiceitem.invoice_line_closed }}</td>
+                <td>{{ invoiceitem.invoice_line_closed | invoiceItemStatus }}</td>
             </tr>
         </table>
 
@@ -70,6 +70,14 @@ export default {
     },
     methods: {
         ...mapActions(['getInvoiceitems']),
+    },
+    filters: {
+        invoiceItemStatus(value) {
+            if (value == 0 ) {
+                return 'In active loan';
+            }
+            return 'Loan closed';
+        }
     },
     mounted() {
         console.log('called from History/Invoiceitems'),

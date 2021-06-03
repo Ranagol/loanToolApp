@@ -10,10 +10,26 @@
             IF the customer is not in your db, then you will have to  collect the customers data, and create a new customer in the db. 
             This is happening in the <a href="/create-customer">Create customer</a>.
         </p>
-        <h3>Customers</h3>
-
+        <hr>
+        <div class="d-flex flex-row justify-content-between">
+            <h3>Customers</h3>
+            <router-link 
+                class="nav-link btn btn-success" 
+                to="/create-customer" 
+            >Create new customer</router-link>
+        </div>
+        <br>
+        
         <!-- SEARCH FIELD -->
-        <input v-model="searchTerm" name="searchTerm" class="form-control input-background" type="search" placeholder="Search">
+        <input 
+            v-model="searchTerm" 
+            name="searchTerm" 
+            class="form-control input-background" 
+            type="search" 
+            placeholder="Search by name, city, address or phone..."
+        >
+        <br>
+
 
         <!-- If there is no data in the db... -->
         <div v-if="!customers.length" class="alert alert-info">
@@ -26,14 +42,14 @@
                 <th>City</th>
                 <th>Address</th>
                 <th>Phone</th>
-                <th>Blacklist</th>
+                <!-- <th>Blacklist</th> -->
             </tr>
             <tr v-for="(customer, i) in filteredCustomers" :key="i">
                 <td>{{ customer.name }}</td>
                 <td>{{ customer.city }}</td>
                 <td>{{ customer.address }}</td>
                 <td>{{ customer.phone }}</td>
-                <td>{{ customer.blacklist }}</td>
+                <!-- <td>{{ customer.blacklist }}</td> -->
             </tr>
         </table>
     </div>
@@ -53,7 +69,11 @@ export default {
         ...mapGetters(['customers', 'errors']),
         filteredCustomers(){
             return this.customers.filter((element) => {
-                return element.name.toLowerCase().match(this.searchTerm.toLowerCase());
+                return element.name.toLowerCase().match(this.searchTerm.toLowerCase())
+                    || element.city.toLowerCase().match(this.searchTerm.toLowerCase())
+                    || element.address.toLowerCase().match(this.searchTerm.toLowerCase())
+                    || element.phone.toLowerCase().match(this.searchTerm.toLowerCase())
+                ;
             });
         }
     },
